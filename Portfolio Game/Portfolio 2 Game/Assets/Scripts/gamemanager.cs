@@ -1,21 +1,33 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class gamemanager : MonoBehaviour
 {
     public static gamemanager instance;
 
+    public Image roundBar;
+
     [SerializeField] GameObject menuActive;
     [SerializeField] GameObject menuPause;
+    [SerializeField] GameObject menuWin;
+    [SerializeField] GameObject menuLose;
 
     public bool isPaused;
+    public Text waveText;
+    int roundNum;
+    [Range(0,23)][SerializeField] public int numEnemies;
+    [Range(0,23)][SerializeField] public int numEnemiesOrig;
 
     void Awake()
     {
         instance = this;
+        roundNum = 0;
+        StartNextWave();
     }
 
     private void Update()
     {
+        UpdateRoundBarUI();
         if (Input.GetButtonDown("Cancel"))
         {
             if (menuActive == null)
@@ -27,6 +39,13 @@ public class gamemanager : MonoBehaviour
                 StateUnpause();
             }
         }
+        TestEnemiesDying();
+
+        if (numEnemies == 0)
+        {
+            StartNextWave();
+        }
+        
     }
 
     public void StatePause()
@@ -47,6 +66,31 @@ public class gamemanager : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
         menuActive.SetActive(false);
         menuActive = null;
+    }
+
+    public void UpdateRoundBarUI()
+    {
+        roundBar.fillAmount = (float)numEnemies / numEnemiesOrig;
+
+    }
+
+    public void UpdateWaveTitleUI()
+    {
+        waveText.text = "Round " + roundNum.ToString();
+    }
+
+    public void StartNextWave()
+    {
+        roundNum++;
+        //spawn enemies
+        numEnemies = numEnemiesOrig;
+        UpdateWaveTitleUI();
+        UpdateRoundBarUI();
+    }
+
+    public void TestEnemiesDying()
+    {
+        UpdateRoundBarUI();
     }
 
 }
