@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections;
 
+
 public class PlayerController : MonoBehaviour, IDamage
 {
 
@@ -22,14 +23,18 @@ public class PlayerController : MonoBehaviour, IDamage
 
     float shootTimer;
 
+    private bool isLanding = false;
+
     Vector3 moveDir;
     Vector3 playerVelocity;
 
+    public Animator animator;
+    public RuntimeAnimatorController playerArcher;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-
+        animator = GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -51,31 +56,45 @@ public class PlayerController : MonoBehaviour, IDamage
             jumpCount = 0;
             playerVelocity = Vector3.zero;
         }
-        // moveDir = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
-        // transform.position += moveDir * speed * Time.deltaTime;
+
+
+        float horizontalInput = Input.GetAxis("Horizontal");
+        float verticalInput = Input.GetAxis("Vertical");
 
         moveDir = (Input.GetAxis("Horizontal") * transform.right) +
                   (Input.GetAxis("Vertical") * transform.forward);
-
         controller.Move(moveDir * speed * Time.deltaTime);
-
-
         jump();
-
         controller.Move(playerVelocity * Time.deltaTime);
         playerVelocity.y -= gravity * Time.deltaTime;
 
+
+
         if (Input.GetButton("Fire1") && shootTimer >= shootRate)
+        {
             shoot();
+            animator.SetTrigger("Shoot");
+        }
+
+        // Animation movement controls
+
+        animator.SetFloat("Speed", moveDir.magnitude);
+        animator.SetFloat("Horizontal", horizontalInput);
+        animator.SetFloat("Vertical", verticalInput);
+        animator.SetBool("IsSprinting", Input.GetButton("Sprint"));
+
+
 
     }
 
-    void jump()
+        void jump()
     {
         if (Input.GetButtonDown("Jump") && jumpCount < jumpMax)
         {
             jumpCount++;
             playerVelocity.y = jumpSpeed;
+            animator.SetBool("IsJumping", true);
+
         }
     }
     void sprint()
