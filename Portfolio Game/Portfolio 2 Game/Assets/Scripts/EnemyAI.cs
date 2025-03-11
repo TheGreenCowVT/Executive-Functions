@@ -84,7 +84,7 @@ public class enemyAI : MonoBehaviour, IDamage
         transform.rotation = Quaternion.Lerp(transform.rotation, rot, Time.deltaTime * faceTargetSpeed);
     }
 
-    public void takeDamage(int amount)
+    public void TakeDamage(int amount)
     {
         HP -= amount;
         StartCoroutine(flashRed());

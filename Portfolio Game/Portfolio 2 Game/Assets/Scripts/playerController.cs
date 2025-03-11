@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
-public class PlayerController : MonoBehaviour
+public class PlayerController : MonoBehaviour, IDamage
 {
     [SerializeField] LayerMask ignoreLayer;
     [SerializeField] CharacterController controller;
@@ -100,29 +100,34 @@ public class PlayerController : MonoBehaviour
 
             if (dmg != null)
             {
-                dmg.takeDamage(shootDamage);
+                dmg.TakeDamage(shootDamage);
             }
 
         }
     }
 
-    //public void takeDamage(int amount)
-    //{
-    //    HP -= amount;
-    //    StartCoroutine(flashDamageScreen());
+    public void TakeDamage(int amount)
+    {
+        throw new System.NotImplementedException();
+    }
 
-    //    if (HP <= 0)
-    //    {
-    //        gamemanager.instance.youLose();
+    public void takeDamage(int amount)
+    {
+        HP -= amount;
+        StartCoroutine(flashDamageScreen());
 
-    //    }
-    //}
+        if (HP <= 0)
+        {
+            gamemanager.instance.youLose();
 
-    //IEnumerator flashDamageScreen()
-    //{
-    //    gamemanager.instance.playerDamageScreen.SetActive(true);
-    //    yield return new WaitForSeconds(0.1f);
-    //    gamemanager.instance.playerDamageScreen.SetActive(false);
-    //}
+        }
+    }
+
+    IEnumerator flashDamageScreen()
+    {
+        gamemanager.instance.playerDamageScreen.SetActive(true);
+        yield return new WaitForSeconds(0.1f);
+        gamemanager.instance.playerDamageScreen.SetActive(false);
+    }
 }
 
