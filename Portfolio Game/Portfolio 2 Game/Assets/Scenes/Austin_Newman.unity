@@ -569,19 +569,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ce75caf1287c5241894c559808b9253, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ignoreLayer:
-    serializedVersion: 2
-    m_Bits: 8
-  controller: {fileID: 371619317}
-  HP: 5
-  speed: 5
-  sprintMod: 3
-  jumpSpeed: 15
-  jumpMax: 3
-  gravity: 35
-  shootDamage: 1
-  shootDist: 100
-  shootRate: 2
 --- !u!4 &371619319
 Transform:
   m_ObjectHideFlags: 0
@@ -847,10 +834,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b5546d6fdea87e144a0c97c5634538bb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sens: 600
-  lovkVerMin: -90
-  lockVertMax: 90
-  invertY: 0
 --- !u!1 &279277158001639041
 GameObject:
   m_ObjectHideFlags: 0
@@ -2079,13 +2062,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   model: {fileID: 0}
   agent: {fileID: 6794750276820336198}
-  anim: {fileID: 6794750276820336193}
+  animator: {fileID: 0}
   HP: 3
   faceTargetSpeed: 0
   animTransSpeed: 0
   shootPos: {fileID: 291133068}
   bullet: {fileID: 2037921496895444295, guid: a8cc610235c43164cb7d9665673d0322, type: 3}
   shootRate: 1
+  playerTarget: {fileID: 0}
+  chaseRange: 1
+  patrolSpeed: 1
+  chaseSpeed: 1
+  waypoints: []
 --- !u!136 &6794750276820336195
 CapsuleCollider:
   m_ObjectHideFlags: 0
