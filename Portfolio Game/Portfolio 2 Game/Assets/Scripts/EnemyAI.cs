@@ -17,15 +17,7 @@ public class enemyAI : MonoBehaviour, IDamage
     [SerializeField] GameObject bullet;
     [SerializeField] float shootRate;
 
-    public Transform playerTarget; // Reference to the player GameObject
-    [Range(1,15), SerializeField] float chaseRange;
-    [Range(1, 20), SerializeField] float patrolSpeed;
-    [Range(1, 20), SerializeField] float chaseSpeed;
 
-    public Transform[] waypoints; // Array to store waypoints
-    private int currentWaypointIndex = 0;
-
-    bool isPatrolling = true;
 
     float shootTimer;
 
@@ -35,40 +27,14 @@ public class enemyAI : MonoBehaviour, IDamage
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        agent = GetComponent<NavMeshAgent>();
-        animator = GetComponentInChildren<Animator>();
+        
         gamemanager.instance.updateGameGoal(1);
     }
 
     // Update is called once per frame
     void Update()
     {
-
-        float distanceToPlayer = Vector3.Distance(transform.position, playerTarget.position); // Get distance to player
-        if (distanceToPlayer <= chaseRange)
-        {
-            isPatrolling = false;
-            agent.speed = chaseSpeed;
-            agent.SetDestination(playerTarget.position);
-            animator.SetBool("IsChasing", true); // Make later
-        }
-        else
-        {
-            // Patrolling Logic
-            isPatrolling = true;
-            agent.speed = patrolSpeed;
-            agent.SetDestination(waypoints[currentWaypointIndex].position); // Move agent to location
-
-            // Waypoint system goes here
-            if (Vector3.Distance(transform.position, waypoints[currentWaypointIndex].position) < 1f) // reached waypoint
-            {
-                currentWaypointIndex++;
-                if (currentWaypointIndex >= waypoints.Length)
-                {
-                    currentWaypointIndex = 0; // Loop back to the first waypoint
-                }
-            }
-        }
+        
 
             setAnimLocomotion();
 
