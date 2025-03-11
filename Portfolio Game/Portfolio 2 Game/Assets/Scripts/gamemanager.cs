@@ -7,6 +7,8 @@ public class gamemanager : MonoBehaviour
 
     public Image roundBar;
 
+    [SerializeField] GameObject barObj;
+
     [SerializeField] GameObject menuActive;
     [SerializeField] GameObject menuPause;
     [SerializeField] GameObject menuWin;
@@ -15,8 +17,8 @@ public class gamemanager : MonoBehaviour
     public bool isPaused;
     public Text waveText;
     int roundNum;
-    [Range(0,23)][SerializeField] public int numEnemies;
-    [Range(0,23)][SerializeField] public int numEnemiesOrig;
+    public int numEnemies;
+    public int numEnemiesOrig;
 
     void Awake()
     {
@@ -27,7 +29,6 @@ public class gamemanager : MonoBehaviour
 
     private void Update()
     {
-        UpdateRoundBarUI();
         if (Input.GetButtonDown("Cancel"))
         {
             if (menuActive == null)
@@ -39,7 +40,6 @@ public class gamemanager : MonoBehaviour
                 StateUnpause();
             }
         }
-        TestEnemiesDying();
 
         if (numEnemies == 0)
         {
@@ -56,6 +56,8 @@ public class gamemanager : MonoBehaviour
         Cursor.lockState = CursorLockMode.None;
         menuActive = menuPause;
         menuActive.SetActive(true);
+        barObj.SetActive(false);
+        
     }
 
     public void StateUnpause()
@@ -66,6 +68,7 @@ public class gamemanager : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
         menuActive.SetActive(false);
         menuActive = null;
+        barObj.SetActive(true);
     }
 
     public void UpdateRoundBarUI()
@@ -85,11 +88,6 @@ public class gamemanager : MonoBehaviour
         //spawn enemies
         numEnemies = numEnemiesOrig;
         UpdateWaveTitleUI();
-        UpdateRoundBarUI();
-    }
-
-    public void TestEnemiesDying()
-    {
         UpdateRoundBarUI();
     }
 
