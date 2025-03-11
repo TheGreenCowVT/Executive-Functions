@@ -1,9 +1,9 @@
 using UnityEngine;
 
-public class camera : MonoBehaviour
+public class cameraController : MonoBehaviour
 {
     [SerializeField] int sens;
-    [SerializeField] int lockVertMin, lockVertMax;
+    [SerializeField] int lovkVerMin, lockVertMax;
     [SerializeField] bool invertY;
 
     float rotX;
@@ -26,15 +26,17 @@ public class camera : MonoBehaviour
             rotX += mouseY;
         else
             rotX -= mouseY;
-
         //clamp the camera on the x-axis
-        rotX = Mathf.Clamp(rotX, lockVertMin, lockVertMax);
+        rotX = Mathf.Clamp(rotX, lovkVerMin, lockVertMax);
 
-        // rotate the camera on the x-axis to look up and down
+
+        //rotate camera on x-axis to look up and down
         transform.localRotation = Quaternion.Euler(rotX, 0, 0);
 
-        // roatate the player on the y-axis to look left adn right
+        //rotate the player on the y-axis to look left and right
         transform.parent.Rotate(Vector3.up * mouseX);
+
+
     }
 }
 
