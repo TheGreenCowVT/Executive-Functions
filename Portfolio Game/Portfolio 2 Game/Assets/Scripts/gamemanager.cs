@@ -1,63 +1,66 @@
 using UnityEngine;
 using UnityEngine.UI;
-using TMPro;
 
 public class gamemanager : MonoBehaviour
 {
     public static gamemanager instance;
 
+    public Image roundBar;
+
+    [SerializeField] GameObject barObj;
+
     [SerializeField] GameObject menuActive;
     [SerializeField] GameObject menuPause;
     [SerializeField] GameObject menuWin;
     [SerializeField] GameObject menuLose;
-    [SerializeField] TMP_Text goalCountText;
-
-
-    public Image playerHPBar;
-    public GameObject playerDamageScreen;
-    public GameObject player;
-    public PlayerController playerScript;
 
     public bool isPaused;
+    public Text waveText;
+    int roundNum;
+    public int numEnemies;
+    public int numEnemiesOrig;
 
-    int goalCount;
-
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Awake()
     {
         instance = this;
-        player = GameObject.FindWithTag("Player");
-        playerScript = player.GetComponent<PlayerController>();
+        roundNum = 0;
+        StartNextWave();
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
         if (Input.GetButtonDown("Cancel"))
         {
             if (menuActive == null)
             {
-                statePause();
-                menuActive = menuPause;
-                menuActive.SetActive(true);
-
+                StatePause();
             }
-            else if (menuActive == menuPause)
+            else if (menuPause != null)
             {
-                stateUnpaused();
+                StateUnpause();
             }
         }
+
+        if (numEnemies == 0)
+        {
+            StartNextWave();
+        }
+        
     }
 
-    public void statePause()
+    public void StatePause()
     {
         isPaused = !isPaused;
         Time.timeScale = 0;
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
+        menuActive = menuPause;
+        menuActive.SetActive(true);
+        barObj.SetActive(false);
+        
     }
 
-    public void stateUnpaused()
+    public void StateUnpause()
     {
         isPaused = !isPaused;
         Time.timeScale = 1;
@@ -65,27 +68,27 @@ public class gamemanager : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
         menuActive.SetActive(false);
         menuActive = null;
-
+        barObj.SetActive(true);
     }
 
-    public void updateGameGoal(int amount)
+    public void UpdateRoundBarUI()
     {
-        goalCount += amount;
-        goalCountText.text = goalCount.ToString("F0");
+        roundBar.fillAmount = (float)numEnemies / numEnemiesOrig;
 
-        if (goalCount <= 0)
-        {
-            // you win!!!
-            statePause();
-            menuActive = menuWin;
-            menuActive.SetActive(true);
-        }
     }
 
-    public void youLose()
+    public void UpdateWaveTitleUI()
     {
-        statePause();
-        menuActive = menuLose;
-        menuActive.SetActive(true);
+        waveText.text = "Round " + roundNum.ToString();
     }
+
+    public void StartNextWave()
+    {
+        roundNum++;
+        //spawn enemies
+        numEnemies = numEnemiesOrig;
+        UpdateWaveTitleUI();
+        UpdateRoundBarUI();
+    }
+
 }
