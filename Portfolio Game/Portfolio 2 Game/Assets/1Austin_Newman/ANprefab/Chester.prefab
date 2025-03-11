@@ -9,9 +9,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6595126116880015743}
+  - component: {fileID: 4325958440409689891}
   - component: {fileID: 8385499998294299452}
   - component: {fileID: 8552646650625300581}
   - component: {fileID: 596499067032282720}
+  - component: {fileID: 8636633791817763275}
   m_Layer: 0
   m_Name: Chester
   m_TagString: Untagged
@@ -36,6 +38,24 @@ Transform:
   - {fileID: 330851069170764140}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 183.354, z: 0}
+--- !u!114 &4325958440409689891
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1838966144641141975}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1c8ca31f59d03384bb2bf3c4c40ceb8e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  type: 0
+  rb: {fileID: 8636633791817763275}
+  damageAmount: 1
+  damageTime: 0.25
+  speed: 10
+  destroyTime: 1
 --- !u!114 &8385499998294299452
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -101,6 +121,33 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!54 &8636633791817763275
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1838966144641141975}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &1860176287168406758
 GameObject:
   m_ObjectHideFlags: 0
