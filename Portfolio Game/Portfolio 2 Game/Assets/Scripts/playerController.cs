@@ -18,7 +18,7 @@ public class PlayerController : MonoBehaviour, IDamage
     [SerializeField] int shootDamage;
     [SerializeField] int shootDist;
     [SerializeField] float shootRate;
-
+    int HPOrig;
     int jumpCount;
 
     float shootTimer;
@@ -122,20 +122,21 @@ public class PlayerController : MonoBehaviour, IDamage
 
             if (dmg != null)
             {
-                dmg.takeDamage(shootDamage);
+                dmg.TakeDamage(shootDamage);
             }
 
         }
     }
-
-    public void takeDamage(int amount)
+    public void TakeDamage(int amount)
     {
         HP -= amount;
+        updatePlayerUI();
         StartCoroutine(flashDamageScreen());
 
         if (HP <= 0)
         {
-           
+            gamemanager.instance.youLose();
+
         }
     }
 
@@ -146,4 +147,11 @@ public class PlayerController : MonoBehaviour, IDamage
         gamemanager.instance.playerDamageScreen.SetActive(false);
 
     }
+
+
+    public void updatePlayerUI()
+    {
+        gamemanager.instance.playerHPBar.fillAmount = (float)HP / HPOrig;
+    }
+
 }
