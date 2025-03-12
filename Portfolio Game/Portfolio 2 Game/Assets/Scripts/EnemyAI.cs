@@ -23,11 +23,12 @@ public class enemyAI : MonoBehaviour, IDamage
 
     Vector3 playerDir;
     bool playerInRage;
+    private EnemyLoot loot;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
+        loot = GetComponent<EnemyLoot>();
         gamemanager.instance.updateGameGoal(1);
     }
 
@@ -97,7 +98,11 @@ public class enemyAI : MonoBehaviour, IDamage
 
         if (HP <= 0)
         {
+
             gamemanager.instance.updateGameGoal(-1);
+            loot.Die();
+        }
+        else { 
             Destroy(gameObject);
         }
     }
