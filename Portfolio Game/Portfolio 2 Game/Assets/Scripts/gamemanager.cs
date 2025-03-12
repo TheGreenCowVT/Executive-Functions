@@ -10,9 +10,10 @@ public class gamemanager : MonoBehaviour
     [SerializeField] GameObject menuPause;
     [SerializeField] GameObject menuWin;
     [SerializeField] GameObject menuLose;
-    [SerializeField] TMP_Text goalCountText;
+    [SerializeField] GameObject menuHUD;
+    [SerializeField] TMP_Text waveNumberText;
 
-
+    public Image WaveTimer;
     public Image playerHPBar;
     public GameObject playerDamageScreen;
     public GameObject player;
@@ -20,7 +21,9 @@ public class gamemanager : MonoBehaviour
 
     public bool isPaused;
 
+    int numEnemies;
     int goalCount;
+    int waveNum = 0;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Awake()
@@ -28,6 +31,7 @@ public class gamemanager : MonoBehaviour
         instance = this;
         player = GameObject.FindWithTag("Player");
         playerScript = player.GetComponent<PlayerController>();
+        StartNextWave();
     }
 
     // Update is called once per frame
@@ -56,6 +60,7 @@ public class gamemanager : MonoBehaviour
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
         menuActive = menuPause;
+        menuHUD.SetActive(false);
         menuActive.SetActive(true);
     }
 
@@ -65,6 +70,7 @@ public class gamemanager : MonoBehaviour
         Time.timeScale = 1;
         Cursor.visible = false;
         Cursor.lockState  = CursorLockMode.Locked;
+        menuHUD.SetActive(true);
         menuActive.SetActive(false);
         menuActive = null;
 
@@ -73,7 +79,6 @@ public class gamemanager : MonoBehaviour
     public void updateGameGoal(int amount)
     {
         goalCount += amount;
-        goalCountText.text = goalCount.ToString("F0");
 
         if(goalCount <= 0)
         {
@@ -87,7 +92,14 @@ public class gamemanager : MonoBehaviour
     public void youLose()
     {
         statePause();
+        playerDamageScreen.SetActive(false);
         menuActive = menuLose;
         menuActive.SetActive(true);
+    }
+
+    public void StartNextWave()
+    {
+        waveNum++;
+        waveNumberText.text = "Wave " + waveNum.ToString();
     }
 }
