@@ -23,7 +23,6 @@ public class PlayerController : MonoBehaviour, IDamage
 
     float shootTimer;
 
-    private bool isLanding = false;
     public float rotationSpeed;
 
     Vector3 moveDir;
@@ -35,6 +34,7 @@ public class PlayerController : MonoBehaviour, IDamage
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        HPOrig = HP;
         animator = GetComponent<Animator>();
     }
 
@@ -46,6 +46,10 @@ public class PlayerController : MonoBehaviour, IDamage
         movement();
 
         sprint();
+
+        animator.SetBool("isGrounded", controller.isGrounded);
+        animator.SetFloat("velocityY", playerVelocity.y + 0.001f);
+        
     }
     void movement()
     {
@@ -85,15 +89,6 @@ public class PlayerController : MonoBehaviour, IDamage
         controller.Move(playerVelocity * Time.deltaTime);
         playerVelocity.y -= gravity * Time.deltaTime;
 
-     
-
-        if (Input.GetButton("Fire1") && shootTimer >= shootRate)
-        {
-            shoot();
-            animator.SetTrigger("Shoot");
-        }
-
-
 
         // Animation movement controls
 
@@ -115,7 +110,7 @@ public class PlayerController : MonoBehaviour, IDamage
             animator.SetBool("IsJumping", true);
 
         }
-        if (controller.isGrounded && animator.GetBool("IsJumping") == true && playerVelocity.y <= 0)
+        if (controller.isGrounded && animator.GetBool("IsJumping") == true && playerVelocity.y + 0.001f <= 0.1f)
         {
             animator.SetBool("IsJumping", false);
         }
@@ -132,7 +127,7 @@ public class PlayerController : MonoBehaviour, IDamage
         }
     }
 
-    void shoot()
+    public void shoot()
     {
         shootTimer = 0;
 
@@ -149,6 +144,7 @@ public class PlayerController : MonoBehaviour, IDamage
             }
 
         }
+        animator.SetTrigger("Shoot");
     }
     public void TakeDamage(int amount)
     {
