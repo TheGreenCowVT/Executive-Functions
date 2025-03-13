@@ -504,7 +504,7 @@ GameObject:
   m_Component:
   - component: {fileID: 904929899}
   - component: {fileID: 904929898}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: NavMesh Surface
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -530,7 +530,7 @@ MonoBehaviour:
   m_Center: {x: 0, y: 2, z: 0}
   m_LayerMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 55
   m_UseGeometry: 0
   m_DefaultArea: 0
   m_GenerateLinks: 0
@@ -541,7 +541,7 @@ MonoBehaviour:
   m_OverrideVoxelSize: 0
   m_VoxelSize: 0.16666667
   m_MinRegionArea: 2
-  m_NavMeshData: {fileID: 23800000, guid: a97c797b278fc8a4db754a9d646ccfc1, type: 2}
+  m_NavMeshData: {fileID: 23800000, guid: 86331403498ce77468ea56fc2d7e70b0, type: 2}
   m_BuildHeightMesh: 0
 --- !u!4 &904929899
 Transform:
