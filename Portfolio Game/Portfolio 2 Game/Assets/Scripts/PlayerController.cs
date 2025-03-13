@@ -24,6 +24,7 @@ public class PlayerController : MonoBehaviour, IDamage
     float shootTimer;
 
     private bool isLanding = false;
+    public float rotationSpeed;
 
     Vector3 moveDir;
     Vector3 playerVelocity;
@@ -55,26 +56,44 @@ public class PlayerController : MonoBehaviour, IDamage
         {
             jumpCount = 0;
             playerVelocity = Vector3.zero;
+        
         }
+
 
 
         float horizontalInput = Input.GetAxis("Horizontal");
         float verticalInput = Input.GetAxis("Vertical");
 
-        moveDir = (Input.GetAxis("Horizontal") * transform.right) +
-                  (Input.GetAxis("Vertical") * transform.forward);
+        Vector3 cameraForward = Camera.main.transform.forward;
+        Vector3 cameraRight = Camera.main.transform.right;
+        cameraForward.y = 0;
+        cameraForward.Normalize();
+
+
+        Vector3 moveDir = (cameraForward * verticalInput) + (cameraRight * horizontalInput);
+        moveDir.Normalize();
+
         controller.Move(moveDir * speed * Time.deltaTime);
+        if (moveDir != Vector3.zero)
+        {
+            Quaternion toRotation = Quaternion.LookRotation(moveDir, Vector3.up);
+
+            transform.rotation = Quaternion.RotateTowards(transform.rotation, toRotation, rotationSpeed * Time.deltaTime);
+        }
+
         jump();
         controller.Move(playerVelocity * Time.deltaTime);
         playerVelocity.y -= gravity * Time.deltaTime;
 
-
+     
 
         if (Input.GetButton("Fire1") && shootTimer >= shootRate)
         {
             shoot();
             animator.SetTrigger("Shoot");
         }
+
+
 
         // Animation movement controls
 
@@ -95,6 +114,10 @@ public class PlayerController : MonoBehaviour, IDamage
             playerVelocity.y = jumpSpeed;
             animator.SetBool("IsJumping", true);
 
+        }
+        if (controller.isGrounded && animator.GetBool("IsJumping") == true && playerVelocity.y <= 0)
+        {
+            animator.SetBool("IsJumping", false);
         }
     }
     void sprint()
