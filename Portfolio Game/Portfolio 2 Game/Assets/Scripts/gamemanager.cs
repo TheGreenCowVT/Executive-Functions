@@ -83,10 +83,18 @@ public class gamemanager : MonoBehaviour
 
         if(goalCount <= 0)
         {
-            // you win!!!
-            statePause();
-            menuActive = menuWin;
-            menuActive.SetActive(true);
+            if (waveNum > 4)
+            {
+                // You Win
+                statePause();
+                menuActive = menuWin;
+                menuActive.SetActive(true);
+            }
+            else
+            {
+                // Start Next Wave
+                StartNextWave();
+            }
         }
     }
 
