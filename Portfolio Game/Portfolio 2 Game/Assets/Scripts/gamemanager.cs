@@ -15,6 +15,7 @@ public class gamemanager : MonoBehaviour
 
     public Image WaveTimer;
     public Image playerHPBar;
+    public Image enemyHPBar;
     public GameObject playerDamageScreen;
     public GameObject player;
     public PlayerController playerScript;

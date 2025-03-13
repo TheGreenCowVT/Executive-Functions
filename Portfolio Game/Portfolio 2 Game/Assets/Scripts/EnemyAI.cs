@@ -1,7 +1,6 @@
 using UnityEngine;
 using System.Collections;
 using UnityEngine.AI;
-using System.Runtime.CompilerServices;
 
 public class enemyAI : MonoBehaviour, IDamage
 {
@@ -9,7 +8,7 @@ public class enemyAI : MonoBehaviour, IDamage
     [SerializeField] NavMeshAgent agent;
     [SerializeField] Animator animator;
 
-    [SerializeField] int HP;
+    [SerializeField] int HP, maxHP;
     [SerializeField] int faceTargetSpeed;
     [SerializeField] int animTransSpeed;
 
@@ -30,14 +29,15 @@ public class enemyAI : MonoBehaviour, IDamage
     {
         loot = GetComponent<EnemyLoot>();
         gamemanager.instance.updateGameGoal(1);
+        maxHP = HP;
+        updateenemyUI();
     }
-
     // Update is called once per frame
     void Update()
     {
-        
 
-            setAnimLocomotion();
+
+        setAnimLocomotion();
 
         shootTimer += Time.deltaTime;
 
@@ -92,7 +92,9 @@ public class enemyAI : MonoBehaviour, IDamage
     public void TakeDamage(int amount)
     {
         HP -= amount;
+        updateenemyUI();
         StartCoroutine(flashRed());
+
 
         agent.SetDestination(gamemanager.instance.player.transform.position);
 
@@ -102,7 +104,8 @@ public class enemyAI : MonoBehaviour, IDamage
             gamemanager.instance.updateGameGoal(-1);
             loot.Die();
         }
-        else { 
+        else
+        {
             Destroy(gameObject);
         }
     }
@@ -117,5 +120,10 @@ public class enemyAI : MonoBehaviour, IDamage
     {
         shootTimer = 0;
         Instantiate(bullet, shootPos.position, transform.rotation);
+    }
+
+    public void updateenemyUI()
+    {
+        gamemanager.instance.enemyHPBar.fillAmount = HP / (float)maxHP;
     }
 }
