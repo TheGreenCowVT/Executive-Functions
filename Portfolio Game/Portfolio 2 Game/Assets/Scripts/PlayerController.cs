@@ -129,6 +129,7 @@ public class PlayerController : MonoBehaviour, IDamage
 
     public void shoot()
     {
+        
         shootTimer = 0;
 
         RaycastHit hit;
@@ -145,6 +146,7 @@ public class PlayerController : MonoBehaviour, IDamage
 
         }
         animator.SetTrigger("Shoot");
+        animator.SetBool("atReady", false);
     }
     public void TakeDamage(int amount)
     {

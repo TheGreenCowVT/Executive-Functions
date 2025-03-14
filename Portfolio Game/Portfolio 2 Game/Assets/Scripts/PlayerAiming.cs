@@ -40,7 +40,9 @@ public class PlayerAiming : MonoBehaviour
 
     void AimingLogic()
     {
-        if(Input.GetButtonDown("Fire2"))
+        animator.SetBool("atReady", true);
+
+        if (Input.GetButtonDown("Fire2"))
         {
             isAiming = true;
             Debug.Log("isAiming set to true");
@@ -57,7 +59,9 @@ public class PlayerAiming : MonoBehaviour
         }
         if (isAiming && Input.GetButtonDown("Fire1"))
         {
+
             playerController.shoot();
+            animator.SetBool("atReady", false);
         }
     }
 
