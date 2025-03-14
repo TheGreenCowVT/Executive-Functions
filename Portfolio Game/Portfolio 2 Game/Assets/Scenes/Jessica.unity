@@ -130,13 +130,13 @@ GameObject:
   - component: {fileID: 181612725}
   - component: {fileID: 181612724}
   - component: {fileID: 181612723}
-  m_Layer: 3
+  m_Layer: 5
   m_Name: Reticle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &181612723
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -174,7 +174,7 @@ CanvasRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 181612722}
-  m_CullTransparentMesh: 1
+  m_CullTransparentMesh: 0
 --- !u!224 &181612725
 RectTransform:
   m_ObjectHideFlags: 0

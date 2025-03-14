@@ -96,13 +96,13 @@ public class PlayerController : MonoBehaviour, IDamage
         animator.SetFloat("Horizontal", horizontalInput);
         animator.SetFloat("Vertical", verticalInput);
         animator.SetBool("IsSprinting", Input.GetButton("Sprint"));
-
+        animator.SetFloat("Speed", Mathf.Round(moveDir.magnitude * 100f) / 100f);
 
 
     }
 
         void jump()
-    {
+     {
         if (Input.GetButtonDown("Jump") && jumpCount < jumpMax)
         {
             jumpCount++;
