@@ -243,7 +243,7 @@ MonoBehaviour:
   model: {fileID: 382761667842882571}
   agent: {fileID: 8637437413379990261}
   animator: {fileID: 5516237652182021337}
-  HP: 0
+  HP: 5
   faceTargetSpeed: 600
   animTransSpeed: 50
   shootPos: {fileID: 4435476490263400147}
