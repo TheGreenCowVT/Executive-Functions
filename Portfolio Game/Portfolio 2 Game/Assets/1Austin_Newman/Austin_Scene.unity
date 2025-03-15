@@ -184,6 +184,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Skully
       objectReference: {fileID: 0}
+    - target: {fileID: 3452765984786029065, guid: 1669c2da67d82f949b38b51ed84fc6bb, type: 3}
+      propertyPath: m_StoppingDistance
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 9185094933068382808, guid: 1669c2da67d82f949b38b51ed84fc6bb, type: 3}
       propertyPath: m_LocalPosition.x
       value: -1.41
@@ -350,7 +354,6 @@ MonoBehaviour:
   shootDamage: 1
   shootDist: 50
   shootRate: 1
-  rotationSpeed: 0
   animator: {fileID: 684715565}
   playerArcher: {fileID: 0}
 --- !u!4 &684715570
