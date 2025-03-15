@@ -38,6 +38,7 @@ public class PlayerController : MonoBehaviour, IDamage
     {
         HPOrig = HP;
         animator = GetComponent<Animator>();
+        updatePlayerUI();
     }
 
     // Update is called once per frame
@@ -46,7 +47,7 @@ public class PlayerController : MonoBehaviour, IDamage
         Debug.DrawRay(Camera.main.transform.position, Camera.main.transform.forward * shootDist, Color.red);
 
         movement();
-
+        updatePlayerUI();
         sprint();
 
         animator.SetBool("isGrounded", controller.isGrounded);
