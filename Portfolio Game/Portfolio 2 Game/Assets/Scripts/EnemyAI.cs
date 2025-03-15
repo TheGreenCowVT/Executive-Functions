@@ -27,6 +27,7 @@ public class enemyAI : MonoBehaviour, IDamage
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        animator = GetComponent<Animator>();
         loot = GetComponent<EnemyLoot>();
         gamemanager.instance.updateGameGoal(1);
         maxHP = HP;
@@ -124,6 +125,6 @@ public class enemyAI : MonoBehaviour, IDamage
 
     public void updateenemyUI()
     {
-        gamemanager.instance.enemyHPBar.fillAmount = HP / (float)maxHP;
+        //gamemanager.instance.enemyHPBar.fillAmount = HP / (float)maxHP;
     }
 }
