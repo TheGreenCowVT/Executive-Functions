@@ -8,6 +8,7 @@ public class PlayerController : MonoBehaviour, IDamage
     [SerializeField] LayerMask ignoreLayer;
     [SerializeField] CharacterController controller;
 
+
     [Range(1, 10)][SerializeField] int HP;
     [Range(2, 5)][SerializeField] int speed;
     [Range(2, 4)][SerializeField] int sprintMod;
@@ -15,11 +16,8 @@ public class PlayerController : MonoBehaviour, IDamage
     [Range(1, 3)][SerializeField] int jumpMax;
     [Range(15, 45)][SerializeField] int gravity;
 
-    [SerializeField] Transform shootPos;
-    [SerializeField] GameObject arrow;
-    [SerializeField] int shootDamage;
-    [SerializeField] int shootDist;
-    [SerializeField] float shootRate;
+    [SerializeField] private Weapon startingWeaponPrefab;
+   
     int HPOrig;
     int jumpCount;
 
@@ -30,8 +28,10 @@ public class PlayerController : MonoBehaviour, IDamage
     Vector3 moveDir;
     Vector3 playerVelocity;
 
+    public Transform handTransform;
+    public Weapon currentWeapon;
     public Animator animator;
-    public RuntimeAnimatorController playerArcher;
+    
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -39,23 +39,30 @@ public class PlayerController : MonoBehaviour, IDamage
         HPOrig = HP;
         animator = GetComponent<Animator>();
         updatePlayerUI();
+        if (startingWeaponPrefab != null)
+        {
+            EquipWeapon(startingWeaponPrefab);
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
-        updatePlayerUI();
-        Debug.DrawRay(Camera.main.transform.position, Camera.main.transform.forward * shootDist, Color.red);
 
-        movement();
+        if (currentWeapon != null)
+        {
+            Debug.DrawRay(Camera.main.transform.position, Camera.main.transform.forward * currentWeapon.Range, Color.red);
 
-        sprint();
+            movement();
+            updatePlayerUI();
+            sprint();
 
-        animator.SetBool("isGrounded", controller.isGrounded);
-        animator.SetFloat("velocityY", playerVelocity.y + 0.001f);
-        
-    }
-    void movement()
+            animator.SetBool("isGrounded", controller.isGrounded);
+            animator.SetFloat("velocityY", playerVelocity.y + 0.001f);
+        }
+
+        }
+        void movement()
     {
         shootTimer += Time.deltaTime;
 
@@ -131,27 +138,31 @@ public class PlayerController : MonoBehaviour, IDamage
         }
     }
 
-    public void shoot()
+    public void EquipWeapon(Weapon newWeaponPrefab)
     {
-        
-        shootTimer = 0;
-        Instantiate(arrow, shootPos.position, Camera.main.transform.rotation);
-
-        RaycastHit hit;
-        if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, shootDist, ~ignoreLayer))
+        if (currentWeapon != null)
         {
-            Debug.Log(hit.collider.name);
-
-            IDamage dmg = hit.collider.GetComponent<IDamage>();
-
-            if (dmg != null)
-            {
-                dmg.TakeDamage(shootDamage);
-            }
-
+            currentWeapon.Unequip();
+            currentWeapon = null;
         }
-        animator.SetTrigger("Shoot");
-        animator.SetBool("atReady", false);
+        GameObject weaponInstance = Instantiate(newWeaponPrefab.gameObject, handTransform);
+        Weapon weaponCompenent = weaponInstance.GetComponent<Weapon>();
+        weaponInstance.transform.localPosition = Vector3.zero;
+        weaponInstance.transform.localRotation = Quaternion.identity;
+
+        currentWeapon = weaponCompenent;
+        currentWeapon.Equip(handTransform);
+
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        Weapon weaponPickup = other.GetComponent<Weapon>();
+        if (weaponPickup != null)
+        {
+            EquipWeapon(weaponPickup);
+            Destroy(other.gameObject);
+        }
     }
     public void TakeDamage(int amount)
     {

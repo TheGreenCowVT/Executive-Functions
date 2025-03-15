@@ -3,12 +3,11 @@ using UnityEngine;
 public class PlayerAiming : MonoBehaviour
 {
 
-    public GameObject bow;
+    
     public GameObject reticle;
     public float aimSpeed = 5f;
     public Vector3 aimPos;
 
-    private Vector3 hipPos;
     private bool isAiming = false;
     private PlayerController playerController;
 
@@ -17,11 +16,9 @@ public class PlayerAiming : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        hipPos = bow.transform.localPosition;
+        
         reticle.SetActive(false);
         playerController = GetComponent<PlayerController>();
-       
-
         animator = GetComponent<Animator>();
 
     }
@@ -29,11 +26,12 @@ public class PlayerAiming : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (playerController.currentWeapon != null)
+        {
+            AimingLogic();
+            BowTransition();
 
-        AimingLogic();
-        BowTransition();
-
-
+        }
 
     }
 
@@ -59,21 +57,23 @@ public class PlayerAiming : MonoBehaviour
         }
         if (isAiming && Input.GetButtonDown("Fire1"))
         {
-
-            playerController.shoot();
-            animator.SetBool("atReady", false);
+            if (playerController.currentWeapon != null)
+            {
+                playerController.currentWeapon.Attack();
+                animator.SetBool("atReady", false);
+            }
+            }
         }
-    }
 
     void BowTransition()
     {
         if (isAiming)
         {
-            bow.transform.localPosition = Vector3.Lerp(bow.transform.localPosition, aimPos, Time.deltaTime * aimSpeed);
+            playerController.currentWeapon.transform.localPosition = Vector3.Lerp(playerController.currentWeapon.transform.localPosition, aimPos, Time.deltaTime * aimSpeed);
         }
         else
         {
-            bow.transform.localPosition = Vector3.Lerp(bow.transform.localPosition, aimPos, Time.deltaTime * aimSpeed);
+            playerController.currentWeapon.transform.localPosition = Vector3.Lerp(playerController.currentWeapon.transform.localPosition, aimPos, Time.deltaTime * aimSpeed);
         }
     }
 
