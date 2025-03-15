@@ -38,7 +38,7 @@ public class enemyAI : MonoBehaviour, IDamage
 
 
         setAnimLocomotion();
-        updateenemyUI();
+
         shootTimer += Time.deltaTime;
 
         if (playerInRage)
@@ -124,6 +124,6 @@ public class enemyAI : MonoBehaviour, IDamage
 
     public void updateenemyUI()
     {
-        gamemanager.instance.enemyHPBar.fillAmount = (float)HP / maxHP;
+        gamemanager.instance.enemyHPBar.fillAmount = HP / (float)maxHP;
     }
 }
