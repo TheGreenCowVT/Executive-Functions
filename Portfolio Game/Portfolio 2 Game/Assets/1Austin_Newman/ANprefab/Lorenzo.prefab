@@ -780,7 +780,6 @@ MonoBehaviour:
   waypoints:
   - {fileID: 0}
   - {fileID: 0}
-  - {fileID: 0}
 --- !u!1 &6024378226065270085
 GameObject:
   m_ObjectHideFlags: 0
