@@ -314,4 +314,8 @@ SceneRoots:
   m_Roots:
   - {fileID: 148954456}
   - {fileID: 3825138}
+--- !u!1660057539 &9223372036854775807
+SceneRoots:
+  m_ObjectHideFlags: 0
+  m_Roots: []
 
