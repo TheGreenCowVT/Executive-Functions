@@ -1,6 +1,5 @@
 using UnityEngine;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine.AI;
 
 public class enemyAI : MonoBehaviour, IDamage
@@ -24,12 +23,10 @@ public class enemyAI : MonoBehaviour, IDamage
     Vector3 playerDir;
     bool playerInRage;
     private EnemyLoot loot;
-    private Animator anim;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        anim.GetComponent<Animator>();
         loot = GetComponent<EnemyLoot>();
         gamemanager.instance.updateGameGoal(1);
         maxHP = HP;
@@ -106,7 +103,6 @@ public class enemyAI : MonoBehaviour, IDamage
 
             gamemanager.instance.updateGameGoal(-1);
             loot.Die();
-            Destroy(gameObject);
         }
         else
         {
@@ -129,17 +125,5 @@ public class enemyAI : MonoBehaviour, IDamage
     public void updateenemyUI()
     {
         gamemanager.instance.enemyHPBar.fillAmount = (float)HP / maxHP;
-    }
-    public void walk(bool walk)
-    {
-        anim.SetBool("walk", walk);
-    }
-    public void attack()
-    {
-        anim.SetTrigger("attack");
-    }
-    public void run(bool run)
-    {
-        anim.SetBool("run", run);
     }
 }
