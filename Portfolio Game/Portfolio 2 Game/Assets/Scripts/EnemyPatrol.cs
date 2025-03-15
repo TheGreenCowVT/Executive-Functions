@@ -101,11 +101,12 @@ public class EnemyPatrol : MonoBehaviour
             //{
                 if (agent.remainingDistance <= 2.0f && !agent.pathPending)
                 {
-                    currentWaypointIndex++;
-                    if (currentWaypointIndex == waypoints.Length)
-                    {
-                        currentWaypointIndex = 0;
-                    }
+                //currentWaypointIndex++;
+                currentWaypointIndex = Random.Range(0, waypoints.Length);
+                    //if (currentWaypointIndex == waypoints.Length)
+                    //{
+                    //    currentWaypointIndex = 0;
+                    //}
                     agent.SetDestination(waypoints[currentWaypointIndex].position);
                 }
             //}
