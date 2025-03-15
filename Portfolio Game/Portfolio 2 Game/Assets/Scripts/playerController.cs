@@ -133,7 +133,7 @@ public class PlayerController : MonoBehaviour, IDamage
     {
         
         shootTimer = 0;
-        Instantiate(arrow, shootPos.position, transform.rotation);
+        Instantiate(arrow, shootPos.position, Camera.main.transform.rotation);
 
         RaycastHit hit;
         if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, shootDist, ~ignoreLayer))
