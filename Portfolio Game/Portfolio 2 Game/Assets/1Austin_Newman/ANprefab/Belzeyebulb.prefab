@@ -293,7 +293,10 @@ MonoBehaviour:
   animator: {fileID: 5516237652182021337}
   targetPoint: 5
   speed: 2
-  waypoints: []
+  waypoints:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
 --- !u!195 &8637437413379990261
 NavMeshAgent:
   m_ObjectHideFlags: 0
