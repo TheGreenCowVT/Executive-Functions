@@ -38,11 +38,13 @@ public class PlayerController : MonoBehaviour, IDamage
     {
         HPOrig = HP;
         animator = GetComponent<Animator>();
+        updatePlayerUI();
     }
 
     // Update is called once per frame
     void Update()
     {
+        updatePlayerUI();
         Debug.DrawRay(Camera.main.transform.position, Camera.main.transform.forward * shootDist, Color.red);
 
         movement();
