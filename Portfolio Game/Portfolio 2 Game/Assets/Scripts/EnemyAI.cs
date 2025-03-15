@@ -8,7 +8,7 @@ public class enemyAI : MonoBehaviour, IDamage
     [SerializeField] NavMeshAgent agent;
     [SerializeField] Animator animator;
 
-    [SerializeField] int HP, maxHP;
+    [SerializeField] int HP;
     [SerializeField] int faceTargetSpeed;
     [SerializeField] int animTransSpeed;
 
@@ -17,7 +17,7 @@ public class enemyAI : MonoBehaviour, IDamage
     [SerializeField] float shootRate;
 
 
-
+    int maxHP;
     float shootTimer;
 
     Vector3 playerDir;
