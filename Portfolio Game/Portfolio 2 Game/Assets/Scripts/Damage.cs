@@ -21,7 +21,7 @@ public class damage : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-
+        
         if (type == damageType.moving)
         {
             rb.linearVelocity = transform.forward * speed;
