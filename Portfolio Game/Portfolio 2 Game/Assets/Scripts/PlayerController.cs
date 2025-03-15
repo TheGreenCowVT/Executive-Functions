@@ -15,6 +15,8 @@ public class PlayerController : MonoBehaviour, IDamage
     [Range(1, 3)][SerializeField] int jumpMax;
     [Range(15, 45)][SerializeField] int gravity;
 
+    [SerializeField] Transform shootPos;
+    [SerializeField] GameObject arrow;
     [SerializeField] int shootDamage;
     [SerializeField] int shootDist;
     [SerializeField] float shootRate;
@@ -131,6 +133,7 @@ public class PlayerController : MonoBehaviour, IDamage
     {
         
         shootTimer = 0;
+        Instantiate(arrow, shootPos.position, transform.rotation);
 
         RaycastHit hit;
         if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, shootDist, ~ignoreLayer))
