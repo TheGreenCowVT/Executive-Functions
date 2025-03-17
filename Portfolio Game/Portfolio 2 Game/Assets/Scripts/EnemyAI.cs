@@ -4,24 +4,25 @@ using UnityEngine.AI;
 
 public class enemyAI : MonoBehaviour, IDamage
 {
+    public enum EnemyType { melee, Ranged }
+    [SerializeField] EnemyType enemyType;
     [SerializeField] Renderer model;
     [SerializeField] NavMeshAgent agent;
     [SerializeField] Animator animator;
 
-    [SerializeField] int HP, maxHP;
+    [SerializeField] int maxHP;
     [SerializeField] int faceTargetSpeed;
     [SerializeField] int animTransSpeed;
-
+    [SerializeField] gamemanager enemyHealthBar;
     [SerializeField] Transform shootPos;
     [SerializeField] GameObject bullet;
     [SerializeField] float shootRate;
 
-
-
     float shootTimer;
-
+    private int HP;
     Vector3 playerDir;
     bool playerInRage;
+    bool wasDamagedRecently;
     private EnemyLoot loot;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -30,8 +31,22 @@ public class enemyAI : MonoBehaviour, IDamage
         animator = GetComponent<Animator>();
         loot = GetComponent<EnemyLoot>();
         gamemanager.instance.updateGameGoal(1);
-        maxHP = HP;
-        updateenemyUI();
+        HP = maxHP;
+
+        enemyHealthBar = gamemanager.instance;
+        if (enemyHealthBar != null)
+        {
+            enemyHealthBar.updateEnemyHPBar(maxHP, HP);
+        }
+        else
+        {
+            Debug.LogError("Gamemanager not found");
+        }
+        if (enemyType == EnemyType.melee)
+        {
+            bullet = null;
+            shootRate = 0f;
+        }
     }
     // Update is called once per frame
     void Update()
@@ -42,14 +57,12 @@ public class enemyAI : MonoBehaviour, IDamage
 
         shootTimer += Time.deltaTime;
 
-        if (playerInRage)
+        if (playerInRage || wasDamagedRecently)
         {
             playerDir = gamemanager.instance.player.transform.position - transform.position;
             agent.SetDestination(gamemanager.instance.player.transform.position);
 
-
-
-            if (shootTimer >= shootRate)
+            if (enemyType == EnemyType.Ranged && shootTimer >= shootRate && bullet != null)
             {
                 shoot();
             }
@@ -93,20 +106,23 @@ public class enemyAI : MonoBehaviour, IDamage
     public void TakeDamage(int amount)
     {
         HP -= amount;
-        updateenemyUI();
+        if (enemyHealthBar != null)
+        {
+            enemyHealthBar.updateEnemyHPBar(maxHP, HP);
+        }
+
         StartCoroutine(flashRed());
 
 
         agent.SetDestination(gamemanager.instance.player.transform.position);
+        wasDamagedRecently = true;
+        StartCoroutine(ResetDamageFlag());
 
         if (HP <= 0)
         {
 
             gamemanager.instance.updateGameGoal(-1);
             loot.Die();
-        }
-        else
-        {
             Destroy(gameObject);
         }
     }
@@ -123,8 +139,9 @@ public class enemyAI : MonoBehaviour, IDamage
         Instantiate(bullet, shootPos.position, transform.rotation);
     }
 
-    public void updateenemyUI()
+    IEnumerator ResetDamageFlag()
     {
-        //gamemanager.instance.enemyHPBar.fillAmount = HP / (float)maxHP;
+        yield return new WaitForSeconds(2F);
+        wasDamagedRecently = false;
     }
 }

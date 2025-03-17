@@ -12,33 +12,101 @@ public class gamemanager : MonoBehaviour
     [SerializeField] GameObject menuLose;
     [SerializeField] GameObject menuHUD;
     [SerializeField] TMP_Text waveNumberText;
-
-    public Image WaveTimer;
+    // Player stuff
     public Image playerHPBar;
-    public Image enemyHPBar;
     public GameObject playerDamageScreen;
     public GameObject player;
     public PlayerController playerScript;
-
-    public bool isPaused;
-
+    //Enemy stff
+    public GameObject enemy;
+    public GameObject enemyHP;
+    public GameObject[] enemies;
+    public GameObject[] enemiesHP;
+    [SerializeField] public Image enemyHPBar;
+    //Waypoint stuff
+    public GameObject waypoint;
+    public Transform[] waypoints;
+    public GameObject[] enemywaypoints;
+    //Wave stuff
     int numEnemies;
     int goalCount;
     int waveNum = 0;
-
+    public Image WaveTimer;
+    public bool isPaused;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Awake()
     {
         instance = this;
         player = GameObject.FindWithTag("Player");
         playerScript = player.GetComponent<PlayerController>();
+
+        enemyHP = GameObject.FindWithTag("EnemyHPBar");
+        enemiesHP = GameObject.FindGameObjectsWithTag("EnemyHPBar");
         StartNextWave();
+        // Find enemies and waypoints
+        enemies = GameObject.FindGameObjectsWithTag("Enemy");
+        enemy = GameObject.FindWithTag("Enemy");
+        enemywaypoints = GameObject.FindGameObjectsWithTag("Waypoint");
+        waypoint = GameObject.FindWithTag("Waypoint");
+
+        if (waypoint != null)
+        {
+            waypoints = waypoint.GetComponentsInChildren<Transform>();
+            Transform[] tempWaypoints = new Transform[waypoints.Length - 1];
+            for (int i = 1; i < waypoints.Length; i++)
+            {
+                tempWaypoints[i - 1] = waypoints[i];
+            }
+            waypoints = tempWaypoints;
+        }
+
+        // Assign player target and waypoints to enemies
+        if (player != null && waypoints != null && enemies != null && enemies.Length > 0)
+        {
+            foreach (GameObject enemyObj in enemies)
+            {
+                EnemyPatrol enemyPatrol = enemyObj.GetComponent<EnemyPatrol>();
+                if (enemyPatrol != null)
+                {
+                    enemyPatrol.playerTarget = player.transform;
+                    enemyPatrol.waypoints = waypoints;
+                }
+            }
+        }
+        else
+        {
+            Debug.LogError("Player, waypoints, or enemies not found.");
+        }
+
+        //Find Enemy HP bars
+        enemyHP = GameObject.FindWithTag("EnemyHPBar");
+        enemiesHP = GameObject.FindGameObjectsWithTag("EnemyHPBar");
+
+        if (enemyHP != null)
+        {
+            foreach (GameObject enemyHPBar in enemiesHP)
+            {
+                Image enemyHPBarImage = enemyHPBar.GetComponent<Image>();
+                if (enemyHPBarImage != null)
+                {
+                    enemyHPBarImage.fillAmount = 1;
+                }
+            }
+            enemyHPBar = enemyHP.GetComponent<Image>();
+        }
+        else
+        {
+            Debug.Log("Enemy HP Bar not found");
+        }
+
+        goalCount = enemies.Length;
+        updateGameGoal(0);
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetButtonDown("Cancel"))
+        if (Input.GetButtonDown("Cancel"))
         {
             if (menuActive == null)
             {
@@ -47,7 +115,7 @@ public class gamemanager : MonoBehaviour
                 menuActive.SetActive(true);
 
             }
-            else if(menuActive == menuPause)
+            else if (menuActive == menuPause)
             {
                 StateUnpause();
             }
@@ -70,7 +138,7 @@ public class gamemanager : MonoBehaviour
         isPaused = !isPaused;
         Time.timeScale = 1;
         Cursor.visible = false;
-        Cursor.lockState  = CursorLockMode.Locked;
+        Cursor.lockState = CursorLockMode.Locked;
         menuHUD.SetActive(true);
         menuActive.SetActive(false);
         menuActive = null;
@@ -81,7 +149,7 @@ public class gamemanager : MonoBehaviour
     {
         goalCount += amount;
 
-        if(goalCount <= 0)
+        if (goalCount <= 0)
         {
             if (waveNum > 4)
             {
@@ -110,5 +178,12 @@ public class gamemanager : MonoBehaviour
     {
         waveNum++;
         waveNumberText.text = "Wave " + waveNum.ToString();
+    }
+    public void updateEnemyHPBar(float enemyHP, float currentenemyHP)
+    {
+        if (enemyHPBar != null)
+        {
+            enemyHPBar.fillAmount = currentenemyHP / enemyHP;
+        }
     }
 }

@@ -9,12 +9,13 @@ public class EnemyPatrol : MonoBehaviour
     [Range(1, 20), SerializeField] float patrolSpeed;
     [Range(1, 20), SerializeField] float chaseSpeed;
     [SerializeField] Animator animator;
+    [Range(1, 50)][SerializeField] float rotationSpeed;
 
     public int targetPoint;
     public float speed;
     bool isChasing = false;
 
-
+    public GameObject enemy;
     public Transform[] waypoints; // Array to store waypoints
     private int currentWaypointIndex = 0;
 
@@ -25,6 +26,7 @@ public class EnemyPatrol : MonoBehaviour
     {
         agent = GetComponent<NavMeshAgent>();
         animator = GetComponentInChildren<Animator>();
+        enemy = GameObject.FindWithTag("Enemy");
     }
 
     // Update is called once per frame
@@ -72,23 +74,26 @@ public class EnemyPatrol : MonoBehaviour
                 agent.speed = chaseSpeed;
                 agent.SetDestination(playerTarget.position);
                 animator.SetBool("IsChasing", true);
+                Vector3 direction = (playerTarget.position - transform.position).normalized;
+                Quaternion lookRotation = Quaternion.LookRotation(new Vector3(direction.x, 0, direction.z));
+                transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * rotationSpeed);
             }
             else
             {
                 agent.speed = patrolSpeed;
                 animator.SetBool("IsChasing", false);
-               //if (waypoints.Length > 0)
-                //{
-                    if (agent.remainingDistance <= 2.0f && !agent.pathPending)
+                if (waypoints != null && waypoints.Length > 0)
+                {
+                    if (agent.remainingDistance <= agent.stoppingDistance && !agent.pathPending && agent.pathStatus == NavMeshPathStatus.PathComplete)
                     {
-                        currentWaypointIndex++;
-                        if (currentWaypointIndex == waypoints.Length)
-                        {
-                            currentWaypointIndex = 0;
-                        }
+                        //currentWaypointIndex++;
+                        //if (currentWaypointIndex == waypoints.Length)
+                        //{
+                        currentWaypointIndex = Random.Range(0, waypoints.Length);
+                        //}
                         agent.SetDestination(waypoints[currentWaypointIndex].position);
                     }
-                //}
+                }
             }
         }
         else
@@ -97,19 +102,14 @@ public class EnemyPatrol : MonoBehaviour
             //Patrolling logic without chasing.
             agent.speed = patrolSpeed;
             animator.SetBool("IsChasing", false);
-            //if (waypoints.Length > 0)
-            //{
-                if (agent.remainingDistance <= 2.0f && !agent.pathPending)
+            if (waypoints != null && waypoints.Length > 0) //Null check here
+            {
+                if (agent.remainingDistance <= agent.stoppingDistance && !agent.pathPending && agent.pathStatus == NavMeshPathStatus.PathComplete)
                 {
-                //currentWaypointIndex++;
-                currentWaypointIndex = Random.Range(0, waypoints.Length);
-                    //if (currentWaypointIndex == waypoints.Length)
-                    //{
-                    //    currentWaypointIndex = 0;
-                    //}
+                    currentWaypointIndex = Random.Range(0, waypoints.Length);
                     agent.SetDestination(waypoints[currentWaypointIndex].position);
                 }
-            //}
+            }
         }
     }
 }
