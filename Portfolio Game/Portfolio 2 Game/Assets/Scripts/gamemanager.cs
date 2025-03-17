@@ -60,9 +60,9 @@ public class gamemanager : MonoBehaviour
         Time.timeScale = 0;
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
-        menuActive = menuPause;
-        menuHUD.SetActive(false);
-        menuActive.SetActive(true);
+        //menuActive = menuPause;
+        //menuHUD.SetActive(false);
+        //menuActive.SetActive(true);
     }
 
     public void StateUnpause()

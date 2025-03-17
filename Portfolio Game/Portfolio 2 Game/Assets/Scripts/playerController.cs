@@ -38,29 +38,20 @@ public class PlayerController : MonoBehaviour, IDamage
     {
         HPOrig = HP;
         animator = GetComponent<Animator>();
-<<<<<<< Updated upstream
-=======
         updatePlayerUI();
         if (startingWeaponPrefab != null)
         {
             EquipWeapon(startingWeaponPrefab);
         }
->>>>>>> Stashed changes
     }
 
     // Update is called once per frame
     void Update()
     {
 
-<<<<<<< Updated upstream
-        movement();
-
-        sprint();
-=======
         if (currentWeapon != null)
         {
             Debug.DrawRay(Camera.main.transform.position, Camera.main.transform.forward * currentWeapon.Range, Color.red);
->>>>>>> Stashed changes
 
             movement();
             updatePlayerUI();
@@ -149,16 +140,7 @@ public class PlayerController : MonoBehaviour, IDamage
 
     public void EquipWeapon(Weapon newWeaponPrefab)
     {
-<<<<<<< Updated upstream
-        
-        shootTimer = 0;
-        Instantiate(arrow, shootPos.position, Camera.main.transform.rotation);
-
-        RaycastHit hit;
-        if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, shootDist, ~ignoreLayer))
-=======
         if (currentWeapon != null)
->>>>>>> Stashed changes
         {
             currentWeapon.Unequip();
             currentWeapon = null;

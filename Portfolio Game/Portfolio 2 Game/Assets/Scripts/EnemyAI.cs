@@ -8,7 +8,7 @@ public class enemyAI : MonoBehaviour, IDamage
     [SerializeField] NavMeshAgent agent;
     [SerializeField] Animator animator;
 
-    [SerializeField] int HP;
+    [SerializeField] int HP, maxHP;
     [SerializeField] int faceTargetSpeed;
     [SerializeField] int animTransSpeed;
 
@@ -16,7 +16,6 @@ public class enemyAI : MonoBehaviour, IDamage
     [SerializeField] GameObject bullet;
     [SerializeField] float shootRate;
 
-    int maxHP;
 
 
     float shootTimer;
@@ -28,6 +27,7 @@ public class enemyAI : MonoBehaviour, IDamage
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        animator = GetComponent<Animator>();
         loot = GetComponent<EnemyLoot>();
         gamemanager.instance.updateGameGoal(1);
         maxHP = HP;
@@ -36,7 +36,7 @@ public class enemyAI : MonoBehaviour, IDamage
     // Update is called once per frame
     void Update()
     {
-        updateenemyUI();
+
 
         setAnimLocomotion();
 
@@ -125,6 +125,6 @@ public class enemyAI : MonoBehaviour, IDamage
 
     public void updateenemyUI()
     {
-        gamemanager.instance.enemyHPBar.fillAmount = (float)HP / maxHP;
+        //gamemanager.instance.enemyHPBar.fillAmount = HP / (float)maxHP;
     }
 }
