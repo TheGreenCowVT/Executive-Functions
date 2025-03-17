@@ -31,20 +31,20 @@ public class Weapon : MonoBehaviour
         {
 
             Instantiate(projectilePrefab, shootPos.position, Camera.main.transform.rotation);
+            ////TODO Needs to not be here
+            //RaycastHit hit;
+            //if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, range, ~ignoreLayer))
+            //{
+            //    Debug.Log(hit.collider.name);
 
-            RaycastHit hit;
-            if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, range, ~ignoreLayer))
-            {
-                Debug.Log(hit.collider.name);
+            //    IDamage dmg = hit.collider.GetComponent<IDamage>();
 
-                IDamage dmg = hit.collider.GetComponent<IDamage>();
+            //    if (dmg != null)
+            //    {
+            //        dmg.TakeDamage((int)damage);
+            //    }
 
-                if (dmg != null)
-                {
-                    dmg.TakeDamage((int)damage);
-                }
-
-            }
+            //}
             animator.SetTrigger("Shoot");
             animator.SetBool("atReady", false);
         }
