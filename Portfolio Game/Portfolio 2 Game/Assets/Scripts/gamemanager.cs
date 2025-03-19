@@ -29,11 +29,11 @@ public class gamemanager : MonoBehaviour
     public Transform[] waypoints;
     public GameObject[] enemywaypoints;
     //Wave stuff
-    int numEnemies;
-    int goalCountOrig;
+    public int numEnemies;
+    public int numEnemiesOrig;
     int goalCount;
     int waveNum = 0;
-    public Image WaveTimer;
+    public Image waveTimer;
     public bool isPaused;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Awake()
@@ -46,7 +46,7 @@ public class gamemanager : MonoBehaviour
         enemiesHP = GameObject.FindGameObjectsWithTag("EnemyHPBar");
         StartNextWave();
         // Find enemies and waypoints
-        enemies = GameObject.FindGameObjectsWithTag("Enemy");
+        //enemies = GameObject.FindGameObjectsWithTag("Enemy");
         enemy = GameObject.FindWithTag("Enemy");
         enemywaypoints = GameObject.FindGameObjectsWithTag("Waypoint");
         waypoint = GameObject.FindWithTag("Waypoint");
@@ -101,8 +101,12 @@ public class gamemanager : MonoBehaviour
             Debug.Log("Enemy HP Bar not found");
         }
 
-        goalCount = enemies.Length;
         updateGameGoal(0);
+
+
+        UpdateWaveBar();
+
+
     }
 
     // Update is called once per frame
@@ -150,13 +154,15 @@ public class gamemanager : MonoBehaviour
     public void updateGameGoal(int amount)
     {
         goalCount += amount;
+        numEnemies += amount;
+
 
         UpdateWaveBar();
 
         if (goalCount <= 0)
         {
             if (waveNum > 4)
-            {
+            {   
                 // You Win
                 statePause();
                 menuActive.SetActive(false);
@@ -187,6 +193,13 @@ public class gamemanager : MonoBehaviour
         waveNum++;
         waveNumberText.text = "Wave " + waveNum.ToString();
 
+        enemies = GameObject.FindGameObjectsWithTag("Enemy");
+
+        goalCount = numEnemies = enemies.Length;
+        numEnemiesOrig = numEnemies;
+
+        UpdateWaveBar();
+
     }
     public void updateEnemyHPBar(float enemyHP, float currentenemyHP)
     {
@@ -198,6 +211,6 @@ public class gamemanager : MonoBehaviour
 
     public void UpdateWaveBar()
     {
-        gamemanager.instance.playerHPBar.fillAmount = (float)goalCount / goalCountOrig;
+        gamemanager.instance.waveTimer.fillAmount = (float)numEnemies / numEnemiesOrig;
     }
 }

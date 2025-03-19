@@ -30,7 +30,6 @@ public class enemyAI : MonoBehaviour, IDamage
     {
         animator = GetComponent<Animator>();
         loot = GetComponent<EnemyLoot>();
-        gamemanager.instance.updateGameGoal(1);
         HP = maxHP;
 
         enemyHealthBar = gamemanager.instance;
