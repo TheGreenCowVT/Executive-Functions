@@ -1039,7 +1039,7 @@ GameObject:
   - component: {fileID: 3822495494856276755}
   - component: {fileID: 264033221044481719}
   - component: {fileID: 6636647476628156206}
-  m_Layer: 6
+  m_Layer: 3
   m_Name: HardLorenzo
   m_TagString: Enemy
   m_Icon: {fileID: 0}

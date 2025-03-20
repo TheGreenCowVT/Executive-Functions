@@ -467,7 +467,7 @@ GameObject:
   - component: {fileID: 6882873661946224876}
   - component: {fileID: 1281667648153962409}
   - component: {fileID: 7277133350056104864}
-  m_Layer: 6
+  m_Layer: 3
   m_Name: EasyLorenzo
   m_TagString: Enemy
   m_Icon: {fileID: 0}

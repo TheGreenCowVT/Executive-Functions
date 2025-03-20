@@ -1693,7 +1693,7 @@ GameObject:
   - component: {fileID: 3140613561183314699}
   - component: {fileID: 2676121284085741528}
   - component: {fileID: 1712045252689466014}
-  m_Layer: 6
+  m_Layer: 3
   m_Name: EasySkully
   m_TagString: Enemy
   m_Icon: {fileID: 0}

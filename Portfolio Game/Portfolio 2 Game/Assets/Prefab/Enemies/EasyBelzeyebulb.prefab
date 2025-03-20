@@ -1565,7 +1565,7 @@ GameObject:
   - component: {fileID: 5109101950528498747}
   - component: {fileID: 8793498140567357026}
   - component: {fileID: 8530622961301669601}
-  m_Layer: 6
+  m_Layer: 3
   m_Name: EasyBelzeyebulb
   m_TagString: Enemy
   m_Icon: {fileID: 0}

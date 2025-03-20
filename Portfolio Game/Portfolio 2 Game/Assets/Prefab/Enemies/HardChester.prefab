@@ -1358,7 +1358,7 @@ GameObject:
   - component: {fileID: 2872152790898166681}
   - component: {fileID: 9218824773590291852}
   - component: {fileID: 4374460476071632300}
-  m_Layer: 6
+  m_Layer: 3
   m_Name: HardChester
   m_TagString: Enemy
   m_Icon: {fileID: 0}

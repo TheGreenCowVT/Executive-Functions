@@ -810,7 +810,7 @@ GameObject:
   - component: {fileID: 7828337606210148523}
   - component: {fileID: 6413837894773051199}
   - component: {fileID: 3232916406659382301}
-  m_Layer: 6
+  m_Layer: 3
   m_Name: MediumLorenzo
   m_TagString: Enemy
   m_Icon: {fileID: 0}

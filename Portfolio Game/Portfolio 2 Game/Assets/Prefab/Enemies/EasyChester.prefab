@@ -758,7 +758,7 @@ GameObject:
   - component: {fileID: 2790576189465637617}
   - component: {fileID: 1919707319388905966}
   - component: {fileID: 4240981545538291502}
-  m_Layer: 6
+  m_Layer: 3
   m_Name: EasyChester
   m_TagString: Enemy
   m_Icon: {fileID: 0}

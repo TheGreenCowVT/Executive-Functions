@@ -1006,7 +1006,7 @@ GameObject:
   - component: {fileID: 7537346356040375942}
   - component: {fileID: 3015461247864555127}
   - component: {fileID: 8649726485363231424}
-  m_Layer: 6
+  m_Layer: 3
   m_Name: MediumBelzeyebulb
   m_TagString: Enemy
   m_Icon: {fileID: 0}

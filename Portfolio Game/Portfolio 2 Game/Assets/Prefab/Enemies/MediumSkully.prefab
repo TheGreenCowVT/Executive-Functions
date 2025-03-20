@@ -1464,7 +1464,7 @@ GameObject:
   - component: {fileID: 8711304968812503311}
   - component: {fileID: 2917614599643102085}
   - component: {fileID: 8444181274685908946}
-  m_Layer: 6
+  m_Layer: 3
   m_Name: MediumSkully
   m_TagString: Enemy
   m_Icon: {fileID: 0}

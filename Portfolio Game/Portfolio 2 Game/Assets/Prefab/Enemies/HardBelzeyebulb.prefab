@@ -2044,7 +2044,7 @@ GameObject:
   - component: {fileID: 8307205716972522995}
   - component: {fileID: 7285774370219654120}
   - component: {fileID: 1808306867926491398}
-  m_Layer: 6
+  m_Layer: 3
   m_Name: HardBelzeyebulb
   m_TagString: Enemy
   m_Icon: {fileID: 0}

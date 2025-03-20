@@ -230,7 +230,7 @@ GameObject:
   - component: {fileID: 5210201886027561892}
   - component: {fileID: 5987406751775126443}
   - component: {fileID: 8068256219210076424}
-  m_Layer: 6
+  m_Layer: 3
   m_Name: HardSkully
   m_TagString: Enemy
   m_Icon: {fileID: 0}
