@@ -9,7 +9,7 @@ public class PlayerController : MonoBehaviour, IDamage
     [SerializeField] CharacterController controller;
 
 
-    [Range(1, 10)][SerializeField] int HP;
+    [Range(1, 10000)][SerializeField] int HP; // Set back to 10 after testing is over
     [Range(2, 5)][SerializeField] int speed;
     [Range(2, 4)][SerializeField] int sprintMod;
     [Range(5, 20)][SerializeField] int jumpSpeed;

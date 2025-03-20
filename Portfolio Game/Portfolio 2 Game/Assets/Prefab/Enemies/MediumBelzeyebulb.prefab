@@ -1021,8 +1021,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3168093148846688338}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0.99967736, z: -0, w: -0.025400452}
-  m_LocalPosition: {x: 4.5191765, y: 0.5415759, z: 4.4264846}
+  m_LocalRotation: {x: -0, y: 0.99967736, z: -0, w: -0.025400452}
+  m_LocalPosition: {x: 4.763232, y: -2.9251425, z: -6.4982796}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1047,13 +1047,13 @@ MonoBehaviour:
   model: {fileID: 5602045795228555586}
   agent: {fileID: 7537346356040375942}
   animator: {fileID: 7236891807839683108}
-  maxHP: 10
+  maxHP: 15
   faceTargetSpeed: 600
   animTransSpeed: 50
   enemyHealthBar: {fileID: 0}
   shootPos: {fileID: 3323231285259308779}
   bullet: {fileID: 7270373641778003685, guid: f4bd1aa9089241c4ead730aa765b6426, type: 3}
-  shootRate: 0.75
+  shootRate: 0.5
 --- !u!95 &7236891807839683108
 Animator:
   serializedVersion: 7
@@ -1090,9 +1090,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerTarget: {fileID: 0}
   agent: {fileID: 7537346356040375942}
-  chaseRange: 4
-  patrolSpeed: 4
-  chaseSpeed: 4
+  chaseRange: 5
+  patrolSpeed: 5
+  chaseSpeed: 5
   animator: {fileID: 7236891807839683108}
   rotationSpeed: 1
   targetPoint: 5
@@ -1227,7 +1227,7 @@ Transform:
   m_GameObject: {fileID: 3676976530187068651}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0, y: -0.262, z: -0.048}
+  m_LocalPosition: {x: 0, y: -0.271, z: -0.048}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2266,6 +2266,7 @@ GameObject:
   - component: {fileID: 1222872066132972312}
   - component: {fileID: 6499700298705114867}
   - component: {fileID: 5683722844990991175}
+  - component: {fileID: 5954704959311155721}
   m_Layer: 6
   m_Name: Name
   m_TagString: Untagged
@@ -2329,8 +2330,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4278255615
-  m_fontColor: {r: 1, g: 1, b: 0, a: 1}
+    rgba: 4278203135
+  m_fontColor: {r: 1, g: 0.19607843, b: 0, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -2391,6 +2392,18 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &5954704959311155721
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8321888700485705076}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a2f3da4749b1947478223fb317301c62, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8500796435943097431
 GameObject:
   m_ObjectHideFlags: 0
