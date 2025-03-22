@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &1872945368703927474
+--- !u!1 &6791616484578458946
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,41 +8,9 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 3934235778095768096}
-  m_Layer: 0
-  m_Name: Shoot Pos
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &3934235778095768096
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1872945368703927474}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.0031, y: 0, z: 0.0466}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 5055640626563911952}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &9012929451401193115
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 5055640626563911952}
-  - component: {fileID: 59253295254084631}
-  - component: {fileID: 8500314749729900385}
-  - component: {fileID: 9186785784583975569}
+  - component: {fileID: 8907762543589452459}
+  - component: {fileID: 5868157160522219738}
+  - component: {fileID: 3589885556782012871}
   m_Layer: 0
   m_Name: Weapon_Bow
   m_TagString: Untagged
@@ -50,59 +18,37 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &5055640626563911952
+--- !u!4 &8907762543589452459
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9012929451401193115}
+  m_GameObject: {fileID: 6791616484578458946}
   serializedVersion: 2
   m_LocalRotation: {x: -0.07006945, y: -0.016689034, z: -0.11494239, w: 0.9907573}
-  m_LocalPosition: {x: -4e-45, y: 4e-45, z: -4e-45}
+  m_LocalPosition: {x: -0.2130832, y: 0.7284448, z: 17.407743}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 3934235778095768096}
+  - {fileID: 5066700550811562594}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: -8.203, y: -0.982, z: -13.165}
---- !u!114 &59253295254084631
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9012929451401193115}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 59f2d9a5e2d2b574c987361d5aa65a77, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  weaponName: Bow
-  weaponPrefab: {fileID: 9012929451401193115}
-  damage: 1
-  range: 150
-  projectilePrefab: {fileID: 4171629509366402671, guid: 0d79cf3292ca60e46a9a584374d11b4a, type: 3}
-  shootPos: {fileID: 3934235778095768096}
-  ignoreLayer:
-    serializedVersion: 2
-    m_Bits: 0
-  animator: {fileID: 0}
---- !u!33 &8500314749729900385
+--- !u!33 &5868157160522219738
 MeshFilter:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9012929451401193115}
+  m_GameObject: {fileID: 6791616484578458946}
   m_Mesh: {fileID: -1694716018070039469, guid: 847790dba8e51e14ea28d34a5de2daf0, type: 3}
---- !u!23 &9186785784583975569
+--- !u!23 &3589885556782012871
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9012929451401193115}
+  m_GameObject: {fileID: 6791616484578458946}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -141,3 +87,34 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!1 &8827974149873929581
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5066700550811562594}
+  m_Layer: 0
+  m_Name: Shoot Pos
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5066700550811562594
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8827974149873929581}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.0031, y: 0, z: 0.0466}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8907762543589452459}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

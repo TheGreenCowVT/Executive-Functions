@@ -1,26 +1,40 @@
 using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 
-public class PlayerController : MonoBehaviour, IDamage
+public class PlayerController : MonoBehaviour, IDamage, IPickup
 {
 
     [SerializeField] LayerMask ignoreLayer;
     [SerializeField] CharacterController controller;
 
-
-    [Range(1, 10000)][SerializeField] int HP; // Set back to 10 after testing is over
+    [Header("----- Stats -----")]
+    [Range(1, 10)][SerializeField] int HP; // Set back to 10 after testing is over
     [Range(2, 5)][SerializeField] int speed;
     [Range(2, 4)][SerializeField] int sprintMod;
     [Range(5, 20)][SerializeField] int jumpSpeed;
     [Range(1, 3)][SerializeField] int jumpMax;
     [Range(15, 45)][SerializeField] int gravity;
 
+
+
+    [Header("----- Weapon -----")]
     [SerializeField] private Weapon startingWeaponPrefab;
-   
+    [SerializeField] List<Weapon> weaponList = new List<Weapon>();
+    [SerializeField] GameObject weaponModel;
+    [SerializeField] int shootDamage;
+    [SerializeField] int shootDist;
+    [SerializeField] float shootRate;
+
+    [Header("----- Grapple -----")]
+    [SerializeField] int grappleDist;
+    [SerializeField] int grappleSpeed;
+    [SerializeField] LineRenderer grappleLine;
+
     int HPOrig;
     int jumpCount;
-
+    int weaponListPos;
     float shootTimer;
 
     public float rotationSpeed;
@@ -31,7 +45,7 @@ public class PlayerController : MonoBehaviour, IDamage
     public Transform handTransform;
     public Weapon currentWeapon;
     public Animator animator;
-    
+
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -39,10 +53,7 @@ public class PlayerController : MonoBehaviour, IDamage
         HPOrig = HP;
         animator = GetComponent<Animator>();
         updatePlayerUI();
-        if (startingWeaponPrefab != null)
-        {
-            EquipWeapon(startingWeaponPrefab);
-        }
+
     }
 
     // Update is called once per frame
@@ -51,7 +62,7 @@ public class PlayerController : MonoBehaviour, IDamage
 
         if (currentWeapon != null)
         {
-            Debug.DrawRay(Camera.main.transform.position, Camera.main.transform.forward * currentWeapon.Range, Color.red);
+            Debug.DrawRay(Camera.main.transform.position, Camera.main.transform.forward * currentWeapon.shootDist, Color.red);
 
             movement();
             updatePlayerUI();
@@ -61,8 +72,8 @@ public class PlayerController : MonoBehaviour, IDamage
             animator.SetFloat("velocityY", playerVelocity.y + 0.001f);
         }
 
-        }
-        void movement()
+    }
+    void movement()
     {
         shootTimer += Time.deltaTime;
 
@@ -71,10 +82,10 @@ public class PlayerController : MonoBehaviour, IDamage
         {
             jumpCount = 0;
             playerVelocity = Vector3.zero;
-        
+
         }
 
-
+        // Basic Movement & Camera Rotation
 
         float horizontalInput = Input.GetAxis("Horizontal");
         float verticalInput = Input.GetAxis("Vertical");
@@ -97,8 +108,16 @@ public class PlayerController : MonoBehaviour, IDamage
         }
 
         jump();
+        isGrappling();
         controller.Move(playerVelocity * Time.deltaTime);
         playerVelocity.y -= gravity * Time.deltaTime;
+
+        if (Input.GetButton("Fire1") && weaponList.Count > 0 && weaponList[weaponListPos].ammoCur > 0 && shootTimer >= shootRate)
+            shoot();
+
+
+        selectWeapon();
+        reloadWeapon();
 
 
         // Animation movement controls
@@ -112,8 +131,9 @@ public class PlayerController : MonoBehaviour, IDamage
 
     }
 
-        void jump()
-     {
+
+    void jump()
+    {
         if (Input.GetButtonDown("Jump") && jumpCount < jumpMax)
         {
             jumpCount++;
@@ -126,6 +146,8 @@ public class PlayerController : MonoBehaviour, IDamage
             animator.SetBool("IsJumping", false);
         }
     }
+
+
     void sprint()
     {
         if (Input.GetButtonDown("Sprint"))
@@ -138,32 +160,67 @@ public class PlayerController : MonoBehaviour, IDamage
         }
     }
 
-    public void EquipWeapon(Weapon newWeaponPrefab)
+    void isGrappling()
     {
-        if (currentWeapon != null)
+        if (Input.GetButton("left shift") && Input.GetButton("Fire2") && grapple())
         {
-            currentWeapon.Unequip();
-            currentWeapon = null;
-        }
-        GameObject weaponInstance = Instantiate(newWeaponPrefab.gameObject, handTransform);
-        Weapon weaponCompenent = weaponInstance.GetComponent<Weapon>();
-        weaponInstance.transform.localPosition = Vector3.zero;
-        weaponInstance.transform.localRotation = Quaternion.identity;
+            grappleLine.enabled = true;
 
-        currentWeapon = weaponCompenent;
-        currentWeapon.Equip(handTransform);
+        }
+        else
+        {
+            grappleLine.enabled = false;
+            controller.Move(playerVelocity * Time.deltaTime);
+            playerVelocity.y -= gravity * Time.deltaTime;
+
+        }
 
     }
 
-    private void OnTriggerEnter(Collider other)
+    bool grapple()
     {
-        Weapon weaponPickup = other.GetComponent<Weapon>();
-        if (weaponPickup != null)
+        RaycastHit hit;
+        if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, grappleDist))
         {
-            EquipWeapon(weaponPickup);
-            Destroy(other.gameObject);
+            if (hit.collider.CompareTag("GrapplePoint"))
+            {
+                controller.Move((hit.point - transform.position).normalized * grappleSpeed * Time.deltaTime);
+
+
+                grappleLine.SetPosition(0, transform.position);
+                grappleLine.SetPosition(1, hit.point);
+
+                return true;
+            }
+
+        }
+
+        return false;
+    }
+
+    public void shoot()
+    {
+        shootTimer = 0;
+
+        weaponList[weaponListPos].ammoCur--;
+
+        RaycastHit hit;
+        if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, shootDist, ~ignoreLayer))
+        {
+            Debug.Log(hit.collider.name);
+            Instantiate(weaponList[weaponListPos].hitEffect, hit.point, Quaternion.identity);
+
+            IDamage dmg = hit.collider.GetComponent<IDamage>();
+
+            if (dmg != null)
+            {
+                dmg.TakeDamage(shootDamage);
+            }
+
         }
     }
+
+
     public void TakeDamage(int amount)
     {
         HP -= amount;
@@ -189,6 +246,48 @@ public class PlayerController : MonoBehaviour, IDamage
     public void updatePlayerUI()
     {
         gamemanager.instance.playerHPBar.fillAmount = (float)HP / HPOrig;
+    }
+
+
+    // Weapon Functions
+
+    public void getWeaponStats(Weapon gun)
+    {
+        weaponList.Add(gun);
+        weaponListPos = weaponList.Count - 1;
+        changeWeapon();
+
+    }
+
+    void selectWeapon()
+    {
+        if (Input.GetAxis("Mouse ScrollWheel") > 0 && weaponListPos < weaponList.Count - 1)
+        {
+            weaponListPos++;
+            changeWeapon();
+        }
+        else if (Input.GetAxis("Mouse ScrollWheel") < 0 && weaponListPos > 0)
+        {
+            weaponListPos--;
+            changeWeapon();
+        }
+    }
+
+    void changeWeapon()
+    {
+        shootDamage = weaponList[weaponListPos].shootDamage;
+        shootDist = weaponList[weaponListPos].shootDist;
+        shootRate = weaponList[weaponListPos].shootRate;
+        weaponModel.GetComponent<MeshFilter>().sharedMesh = weaponList[weaponListPos].model.GetComponent<MeshFilter>().sharedMesh;
+        weaponModel.GetComponent<MeshRenderer>().sharedMaterial = weaponList[weaponListPos].model.GetComponent<MeshRenderer>().sharedMaterial;
+    }
+
+    void reloadWeapon()
+    {
+        if (Input.GetButtonDown("Reload"))
+        {
+            weaponList[weaponListPos].ammoCur = weaponList[weaponListPos].ammoMax;
+        }
     }
 
 }

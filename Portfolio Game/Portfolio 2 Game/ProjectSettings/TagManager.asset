@@ -7,6 +7,9 @@ TagManager:
   - Enemy
   - EnemyHPBar
   - Waypoint
+  - Easy Enemy
+  - Med Enemy
+  - Hard Enemy
   layers:
   - Default
   - TransparentFX

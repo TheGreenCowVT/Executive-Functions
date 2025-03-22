@@ -59,7 +59,7 @@ public class PlayerAiming : MonoBehaviour
         {
             if (playerController.currentWeapon != null)
             {
-                playerController.currentWeapon.Attack();
+                playerController.shoot();
                 animator.SetBool("atReady", false);
             }
             }
@@ -69,11 +69,11 @@ public class PlayerAiming : MonoBehaviour
     {
         if (isAiming)
         {
-            playerController.currentWeapon.transform.localPosition = Vector3.Lerp(playerController.currentWeapon.transform.localPosition, aimPos, Time.deltaTime * aimSpeed);
+            playerController.transform.localPosition = Vector3.Lerp(playerController.transform.localPosition, aimPos, Time.deltaTime * aimSpeed);
         }
         else
         {
-            playerController.currentWeapon.transform.localPosition = Vector3.Lerp(playerController.currentWeapon.transform.localPosition, aimPos, Time.deltaTime * aimSpeed);
+            playerController.transform.localPosition = Vector3.Lerp(playerController.transform.localPosition, aimPos, Time.deltaTime * aimSpeed);
         }
     }
 

@@ -134,9 +134,8 @@ public class gamemanager : MonoBehaviour
         Time.timeScale = 0;
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
-        menuActive = menuPause;
-        menuHUD.SetActive(false);
-        menuActive.SetActive(true);
+        
+        
     }
 
     public void StateUnpause()
@@ -165,8 +164,6 @@ public class gamemanager : MonoBehaviour
             {   
                 // You Win
                 statePause();
-                menuActive.SetActive(false);
-                menuActive = null;
                 menuActive = menuWin;
                 menuActive.SetActive(true);
             }
@@ -181,9 +178,6 @@ public class gamemanager : MonoBehaviour
     public void youLose()
     {
         statePause();
-        menuActive.SetActive(false);
-        menuActive = null;
-        playerDamageScreen.SetActive(false);
         menuActive = menuLose;
         menuActive.SetActive(true);
     }
