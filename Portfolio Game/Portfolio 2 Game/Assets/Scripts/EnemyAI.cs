@@ -25,6 +25,8 @@ public class enemyAI : MonoBehaviour, IDamage
     bool wasDamagedRecently;
     private EnemyLoot loot;
 
+    private EnemySpawner spawner; // Reference to the wave-based spawner
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -46,6 +48,8 @@ public class enemyAI : MonoBehaviour, IDamage
             bullet = null;
             shootRate = 0f;
         }
+
+        spawner = FindObjectOfType<EnemySpawner>();
     }
     // Update is called once per frame
     void Update()
@@ -122,6 +126,13 @@ public class enemyAI : MonoBehaviour, IDamage
 
             gamemanager.instance.updateGameGoal(-1);
             loot.Die();
+
+            // Notify the spawner that this enemy was destroyed
+            if (spawner != null)
+            {
+                spawner.OnEnemyDestroyed();
+            }
+
             Destroy(gameObject);
         }
     }
