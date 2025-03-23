@@ -1,5 +1,7 @@
 using UnityEngine;
 
+[CreateAssetMenu]
+
 public class Weapon : ScriptableObject
 {
 
@@ -10,7 +12,10 @@ public GameObject model;
 [HideInInspector] public int ammoCur;
 [Range(5, 50)] public int ammoMax;
 
-public ParticleSystem hitEffect;
+    public GameObject projectilePrefab;
+[Range(5, 50)] public float projectileSpeed;
+
+    public ParticleSystem hitEffect;
 public AudioClip[] shootSound;
 [Range(0, 1)] public float shootVol;
    

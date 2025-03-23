@@ -20,7 +20,6 @@ public class PlayerController : MonoBehaviour, IDamage, IPickup
 
 
     [Header("----- Weapon -----")]
-    [SerializeField] private Weapon startingWeaponPrefab;
     [SerializeField] List<Weapon> weaponList = new List<Weapon>();
     [SerializeField] GameObject weaponModel;
     [SerializeField] int shootDamage;
@@ -109,6 +108,7 @@ public class PlayerController : MonoBehaviour, IDamage, IPickup
 
         jump();
         isGrappling();
+
         controller.Move(playerVelocity * Time.deltaTime);
         playerVelocity.y -= gravity * Time.deltaTime;
 
@@ -122,7 +122,6 @@ public class PlayerController : MonoBehaviour, IDamage, IPickup
 
         // Animation movement controls
 
-        animator.SetFloat("Speed", moveDir.magnitude);
         animator.SetFloat("Horizontal", horizontalInput);
         animator.SetFloat("Vertical", verticalInput);
         animator.SetBool("IsSprinting", Input.GetButton("Sprint"));
@@ -162,61 +161,67 @@ public class PlayerController : MonoBehaviour, IDamage, IPickup
 
     void isGrappling()
     {
-        if (Input.GetButton("left shift") && Input.GetButton("Fire2") && grapple())
+        if (Input.GetButton("Sprint") && Input.GetButton("Fire2"))
         {
-            grappleLine.enabled = true;
+            RaycastHit hit;
+            if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, grappleDist))
+            {
+                if (hit.collider.CompareTag("GrapplePoint"))
+                {
+                    grappleLine.enabled = true;
+                    grappleLine.SetPosition(0, transform.position);
+                    grappleLine.SetPosition(1, hit.point);
+
+                    if (Input.GetButtonDown("Fire1"))
+                    {
+                        controller.Move((hit.point - transform.position).normalized * grappleSpeed * Time.deltaTime);
+                    }
+                }
+                else
+                {
+                    grappleLine.enabled = false;
+                }
+            }
+            else
+            {
+                grappleLine.enabled = false;
+
+
+            }
 
         }
         else
         {
             grappleLine.enabled = false;
-            controller.Move(playerVelocity * Time.deltaTime);
-            playerVelocity.y -= gravity * Time.deltaTime;
-
         }
 
+        
     }
 
-    bool grapple()
-    {
-        RaycastHit hit;
-        if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, grappleDist))
-        {
-            if (hit.collider.CompareTag("GrapplePoint"))
-            {
-                controller.Move((hit.point - transform.position).normalized * grappleSpeed * Time.deltaTime);
 
-
-                grappleLine.SetPosition(0, transform.position);
-                grappleLine.SetPosition(1, hit.point);
-
-                return true;
-            }
-
-        }
-
-        return false;
-    }
-
-    public void shoot()
+        public void shoot()
     {
         shootTimer = 0;
 
         weaponList[weaponListPos].ammoCur--;
+        Weapon currentWeapon = weaponList[weaponListPos];
+        Transform projectilePos = handTransform;
 
-        RaycastHit hit;
-        if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, shootDist, ~ignoreLayer))
+        if (currentWeapon.projectilePrefab != null)
         {
-            Debug.Log(hit.collider.name);
-            Instantiate(weaponList[weaponListPos].hitEffect, hit.point, Quaternion.identity);
+            GameObject projectile = Instantiate(currentWeapon.projectilePrefab, projectilePos.position, projectilePos.rotation);
 
-            IDamage dmg = hit.collider.GetComponent<IDamage>();
-
-            if (dmg != null)
+            damage projectileDamage = projectile.GetComponent<damage>();
+            if (projectileDamage != null)
             {
-                dmg.TakeDamage(shootDamage);
+                projectileDamage.SetDamageAmount(currentWeapon.shootDamage);
             }
 
+            Rigidbody rb = projectile.GetComponent<Rigidbody>();
+            if (rb != null)
+            {
+                rb.linearVelocity = projectilePos.forward * currentWeapon.projectileSpeed;
+            }
         }
     }
 

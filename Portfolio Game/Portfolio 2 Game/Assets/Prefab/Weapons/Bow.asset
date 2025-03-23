@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 59f2d9a5e2d2b574c987361d5aa65a77, type: 3}
+  m_Name: Bow
+  m_EditorClassIdentifier: 
+  model: {fileID: 3081383619466149923, guid: 0ffbd98feaea88b4d8eff16383bcefa3, type: 3}
+  shootDamage: 1
+  shootDist: 150
+  shootRate: 0.1
+  ammoCur: -7
+  ammoMax: 12
+  projectilePrefab: {fileID: 1850961265077878968, guid: 0d79cf3292ca60e46a9a584374d11b4a, type: 3}
+  projectileSpeed: 5
+  hitEffect: {fileID: 0}
+  shootSound: []
+  shootVol: 0.5

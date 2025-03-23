@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4025514700382535652}
+  - component: {fileID: -1695544284465666280}
   - component: {fileID: 9197783921912513503}
   m_Layer: 0
   m_Name: Wand
@@ -34,6 +35,19 @@ Transform:
   - {fileID: 4180936730071479867}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: -52.595, z: 0}
+--- !u!114 &-1695544284465666280
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3674654589630629515}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a26364d14684cbd4391f9858f4458451, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weapon: {fileID: 11400000, guid: db32fc2130dd5bb4583d4d646cca0743, type: 2}
 --- !u!135 &9197783921912513503
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -49,7 +63,7 @@ SphereCollider:
     serializedVersion: 2
     m_Bits: 8
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
