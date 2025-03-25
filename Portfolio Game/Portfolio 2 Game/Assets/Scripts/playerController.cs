@@ -20,7 +20,7 @@ public class PlayerController : MonoBehaviour, IDamage, IPickup
 
 
     [Header("----- Weapon -----")]
-    [SerializeField] List<Weapon> weaponList = new List<Weapon>();
+    [SerializeField] public List<Weapon> weaponList = new List<Weapon>();
     [SerializeField] GameObject weaponModel;
     [SerializeField] int shootDamage;
     [SerializeField] int shootDist;
@@ -33,7 +33,7 @@ public class PlayerController : MonoBehaviour, IDamage, IPickup
 
     int HPOrig;
     int jumpCount;
-    int weaponListPos;
+    public int weaponListPos;
     float shootTimer;
 
     public float rotationSpeed;
@@ -285,6 +285,7 @@ public class PlayerController : MonoBehaviour, IDamage, IPickup
         shootRate = weaponList[weaponListPos].shootRate;
         weaponModel.GetComponent<MeshFilter>().sharedMesh = weaponList[weaponListPos].model.GetComponent<MeshFilter>().sharedMesh;
         weaponModel.GetComponent<MeshRenderer>().sharedMaterial = weaponList[weaponListPos].model.GetComponent<MeshRenderer>().sharedMaterial;
+        gamemanager.instance.UpdateWeaponUI();
     }
 
     void reloadWeapon()

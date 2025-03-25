@@ -6,36 +6,42 @@ public class gamemanager : MonoBehaviour
 {
     public static gamemanager instance;
 
+    [Header("----Menus----")]
     [SerializeField] GameObject menuActive;
     [SerializeField] GameObject menuPause;
     [SerializeField] GameObject menuWin;
     [SerializeField] GameObject menuLose;
     [SerializeField] GameObject menuHUD;
-    [SerializeField] TMP_Text waveNumberText;
-    // Player stuff
+    public bool isPaused;
+
+    [Header("----Player----")]
     public Image playerHeartBeat;
     public Image playerHPBar;
     public GameObject playerDamageScreen;
     public GameObject player;
     public PlayerController playerScript;
-    //Enemy stff
+    [SerializeField] public Image weaponIcon;
+    [SerializeField] TMP_Text ammoCount;
+
+    [Header("----Enemy----")]
     public GameObject enemy;
     public GameObject enemyHP;
     public GameObject[] enemies;
     public GameObject[] enemiesHP;
     [SerializeField] public Image enemyHPBar;
-    //Waypoint stuff
+
+    [Header("----Waypoint----")]
     public GameObject waypoint;
     public Transform[] waypoints;
     public GameObject[] enemywaypoints;
-    //Wave stuff
+
+    [Header("----Wave----")]
+    [SerializeField] TMP_Text waveNumberText;
     public int numEnemies;
     public int numEnemiesOrig;
     int goalCount;
     int waveNum = 0;
     public Image waveTimer;
-    public bool isPaused;
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Awake()
     {
         instance = this;
@@ -206,5 +212,18 @@ public class gamemanager : MonoBehaviour
     public void UpdateWaveBar()
     {
         gamemanager.instance.waveTimer.fillAmount = (float)numEnemies / numEnemiesOrig;
+    }
+
+    public void UpdateWeaponUI()
+    {
+        weaponIcon = playerScript.weaponList[playerScript.weaponListPos].UIImage;
+        if (playerScript.weaponList[playerScript.weaponListPos].ammoMax > 0)
+        {
+            ammoCount.text = playerScript.weaponList[playerScript.weaponListPos].ammoCur.ToString() + " / " + playerScript.weaponList[playerScript.weaponListPos].ammoMax.ToString();
+        }
+        else if (playerScript.weaponList[playerScript.weaponListPos].ammoMax == 0 || playerScript.weaponList.Count <= 0)
+        {
+            ammoCount.text = "";
+        }
     }
 }

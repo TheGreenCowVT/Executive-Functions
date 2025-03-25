@@ -16,10 +16,11 @@ MonoBehaviour:
   shootDamage: 10
   shootDist: 500
   shootRate: 0.1
-  ammoCur: 20
+  ammoCur: 2
   ammoMax: 20
   projectilePrefab: {fileID: 0}
   projectileSpeed: 5
   hitEffect: {fileID: 0}
   shootSound: []
   shootVol: 0.5
+  UIImage: {fileID: 2048046860052029612, guid: e042477a52f90154e920372b38036809, type: 3}

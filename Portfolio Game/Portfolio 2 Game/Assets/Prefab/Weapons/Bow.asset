@@ -23,3 +23,4 @@ MonoBehaviour:
   hitEffect: {fileID: 0}
   shootSound: []
   shootVol: 0.5
+  UIImage: {fileID: 5582728745206271579, guid: 0d320f04ceecbc649862985518a30b17, type: 3}
