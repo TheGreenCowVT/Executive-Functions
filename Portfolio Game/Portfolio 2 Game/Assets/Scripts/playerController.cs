@@ -10,7 +10,7 @@ public class PlayerController : MonoBehaviour, IDamage, IPickup
     [SerializeField] CharacterController controller;
 
     [Header("----- Stats -----")]
-    [Range(1, 10)][SerializeField] int HP; // Set back to 10 after testing is over
+    [Range(1, 10000)][SerializeField] int HP; // Set back to 10 after testing is over
     [Range(2, 5)][SerializeField] int speed;
     [Range(2, 4)][SerializeField] int sprintMod;
     [Range(5, 20)][SerializeField] int jumpSpeed;
@@ -65,7 +65,7 @@ public class PlayerController : MonoBehaviour, IDamage, IPickup
 
             movement();
             updatePlayerUI();
-            sprint();
+            
 
             animator.SetBool("isGrounded", controller.isGrounded);
             animator.SetFloat("velocityY", playerVelocity.y + 0.001f);
@@ -75,7 +75,7 @@ public class PlayerController : MonoBehaviour, IDamage, IPickup
     void movement()
     {
         shootTimer += Time.deltaTime;
-
+        sprint();
 
         if (controller.isGrounded)
         {
