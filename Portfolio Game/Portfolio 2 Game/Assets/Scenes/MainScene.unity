@@ -11621,7 +11621,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6f55f719eb8a4cf4a854fb18ac1e2ea9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  controller: {fileID: 2032150491}
 --- !u!1 &2075346431
 GameObject:
   m_ObjectHideFlags: 0
@@ -12401,6 +12400,7 @@ MonoBehaviour:
   activeWeaponIcon: {fileID: 0}
   ammoText: {fileID: 1882747012}
   ammoCount: {fileID: 707992834}
+  currentLevelCount: {fileID: 517209525}
   enemy: {fileID: 0}
   enemyHP: {fileID: 0}
   enemies: []
