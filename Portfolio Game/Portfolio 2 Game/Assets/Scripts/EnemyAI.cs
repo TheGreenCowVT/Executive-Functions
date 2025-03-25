@@ -49,6 +49,9 @@ public class enemyAI : MonoBehaviour, IDamage
             shootRate = 0f;
         }
 
+        gamemanager.instance.updateNumEnemies(1);
+        gamemanager.instance.numEnemiesOrig++;
+
         spawner = FindObjectOfType<EnemySpawner>();
     }
     // Update is called once per frame
@@ -124,7 +127,6 @@ public class enemyAI : MonoBehaviour, IDamage
         if (HP <= 0)
         {
 
-            gamemanager.instance.updateGameGoal(-1);
             loot.Die();
 
             // Notify the spawner that this enemy was destroyed

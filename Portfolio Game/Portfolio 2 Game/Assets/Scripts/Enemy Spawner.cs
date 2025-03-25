@@ -29,7 +29,7 @@ public class EnemySpawner : MonoBehaviour
 
     private void Start()
     {
-        SpawnBoss();
+        //SpawnBoss();
         StartNextWave();
     }
 
@@ -63,10 +63,12 @@ public class EnemySpawner : MonoBehaviour
 
         enemiesRemainingInWave = currentWave.enemyCount;
         enemiesAlive = 0;
+        gamemanager.instance.numEnemiesOrig = 0;
 
         Debug.Log($"Starting Wave {currentWaveIndex + 1} with {enemiesRemainingInWave} enemies.");
 
         SpawnEnemiesForWave();
+
     }
 
     private void SpawnEnemiesForWave()
@@ -94,6 +96,7 @@ public class EnemySpawner : MonoBehaviour
                 Debug.LogWarning("No spawn points assigned to the spawner!");
             }
         }
+        
     }
 
     private IEnumerator EnableEnemyMovement(GameObject enemy)
@@ -111,6 +114,7 @@ public class EnemySpawner : MonoBehaviour
     public void OnEnemyDestroyed()
     {
         enemiesAlive--;
+        gamemanager.instance.updateNumEnemies(-1);
 
         Debug.Log($"Enemy destroyed. Enemies alive: {enemiesAlive}");
 
@@ -119,6 +123,7 @@ public class EnemySpawner : MonoBehaviour
             currentWaveIndex++;
             Invoke(nameof(StartNextWave), timeBetweenWaves);
         }
+
     }
 
     private IEnumerator MakeBossVulnerable()

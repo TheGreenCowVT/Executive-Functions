@@ -51,7 +51,6 @@ public class gamemanager : MonoBehaviour
 
         enemyHP = GameObject.FindWithTag("EnemyHPBar");
         enemiesHP = GameObject.FindGameObjectsWithTag("EnemyHPBar");
-        StartNextWave();
         // Find enemies and waypoints
         //enemies = GameObject.FindGameObjectsWithTag("Enemy");
         enemy = GameObject.FindWithTag("Enemy");
@@ -108,7 +107,9 @@ public class gamemanager : MonoBehaviour
             Debug.Log("Enemy HP Bar not found");
         }
 
-        updateGameGoal(0);
+        numEnemiesOrig = numEnemies;
+
+        updateNumEnemies(0);
 
 
         UpdateWaveBar();
@@ -157,29 +158,14 @@ public class gamemanager : MonoBehaviour
 
     }
 
-    public void updateGameGoal(int amount)
+    public void updateNumEnemies(int amount)
     {
-        goalCount += amount;
         numEnemies += amount;
 
 
         UpdateWaveBar();
 
-        if (goalCount <= 0)
-        {
-            if (waveNum > 4)
-            {   
-                // You Win
-                statePause();
-                menuActive = menuWin;
-                menuActive.SetActive(true);
-            }
-            else
-            {
-                // Start Next Wave
-                StartNextWave();
-            }
-        }
+       
     }
 
     public void youLose()
@@ -189,19 +175,6 @@ public class gamemanager : MonoBehaviour
         menuActive.SetActive(true);
     }
 
-    public void StartNextWave()
-    {
-        waveNum++;
-        waveNumberText.text = "Wave " + waveNum.ToString();
-
-        enemies = GameObject.FindGameObjectsWithTag("Enemy");
-
-        goalCount = numEnemies = enemies.Length;
-        numEnemiesOrig = numEnemies;
-
-        UpdateWaveBar();
-
-    }
     public void updateEnemyHPBar(float enemyHP, float currentenemyHP)
     {
         if (enemyHPBar != null)
