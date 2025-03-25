@@ -27,43 +27,14 @@ public class EnemyPatrol : MonoBehaviour
         agent = GetComponent<NavMeshAgent>();
         animator = GetComponentInChildren<Animator>();
         enemy = GameObject.FindWithTag("Enemy");
+        playerTarget = GameObject.FindWithTag("Player").transform;
     }
 
     // Update is called once per frame
-    //void Update()
-    //{
-    //    Debug.DrawLine(transform.position, agent.destination, Color.red);
-    //    float distanceToPlayer = Vector3.Distance(transform.position, playerTarget.position); // Get distance to player
-    //    if (distanceToPlayer <= chaseRange)
-    //    {
-    //        isPatrolling = false;
-    //        agent.speed = chaseSpeed;
-    //        agent.SetDestination(playerTarget.position);
-    //        animator.SetBool("IsChasing", true); // Make later
-    //    }
-    //    else
-    //    {
-    //        // Patrolling Logic
-    //        isPatrolling = true;
-    //        agent.speed = patrolSpeed;
-    //        agent.SetDestination(waypoints[currentWaypointIndex].position); // Move agent to location
-    //        animator.SetBool("IsChasing", false);                            //transform.position = Vector3.MoveTowards(transform.position, waypoints[currentWaypointIndex].position, patrolSpeed * Time.deltaTime);
-
-    //        // Waypoint system goes here
-    //        //if (Vector3.Distance(transform.position, waypoints[currentWaypointIndex].position) < 1f) // reached waypoint
-    //        if (agent.remainingDistance < 0.1f && !agent.pathPending)
-    //        {
-    //            currentWaypointIndex++;
-    //            if (currentWaypointIndex >= waypoints.Length)
-    //            {
-    //                currentWaypointIndex = 0; // Loop back to the first waypoint
-    //            }
-    //        }
-    //    }
-    //}
     void Update()
     {
         Debug.DrawLine(transform.position, agent.destination, Color.red);
+
 
         if (playerTarget != null)
         {
@@ -86,11 +57,7 @@ public class EnemyPatrol : MonoBehaviour
                 {
                     if (agent.remainingDistance <= agent.stoppingDistance && !agent.pathPending && agent.pathStatus == NavMeshPathStatus.PathComplete)
                     {
-                        //currentWaypointIndex++;
-                        //if (currentWaypointIndex == waypoints.Length)
-                        //{
                         currentWaypointIndex = Random.Range(0, waypoints.Length);
-                        //}
                         agent.SetDestination(waypoints[currentWaypointIndex].position);
                     }
                 }

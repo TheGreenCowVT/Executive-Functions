@@ -46,6 +46,7 @@ public class gamemanager : MonoBehaviour
     {
         instance = this;
         player = GameObject.FindWithTag("Player");
+
         playerScript = player.GetComponent<PlayerController>();
 
         enemyHP = GameObject.FindWithTag("EnemyHPBar");
