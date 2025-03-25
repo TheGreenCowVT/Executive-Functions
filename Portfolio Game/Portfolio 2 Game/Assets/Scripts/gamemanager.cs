@@ -21,6 +21,8 @@ public class gamemanager : MonoBehaviour
     public GameObject player;
     public PlayerController playerScript;
     [SerializeField] public Image weaponIcon;
+    [SerializeField] public Image activeWeaponIcon;
+    [SerializeField] TMP_Text ammoText;
     [SerializeField] TMP_Text ammoCount;
 
     [Header("----Enemy----")]
@@ -190,14 +192,19 @@ public class gamemanager : MonoBehaviour
 
     public void UpdateWeaponUI()
     {
-        weaponIcon = playerScript.weaponList[playerScript.weaponListPos].UIImage;
+        activeWeaponIcon = playerScript.weaponList[playerScript.weaponListPos].UIImage;
+        weaponIcon.sprite = activeWeaponIcon.sprite;
+
         if (playerScript.weaponList[playerScript.weaponListPos].ammoMax > 0)
         {
+            ammoText.enabled = true;
+            ammoCount.enabled = true;
             ammoCount.text = playerScript.weaponList[playerScript.weaponListPos].ammoCur.ToString() + " / " + playerScript.weaponList[playerScript.weaponListPos].ammoMax.ToString();
         }
         else if (playerScript.weaponList[playerScript.weaponListPos].ammoMax == 0 || playerScript.weaponList.Count <= 0)
         {
-            ammoCount.text = "";
+            ammoText.enabled = false;
+            ammoCount.enabled = false;
         }
     }
 }

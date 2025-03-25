@@ -10,7 +10,7 @@ public GameObject model;
 [Range(1, 100)] public int shootDamage;
 [Range(5, 1000)] public int shootDist;
 [Range(0.1f, 2)] public float shootRate;
-[HideInInspector] public int ammoCur;
+ public int ammoCur;
 [Range(0, 50)] public int ammoMax;
 
     public GameObject projectilePrefab;

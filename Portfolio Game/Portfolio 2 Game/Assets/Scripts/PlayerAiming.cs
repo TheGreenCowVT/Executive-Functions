@@ -55,7 +55,7 @@ public class PlayerAiming : MonoBehaviour
             animator.SetBool("isAiming", false);
 
         }
-        if (isAiming && Input.GetButtonDown("Fire1"))
+        if (isAiming && Input.GetButtonDown("Fire1") && gamemanager.instance.playerScript.weaponList.Count > 0 && gamemanager.instance.playerScript.weaponList[gamemanager.instance.playerScript.weaponListPos].ammoCur > 0 && gamemanager.instance.playerScript.shootTimer >= gamemanager.instance.playerScript.shootRate)
         {
             if (playerController.currentWeapon != null)
             {

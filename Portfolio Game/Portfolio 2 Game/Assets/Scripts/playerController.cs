@@ -24,7 +24,7 @@ public class PlayerController : MonoBehaviour, IDamage, IPickup
     [SerializeField] GameObject weaponModel;
     [SerializeField] int shootDamage;
     [SerializeField] int shootDist;
-    [SerializeField] float shootRate;
+    [SerializeField] public float shootRate;
 
     [Header("----- Grapple -----")]
     [SerializeField] int grappleDist;
@@ -34,7 +34,7 @@ public class PlayerController : MonoBehaviour, IDamage, IPickup
     int HPOrig;
     int jumpCount;
     public int weaponListPos;
-    float shootTimer;
+    public float shootTimer;
 
     public float rotationSpeed;
 
@@ -52,6 +52,7 @@ public class PlayerController : MonoBehaviour, IDamage, IPickup
         HPOrig = HP;
         animator = GetComponent<Animator>();
         updatePlayerUI();
+        gamemanager.instance.UpdateWeaponUI();
 
     }
 
@@ -112,8 +113,8 @@ public class PlayerController : MonoBehaviour, IDamage, IPickup
         controller.Move(playerVelocity * Time.deltaTime);
         playerVelocity.y -= gravity * Time.deltaTime;
 
-        if (Input.GetButton("Fire1") && weaponList.Count > 0 && weaponList[weaponListPos].ammoCur > 0 && shootTimer >= shootRate)
-            shoot();
+        //if (Input.GetButtonDown("Fire1") && weaponList.Count > 0 && weaponList[weaponListPos].ammoCur > 0 && shootTimer >= shootRate)
+        //    shoot();
 
 
         selectWeapon();
@@ -204,6 +205,7 @@ public class PlayerController : MonoBehaviour, IDamage, IPickup
         shootTimer = 0;
 
         weaponList[weaponListPos].ammoCur--;
+        gamemanager.instance.UpdateWeaponUI();
         Weapon currentWeapon = weaponList[weaponListPos];
         Transform projectilePos = handTransform;
 
@@ -270,6 +272,7 @@ public class PlayerController : MonoBehaviour, IDamage, IPickup
         {
             weaponListPos++;
             changeWeapon();
+
         }
         else if (Input.GetAxis("Mouse ScrollWheel") < 0 && weaponListPos > 0)
         {
@@ -293,6 +296,7 @@ public class PlayerController : MonoBehaviour, IDamage, IPickup
         if (Input.GetButtonDown("Reload"))
         {
             weaponList[weaponListPos].ammoCur = weaponList[weaponListPos].ammoMax;
+            gamemanager.instance.UpdateWeaponUI();
         }
     }
 

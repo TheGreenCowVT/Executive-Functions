@@ -16,7 +16,7 @@ MonoBehaviour:
   shootDamage: 1
   shootDist: 150
   shootRate: 0.1
-  ammoCur: -7
+  ammoCur: 12
   ammoMax: 12
   projectilePrefab: {fileID: 1850961265077878968, guid: 0d79cf3292ca60e46a9a584374d11b4a, type: 3}
   projectileSpeed: 5
