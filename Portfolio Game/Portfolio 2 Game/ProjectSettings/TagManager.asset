@@ -10,6 +10,8 @@ TagManager:
   - Easy Enemy
   - Med Enemy
   - Hard Enemy
+  - Torch
+  - FlameTrap
   layers:
   - Default
   - TransparentFX
