@@ -1835,7 +1835,6 @@ GameObject:
   - component: {fileID: 6983267131212764590}
   - component: {fileID: 6443688462663609804}
   - component: {fileID: 7529529431047868379}
-  - component: {fileID: 7674249237000212244}
   - component: {fileID: 8307205716972522995}
   - component: {fileID: 7285774370219654120}
   - component: {fileID: 1808306867926491398}
@@ -1909,29 +1908,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &7674249237000212244
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8591509219762547518}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3ade734422fa7da448add532a8c46c9e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerTarget: {fileID: 0}
-  agent: {fileID: 8307205716972522995}
-  chaseRange: 5
-  patrolSpeed: 5
-  chaseSpeed: 5
-  animator: {fileID: 7529529431047868379}
-  rotationSpeed: 1
-  targetPoint: 5
-  speed: 2
-  enemy: {fileID: 0}
-  waypoints: []
 --- !u!195 &8307205716972522995
 NavMeshAgent:
   m_ObjectHideFlags: 0

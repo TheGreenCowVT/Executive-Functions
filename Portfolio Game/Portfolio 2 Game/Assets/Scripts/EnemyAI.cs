@@ -4,6 +4,7 @@ using UnityEngine.AI;
 
 public class enemyAI : MonoBehaviour, IDamage
 {
+    [SerializeField] playerController controller;
     public enum EnemyType { melee, Ranged }
     [SerializeField] EnemyType enemyType;
     [SerializeField] Renderer model;
@@ -11,6 +12,7 @@ public class enemyAI : MonoBehaviour, IDamage
     [SerializeField] Animator animator;
 
     [SerializeField] int maxHP;
+    [Range(1,100),SerializeField] int expValue;
     [SerializeField] int faceTargetSpeed;
     [SerializeField] int animTransSpeed;
     [SerializeField] gamemanager enemyHealthBar;
@@ -18,6 +20,8 @@ public class enemyAI : MonoBehaviour, IDamage
     [SerializeField] GameObject bullet;
     [SerializeField] float shootRate;
 
+    
+    
     float shootTimer;
     private int HP;
     Vector3 playerDir;
@@ -136,6 +140,8 @@ public class enemyAI : MonoBehaviour, IDamage
             }
 
             Destroy(gameObject);
+            controller.expAmount += expValue;
+            controller.updatePlayerUI();
         }
     }
     IEnumerator flashRed()

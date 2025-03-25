@@ -1133,7 +1133,6 @@ GameObject:
   - component: {fileID: 5650419303136421799}
   - component: {fileID: 2341095556154248992}
   - component: {fileID: 3293321528696486325}
-  - component: {fileID: 26189960013577285}
   - component: {fileID: 3684505476830150133}
   - component: {fileID: 6852553086072639307}
   - component: {fileID: 1094760997493753301}
@@ -1206,29 +1205,6 @@ MonoBehaviour:
   shootPos: {fileID: 0}
   bullet: {fileID: 0}
   shootRate: 0
---- !u!114 &26189960013577285
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7669950621016815718}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3ade734422fa7da448add532a8c46c9e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerTarget: {fileID: 0}
-  agent: {fileID: 1094760997493753301}
-  chaseRange: 5
-  patrolSpeed: 5
-  chaseSpeed: 5
-  animator: {fileID: 3684505476830150133}
-  rotationSpeed: 10
-  targetPoint: 5
-  speed: 3
-  enemy: {fileID: 0}
-  waypoints: []
 --- !u!95 &3684505476830150133
 Animator:
   serializedVersion: 7

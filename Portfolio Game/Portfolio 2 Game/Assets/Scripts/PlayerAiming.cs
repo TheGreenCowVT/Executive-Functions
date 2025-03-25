@@ -9,7 +9,7 @@ public class PlayerAiming : MonoBehaviour
     public Vector3 aimPos;
 
     private bool isAiming = false;
-    private PlayerController playerController;
+    private playerController playerController;
 
     public Animator animator;
 
@@ -18,7 +18,7 @@ public class PlayerAiming : MonoBehaviour
     {
         
         reticle.SetActive(false);
-        playerController = GetComponent<PlayerController>();
+        playerController = GetComponent<playerController>();
         animator = GetComponent<Animator>();
 
     }

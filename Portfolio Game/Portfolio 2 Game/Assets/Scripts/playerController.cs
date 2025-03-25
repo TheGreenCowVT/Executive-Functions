@@ -3,15 +3,15 @@ using System.Collections;
 using System.Collections.Generic;
 
 
-public class PlayerController : MonoBehaviour, IDamage, IPickup
+public class playerController : MonoBehaviour, IDamage, IPickup
 {
 
     [SerializeField] LayerMask ignoreLayer;
     [SerializeField] CharacterController controller;
 
     [Header("----- Stats -----")]
-    [Range(1, 10000)][SerializeField] int HP; // Set back to 10 after testing is over
-    [Range(2, 5)][SerializeField] int speed;
+    [Range(1, 10000)][SerializeField] public int HP; // Set back to 10 after testing is over
+    [Range(2, 10)][SerializeField] public float speed;
     [Range(2, 4)][SerializeField] int sprintMod;
     [Range(5, 20)][SerializeField] int jumpSpeed;
     [Range(1, 3)][SerializeField] int jumpMax;
@@ -45,6 +45,8 @@ public class PlayerController : MonoBehaviour, IDamage, IPickup
     public Weapon currentWeapon;
     public Animator animator;
 
+    public int expAmount;
+    public int expMax;        
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -54,12 +56,18 @@ public class PlayerController : MonoBehaviour, IDamage, IPickup
         updatePlayerUI();
         gamemanager.instance.UpdateWeaponUI();
 
+        expAmount = 0;
+        expMax = 100;
+
     }
 
     // Update is called once per frame
     void Update()
     {
-
+        if (expAmount >= expMax)
+        {
+            levelUp();
+        }
         if (currentWeapon != null)
         {
             Debug.DrawRay(Camera.main.transform.position, Camera.main.transform.forward * currentWeapon.shootDist, Color.red);
@@ -253,6 +261,7 @@ public class PlayerController : MonoBehaviour, IDamage, IPickup
     public void updatePlayerUI()
     {
         gamemanager.instance.playerHPBar.fillAmount = (float)HP / HPOrig;
+        gamemanager.instance.playerExpBar.fillAmount = (float)expAmount / expMax;
     }
 
 
@@ -298,6 +307,17 @@ public class PlayerController : MonoBehaviour, IDamage, IPickup
             weaponList[weaponListPos].ammoCur = weaponList[weaponListPos].ammoMax;
             gamemanager.instance.UpdateWeaponUI();
         }
+    }
+
+    void levelUp()
+    {
+        HP += 3;
+        speed += 0.5f;
+        expAmount = 0;
+        gamemanager.instance.updateLevelCount();
+
+        updatePlayerUI();
+        
     }
 
 }

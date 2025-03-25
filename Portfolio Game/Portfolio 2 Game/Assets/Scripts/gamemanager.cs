@@ -17,13 +17,15 @@ public class gamemanager : MonoBehaviour
     [Header("----Player----")]
     public Image playerHeartBeat;
     public Image playerHPBar;
+    public Image playerExpBar;
     public GameObject playerDamageScreen;
     public GameObject player;
-    public PlayerController playerScript;
+    public playerController playerScript;
     [SerializeField] public Image weaponIcon;
     [SerializeField] public Image activeWeaponIcon;
     [SerializeField] TMP_Text ammoText;
     [SerializeField] TMP_Text ammoCount;
+    [SerializeField] TMP_Text currentLevelCount;
 
     [Header("----Enemy----")]
     public GameObject enemy;
@@ -42,6 +44,7 @@ public class gamemanager : MonoBehaviour
     public int numEnemies;
     public int numEnemiesOrig;
     int goalCount;
+    int levelCount;
     int waveNum = 0;
     public Image waveTimer;
     void Awake()
@@ -49,7 +52,7 @@ public class gamemanager : MonoBehaviour
         instance = this;
         player = GameObject.FindWithTag("Player");
 
-        playerScript = player.GetComponent<PlayerController>();
+        playerScript = player.GetComponent<playerController>();
 
         enemyHP = GameObject.FindWithTag("EnemyHPBar");
         enemiesHP = GameObject.FindGameObjectsWithTag("EnemyHPBar");
@@ -116,6 +119,8 @@ public class gamemanager : MonoBehaviour
 
         UpdateWaveBar();
 
+        levelCount = 1;
+        currentLevelCount.text = levelCount.ToString("F0");
 
     }
 
@@ -206,5 +211,11 @@ public class gamemanager : MonoBehaviour
             ammoText.enabled = false;
             ammoCount.enabled = false;
         }
+    }
+
+    public void updateLevelCount()
+    {
+        levelCount++;
+        currentLevelCount.text = levelCount.ToString("F0");
     }
 }

@@ -641,7 +641,6 @@ GameObject:
   m_Component:
   - component: {fileID: 3510200139011971657}
   - component: {fileID: 7523977118933123097}
-  - component: {fileID: 8502109614193280193}
   - component: {fileID: 6877183474005268433}
   - component: {fileID: 6835452938548262317}
   - component: {fileID: 248921430708878552}
@@ -692,29 +691,6 @@ MonoBehaviour:
   damageTime: 0.25
   speed: 10
   destroyTime: 1
---- !u!114 &8502109614193280193
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4860074194907642780}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2150778e29609b341b0776e19843e621, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  enemyType: 0
-  model: {fileID: 7694884648942278272}
-  agent: {fileID: 6035470696541992855}
-  animator: {fileID: 6835452938548262317}
-  maxHP: 5
-  faceTargetSpeed: 600
-  animTransSpeed: 50
-  enemyHealthBar: {fileID: 0}
-  shootPos: {fileID: 0}
-  bullet: {fileID: 0}
-  shootRate: 0
 --- !u!114 &6877183474005268433
 MonoBehaviour:
   m_ObjectHideFlags: 0

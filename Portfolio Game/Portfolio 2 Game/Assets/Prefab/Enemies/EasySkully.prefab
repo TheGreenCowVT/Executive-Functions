@@ -1689,7 +1689,6 @@ GameObject:
   - component: {fileID: 2534063191272720798}
   - component: {fileID: 8029108297239470857}
   - component: {fileID: 2679200414143150934}
-  - component: {fileID: 6919163449479604381}
   - component: {fileID: 3140613561183314699}
   - component: {fileID: 2676121284085741528}
   - component: {fileID: 1712045252689466014}
@@ -1885,29 +1884,6 @@ MonoBehaviour:
     dropChance: 0.1
     minQuantity: 5
     maxQuantity: 15
---- !u!114 &6919163449479604381
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7014625478262514293}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3ade734422fa7da448add532a8c46c9e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerTarget: {fileID: 0}
-  agent: {fileID: 8029108297239470857}
-  chaseRange: 5
-  patrolSpeed: 3
-  chaseSpeed: 3
-  animator: {fileID: 7500374806150277103}
-  rotationSpeed: 1
-  targetPoint: 5
-  speed: 2
-  enemy: {fileID: 0}
-  waypoints: []
 --- !u!54 &3140613561183314699
 Rigidbody:
   m_ObjectHideFlags: 0
