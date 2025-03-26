@@ -12,6 +12,7 @@ public class gamemanager : MonoBehaviour
     [SerializeField] GameObject menuWin;
     [SerializeField] GameObject menuLose;
     [SerializeField] GameObject menuHUD;
+    [SerializeField] public GameObject levelUp;
     public bool isPaused;
 
     [Header("----Player----")]
@@ -217,5 +218,8 @@ public class gamemanager : MonoBehaviour
     {
         levelCount++;
         currentLevelCount.text = levelCount.ToString("F0");
+        
+
     }
+
 }

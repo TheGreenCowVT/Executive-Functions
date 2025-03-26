@@ -318,9 +318,18 @@ public class playerController : MonoBehaviour, IDamage, IPickup
         speed += 0.5f;
         expAmount = 0;
         gamemanager.instance.updateLevelCount();
-
-        updatePlayerUI();
+       StartCoroutine(levelUpNotification());
         
+    }
+
+    IEnumerator levelUpNotification()
+    {
+        gamemanager.instance.levelUp.SetActive(true);
+
+        yield return new WaitForSeconds(3f);
+
+        gamemanager.instance.levelUp.SetActive(false);
+        updatePlayerUI();
     }
 
 }
