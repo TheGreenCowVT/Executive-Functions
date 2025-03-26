@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 5711491829239601978}
   - component: {fileID: 6608435797056980004}
   - component: {fileID: -1555154638932253607}
+  - component: {fileID: 4916799394992873710}
   - component: {fileID: -5320947892679611732}
   m_Layer: 0
   m_Name: Lorenzo spell
@@ -157,6 +158,21 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &4916799394992873710
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5734728596501507153}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 852a3d1b872b3dd4291925d2f2a3ccf0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bullet: {fileID: 5734728596501507153}
+  force: 5
+  rotationForce: 6
 --- !u!96 &-5320947892679611732
 TrailRenderer:
   serializedVersion: 3

@@ -64,6 +64,106 @@ Transform:
   - {fileID: 1705000493556554334}
   m_Father: {fileID: 6937444046656954828}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &444702766008876506
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6903713513426493934}
+  - component: {fileID: 3971400148174974256}
+  - component: {fileID: 2042287300702027215}
+  - component: {fileID: 7033025306404945134}
+  m_Layer: 3
+  m_Name: DamageSphere
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6903713513426493934
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 444702766008876506}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 160742409916677337}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!135 &3971400148174974256
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 444702766008876506}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 1.44
+  m_Center: {x: 0, y: 0.84, z: 0}
+--- !u!54 &2042287300702027215
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 444702766008876506}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 137
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 126
+  m_CollisionDetection: 0
+--- !u!114 &7033025306404945134
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 444702766008876506}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1c8ca31f59d03384bb2bf3c4c40ceb8e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  type: 0
+  rb: {fileID: 0}
+  damageAmount: 0
+  damageTime: 0
+  speed: 0
+  destroyTime: 0
 --- !u!1 &459186649474052163
 GameObject:
   m_ObjectHideFlags: 0
@@ -1013,7 +1113,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 6903713513426493934}
   m_Father: {fileID: 9016270514785566900}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!137 &1807677727091103330
@@ -1562,15 +1663,12 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9016270514785566900}
-  - component: {fileID: 5906513987299068300}
   - component: {fileID: 1574171721977101368}
   - component: {fileID: 3438909152556536821}
   - component: {fileID: 2726805953900363311}
   - component: {fileID: 4167778477585725381}
-  - component: {fileID: 1310910551493106076}
-  - component: {fileID: 8711304968812503311}
   - component: {fileID: 2917614599643102085}
-  - component: {fileID: 8444181274685908946}
+  - component: {fileID: 254689504299909946}
   m_Layer: 3
   m_Name: MediumSkully
   m_TagString: Enemy
@@ -1599,35 +1697,6 @@ Transform:
   - {fileID: 1298782274448651995}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &5906513987299068300
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5871008917630292716}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2150778e29609b341b0776e19843e621, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  controller: {fileID: 0}
-  enemyType: 0
-  model: {fileID: 2726805953900363311}
-  agent: {fileID: 4167778477585725381}
-  animator: {fileID: 1574171721977101368}
-  FOV: 90
-  roamPauseTime: 3
-  roamDistance: 20
-  maxHP: 6
-  expValue: 1
-  faceTargetSpeed: 300
-  animTransSpeed: 30
-  enemyHealthBar: {fileID: 0}
-  shootPos: {fileID: 0}
-  bullet: {fileID: 0}
-  shootRate: 0
-  headPos: {fileID: 5140476200676647782}
 --- !u!95 &1574171721977101368
 Animator:
   serializedVersion: 7
@@ -1727,12 +1796,12 @@ NavMeshAgent:
   m_GameObject: {fileID: 5871008917630292716}
   m_Enabled: 1
   m_AgentTypeID: 0
-  m_Radius: 0.72
+  m_Radius: 0.9
   m_Speed: 3.5
   m_Acceleration: 32
   avoidancePriority: 50
   m_AngularSpeed: 600
-  m_StoppingDistance: 2
+  m_StoppingDistance: 1.5
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 0
   m_AutoRepath: 1
@@ -1740,62 +1809,6 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 1
   m_ObstacleAvoidanceType: 4
---- !u!114 &1310910551493106076
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5871008917630292716}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b66774980978f3643bcac06b13fe1738, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  lootTable:
-  - itemPrefab: {fileID: 2999748106215116, guid: a9de5a98f016a334c9a1113e07b1a12f, type: 3}
-    dropChance: 0.5
-    minQuantity: 2
-    maxQuantity: 8
-  - itemPrefab: {fileID: 4651264813699394226, guid: 238d5f1b77b9e494180383a7f0480c61, type: 3}
-    dropChance: 0.2
-    minQuantity: 4
-    maxQuantity: 10
-  - itemPrefab: {fileID: 5996680578629692151, guid: a71d1f9b3c3dfdf4f8190625852fd277, type: 3}
-    dropChance: 0.5
-    minQuantity: 2
-    maxQuantity: 8
-  - itemPrefab: {fileID: 1198998981114754527, guid: d0c32318984847e428ac1bce4ea19377, type: 3}
-    dropChance: 0.1
-    minQuantity: 5
-    maxQuantity: 15
---- !u!54 &8711304968812503311
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5871008917630292716}
-  serializedVersion: 4
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_CenterOfMass: {x: 0, y: 0, z: 0}
-  m_InertiaTensor: {x: 1, y: 1, z: 1}
-  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ImplicitCom: 1
-  m_ImplicitTensor: 1
-  m_UseGravity: 0
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 1
 --- !u!135 &2917614599643102085
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -1815,9 +1828,9 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 2.05
+  m_Radius: 7
   m_Center: {x: 0, y: 0.7, z: 0}
---- !u!114 &8444181274685908946
+--- !u!114 &254689504299909946
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1826,15 +1839,26 @@ MonoBehaviour:
   m_GameObject: {fileID: 5871008917630292716}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1c8ca31f59d03384bb2bf3c4c40ceb8e, type: 3}
+  m_Script: {fileID: 11500000, guid: 348752c391a67484692c5c79b558ac43, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: 2
-  rb: {fileID: 8711304968812503311}
-  damageAmount: 3
-  damageTime: 1
-  speed: 10
-  destroyTime: 1
+  controller: {fileID: 0}
+  enemyType: 0
+  model: {fileID: 2726805953900363311}
+  agent: {fileID: 4167778477585725381}
+  animator: {fileID: 1574171721977101368}
+  FOV: 90
+  roamPauseTime: 3
+  roamDistance: 20
+  maxHP: 6
+  expValue: 1
+  faceTargetSpeed: 600
+  animTransSpeed: 30
+  enemyHealthBar: {fileID: 0}
+  shootPos: {fileID: 0}
+  bullet: {fileID: 0}
+  shootRate: 0
+  headPos: {fileID: 0}
 --- !u!1 &6007272079131462436
 GameObject:
   m_ObjectHideFlags: 0

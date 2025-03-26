@@ -3,7 +3,7 @@ using System.Collections;
 using UnityEngine.AI;
 using Unity.VisualScripting;
 
-public class EnemyAI : MonoBehaviour, IDamage
+public class ChesterEnemyAI : MonoBehaviour, IDamage
 {
     [SerializeField] playerController controller;
     public enum EnemyType { melee, Ranged }
@@ -104,11 +104,7 @@ public class EnemyAI : MonoBehaviour, IDamage
             animator.SetBool("isChasing", true);
             agent.SetDestination(gamemanager.instance.player.transform.position);
 
-            if (shootTimer >= shootRate)
-            {
-                shoot();
-            }
-           
+            shoot();
 
         }
         else if (!playerInRange)

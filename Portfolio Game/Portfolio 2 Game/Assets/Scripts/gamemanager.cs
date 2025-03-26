@@ -13,6 +13,8 @@ public class gamemanager : MonoBehaviour
     [SerializeField] GameObject menuLose;
     [SerializeField] GameObject menuHUD;
     [SerializeField] public GameObject levelUp;
+
+    [SerializeField] public Transform playerTargetPos;
     public bool isPaused;
 
     [Header("----Player----")]
