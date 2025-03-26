@@ -36,6 +36,37 @@ Transform:
   - {fileID: 4319826351962533841}
   m_Father: {fileID: 1888683658381069641}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &266236169469118984
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7078270751841425990}
+  m_Layer: 3
+  m_Name: HeadPos
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7078270751841425990
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 266236169469118984}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5863000045106568569}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &328743985992579064
 GameObject:
   m_ObjectHideFlags: 0
@@ -484,6 +515,7 @@ GameObject:
   - component: {fileID: 7828337606210148523}
   - component: {fileID: 6413837894773051199}
   - component: {fileID: 3232916406659382301}
+  - component: {fileID: 7924598226270364456}
   m_Layer: 3
   m_Name: MediumLorenzo
   m_TagString: Enemy
@@ -499,7 +531,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3800714334083428230}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: 0.9978572, z: -0, w: 0.06542942}
+  m_LocalRotation: {x: 0, y: 0.9978572, z: 0, w: 0.06542942}
   m_LocalPosition: {x: 2.149476, y: -2.6353238, z: 0.20243192}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -521,17 +553,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2150778e29609b341b0776e19843e621, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  controller: {fileID: 0}
   enemyType: 1
   model: {fileID: 4870623608765979411}
   agent: {fileID: 7828337606210148523}
   animator: {fileID: 2512337600469223397}
+  FOV: 90
+  roamPauseTime: 3
+  roamDistance: 20
   maxHP: 20
+  expValue: 1
   faceTargetSpeed: 600
   animTransSpeed: 30
   enemyHealthBar: {fileID: 0}
   shootPos: {fileID: 8165802380783023381}
   bullet: {fileID: 5734728596501507153, guid: fef54797df8737b4cb825f7dfa647fcf, type: 3}
   shootRate: 0.75
+  headPos: {fileID: 7078270751841425990}
 --- !u!95 &2512337600469223397
 Animator:
   serializedVersion: 7
@@ -628,6 +666,27 @@ CapsuleCollider:
   m_Height: 2.25
   m_Direction: 1
   m_Center: {x: 0, y: 1.06, z: 0.16}
+--- !u!135 &7924598226270364456
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3800714334083428230}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 9.5
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &3815093748362746539
 GameObject:
   m_ObjectHideFlags: 0
@@ -1295,7 +1354,8 @@ Transform:
   m_LocalPosition: {x: -62.965614, y: 2.6645353e-14, z: -5.6825615e-15}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 7078270751841425990}
   m_Father: {fileID: 6300027363642927075}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &9129162167913839350

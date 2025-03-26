@@ -135,6 +135,37 @@ Transform:
   m_Children: []
   m_Father: {fileID: 2731541019632467885}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1441852960345112888
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 146814607442285018}
+  m_Layer: 3
+  m_Name: headPos
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &146814607442285018
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1441852960345112888}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6073786320036491245}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1475875749418561412
 GameObject:
   m_ObjectHideFlags: 0
@@ -847,6 +878,7 @@ Transform:
   m_Children:
   - {fileID: 2528207381208528191}
   - {fileID: 9098289940436751915}
+  - {fileID: 146814607442285018}
   m_Father: {fileID: 6884503009036440232}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5665598208092031577
@@ -1154,7 +1186,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7669950621016815718}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: 0.99957174, z: -0, w: -0.029264856}
+  m_LocalRotation: {x: 0, y: 0.99957174, z: -0, w: -0.029264856}
   m_LocalPosition: {x: 4.896447, y: -2.6352623, z: -4.2238684}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1194,17 +1226,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2150778e29609b341b0776e19843e621, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  controller: {fileID: 0}
   enemyType: 0
   model: {fileID: 2316177600589166454}
   agent: {fileID: 1094760997493753301}
   animator: {fileID: 3684505476830150133}
+  FOV: 90
+  roamPauseTime: 3
+  roamDistance: 20
   maxHP: 10
+  expValue: 1
   faceTargetSpeed: 600
   animTransSpeed: 50
   enemyHealthBar: {fileID: 0}
   shootPos: {fileID: 0}
   bullet: {fileID: 0}
   shootRate: 0
+  headPos: {fileID: 146814607442285018}
 --- !u!95 &3684505476830150133
 Animator:
   serializedVersion: 7

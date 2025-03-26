@@ -466,6 +466,7 @@ GameObject:
   - component: {fileID: 6882873661946224876}
   - component: {fileID: 1281667648153962409}
   - component: {fileID: 7277133350056104864}
+  - component: {fileID: 1563554676717720679}
   m_Layer: 3
   m_Name: EasyLorenzo
   m_TagString: Enemy
@@ -481,7 +482,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1834982793129768722}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: 0.9978572, z: -0, w: 0.06542942}
+  m_LocalRotation: {x: 0, y: 0.9978572, z: 0, w: 0.06542942}
   m_LocalPosition: {x: -0.60955334, y: -2.6357658, z: 0.25961137}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -503,17 +504,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2150778e29609b341b0776e19843e621, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  controller: {fileID: 0}
   enemyType: 1
   model: {fileID: 1849732686744669376}
   agent: {fileID: 6882873661946224876}
   animator: {fileID: 5126808661706810300}
+  FOV: 90
+  roamPauseTime: 3
+  roamDistance: 20
   maxHP: 15
+  expValue: 1
   faceTargetSpeed: 600
   animTransSpeed: 30
   enemyHealthBar: {fileID: 0}
   shootPos: {fileID: 359209796680145442}
   bullet: {fileID: 5734728596501507153, guid: fef54797df8737b4cb825f7dfa647fcf, type: 3}
   shootRate: 1
+  headPos: {fileID: 4797989429936895597}
 --- !u!95 &5126808661706810300
 Animator:
   serializedVersion: 7
@@ -610,6 +617,27 @@ CapsuleCollider:
   m_Height: 2.25
   m_Direction: 1
   m_Center: {x: 0, y: 1.06, z: 0.16}
+--- !u!135 &1563554676717720679
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1834982793129768722}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 9.5
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &1953345407020884630
 GameObject:
   m_ObjectHideFlags: 0
@@ -1048,6 +1076,37 @@ Transform:
   - {fileID: 7501139903177589696}
   m_Father: {fileID: 5275425703541038280}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &4225658281985266086
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4797989429936895597}
+  m_Layer: 3
+  m_Name: headPos
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4797989429936895597
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4225658281985266086}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 7504010883620270193}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &4976628121013928417
 GameObject:
   m_ObjectHideFlags: 0
@@ -1405,6 +1464,7 @@ Transform:
   m_LocalPosition: {x: -62.965614, y: 2.6645353e-14, z: -5.6825615e-15}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 4797989429936895597}
   m_Father: {fileID: 4704347958341444083}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
