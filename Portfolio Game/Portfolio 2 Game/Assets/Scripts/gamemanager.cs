@@ -47,10 +47,11 @@ public class gamemanager : MonoBehaviour
     [SerializeField] TMP_Text waveNumberText;
     public int numEnemies;
     public int numEnemiesOrig;
-    int goalCount;
     int levelCount;
     int waveNum = 0;
     public Image waveTimer;
+    public EnemySpawner enemySpawner;
+
     void Awake()
     {
         instance = this;
@@ -64,7 +65,7 @@ public class gamemanager : MonoBehaviour
         enemyHP = GameObject.FindWithTag("EnemyHPBar");
         enemiesHP = GameObject.FindGameObjectsWithTag("EnemyHPBar");
         // Find enemies and waypoints
-        //enemies = GameObject.FindGameObjectsWithTag("Enemy");
+        enemies = GameObject.FindGameObjectsWithTag("Enemy");
         enemy = GameObject.FindWithTag("Enemy");
         
 
@@ -89,15 +90,11 @@ public class gamemanager : MonoBehaviour
             Debug.Log("Enemy HP Bar not found");
         }
 
-        numEnemiesOrig = numEnemies;
 
         updateNumEnemies(0);
 
-
-        UpdateWaveBar();
-
-        levelCount = 1;
-        currentLevelCount.text = levelCount.ToString("F0");
+        
+        StartNewWave();
 
     }
 
@@ -146,8 +143,19 @@ public class gamemanager : MonoBehaviour
     {
         numEnemies += amount;
 
-
         UpdateWaveBar();
+
+        if (numEnemies <=0)
+        {
+            if (waveNum < 4)
+            {
+                StartNewWave();
+            }
+            else if(waveNum == 4)
+            {
+                youWin();
+            }
+        }
 
        
     }
@@ -156,6 +164,13 @@ public class gamemanager : MonoBehaviour
     {
         statePause();
         menuActive = menuLose;
+        menuActive.SetActive(true);
+    }
+
+    public void youWin()
+    {
+        statePause();
+        menuActive = menuWin;
         menuActive.SetActive(true);
     }
 
@@ -196,6 +211,13 @@ public class gamemanager : MonoBehaviour
         currentLevelCount.text = levelCount.ToString("F0");
         
 
+    }
+
+    public void StartNewWave()
+    {
+        UpdateWaveBar();
+        waveNum++;
+        waveNumberText.text = waveNum.ToString();
     }
 
 }

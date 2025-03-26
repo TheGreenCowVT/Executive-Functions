@@ -2,15 +2,16 @@ using UnityEngine;
 
 public class TestingWaves : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    private void OnTriggerEnter(Collider other)
     {
-        
+        gamemanager.instance.StartNewWave();
     }
-
-    // Update is called once per frame
-    void Update()
+    public void killAllEnemies()
     {
-        
+        for (int en = 0; en > 0; en++)
+        {
+            Destroy(gamemanager.instance.enemies[en]);
+            gamemanager.instance.updateNumEnemies(-(en - 1));
+        }
     }
 }
