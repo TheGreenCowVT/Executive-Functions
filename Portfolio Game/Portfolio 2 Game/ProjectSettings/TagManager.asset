@@ -12,6 +12,7 @@ TagManager:
   - Hard Enemy
   - Torch
   - FlameTrap
+  - PlayerDamageSpot
   layers:
   - Default
   - TransparentFX

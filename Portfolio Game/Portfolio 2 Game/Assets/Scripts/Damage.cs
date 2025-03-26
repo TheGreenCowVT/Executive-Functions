@@ -24,6 +24,7 @@ public class damage : MonoBehaviour
 
         if (type == damageType.moving)
         {
+            damageAmount = 1;
             rb.linearVelocity = transform.forward * speed;
             Destroy(gameObject, destroyTime);
         }

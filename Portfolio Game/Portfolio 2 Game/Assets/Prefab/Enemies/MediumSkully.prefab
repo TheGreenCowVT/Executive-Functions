@@ -159,11 +159,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 0
-  rb: {fileID: 0}
-  damageAmount: 0
-  damageTime: 0
-  speed: 0
-  destroyTime: 0
+  rb: {fileID: 2042287300702027215}
+  damageAmount: 1
+  damageTime: 0.25
+  speed: 10
+  destroyTime: 1
 --- !u!1 &459186649474052163
 GameObject:
   m_ObjectHideFlags: 0

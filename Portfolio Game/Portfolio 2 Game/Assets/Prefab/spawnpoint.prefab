@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6288440683109758698}
   - component: {fileID: 8160022563610053415}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: spawnpoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -27,7 +27,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -18.988, y: 2.4299998, z: -2.1599998}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 2, y: 2, z: 2}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -44,6 +44,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 41668f19c3282b64ab824dc7b2cbf606, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  waves: []
-  spawnPoints: []
-  timeBetweenWaves: 10
+  waves:
+  - enemyPrefabs:
+    - {fileID: 3800714334083428230, guid: bf1748f8acdbc9d4d83804cc099a9dbf, type: 3}
+    - {fileID: 3168093148846688338, guid: 37d207d53cb8f39499cf5b4841f9c901, type: 3}
+    enemyCount: 3
+  - enemyPrefabs:
+    - {fileID: 3800714334083428230, guid: bf1748f8acdbc9d4d83804cc099a9dbf, type: 3}
+    - {fileID: 3168093148846688338, guid: 37d207d53cb8f39499cf5b4841f9c901, type: 3}
+    enemyCount: 3
+  - enemyPrefabs:
+    - {fileID: 3800714334083428230, guid: bf1748f8acdbc9d4d83804cc099a9dbf, type: 3}
+    - {fileID: 3168093148846688338, guid: 37d207d53cb8f39499cf5b4841f9c901, type: 3}
+    enemyCount: 3
+  spawnPoints:
+  - {fileID: 6288440683109758698}
+  timeBetweenWaves: 30
+  bossPrefabs: []
+  bossVulnerabilityTime: 5

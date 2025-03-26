@@ -23,6 +23,7 @@ public class gamemanager : MonoBehaviour
     public Image playerExpBar;
     public GameObject playerDamageScreen;
     public GameObject player;
+    public GameObject playerDamageSpot;
     public playerController playerScript;
     [SerializeField] public Image weaponIcon;
     [SerializeField] public Image activeWeaponIcon;
@@ -54,6 +55,9 @@ public class gamemanager : MonoBehaviour
     {
         instance = this;
         player = GameObject.FindWithTag("Player");
+        playerDamageSpot = GameObject.FindWithTag("PlayerDamageSpot");
+
+        playerTargetPos = playerDamageSpot.transform;
 
         playerScript = player.GetComponent<playerController>();
 
@@ -62,19 +66,7 @@ public class gamemanager : MonoBehaviour
         // Find enemies and waypoints
         //enemies = GameObject.FindGameObjectsWithTag("Enemy");
         enemy = GameObject.FindWithTag("Enemy");
-        enemywaypoints = GameObject.FindGameObjectsWithTag("Waypoint");
-        waypoint = GameObject.FindWithTag("Waypoint");
-
-        if (waypoint != null)
-        {
-            waypoints = waypoint.GetComponentsInChildren<Transform>();
-            Transform[] tempWaypoints = new Transform[waypoints.Length - 1];
-            for (int i = 1; i < waypoints.Length; i++)
-            {
-                tempWaypoints[i - 1] = waypoints[i];
-            }
-            waypoints = tempWaypoints;
-        }
+        
 
         //Find Enemy HP bars
         enemyHP = GameObject.FindWithTag("EnemyHPBar");

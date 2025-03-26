@@ -22,9 +22,7 @@ public class ChesterEnemyAI : MonoBehaviour, IDamage
     [SerializeField] int faceTargetSpeed;
     [SerializeField] int animTransSpeed;
     [SerializeField] gamemanager enemyHealthBar;
-    [SerializeField] Transform shootPos;
-    [SerializeField] GameObject bullet;
-    [SerializeField] float shootRate;
+
     [SerializeField] Transform headPos;
 
 
@@ -103,8 +101,6 @@ public class ChesterEnemyAI : MonoBehaviour, IDamage
 
             animator.SetBool("isChasing", true);
             agent.SetDestination(gamemanager.instance.player.transform.position);
-
-            shoot();
 
         }
         else if (!playerInRange)
@@ -190,11 +186,7 @@ public class ChesterEnemyAI : MonoBehaviour, IDamage
         model.material.color = Color.white;
     }
 
-    void shoot()
-    {
-        shootTimer = 0;
-        Instantiate(bullet, shootPos.position, transform.rotation);
-    }
+   
 
     IEnumerator ResetDamageFlag()
     {
@@ -220,10 +212,6 @@ public class ChesterEnemyAI : MonoBehaviour, IDamage
                 agent.SetDestination(gamemanager.instance.player.transform.position);
 
                 // Moved to only let the enemy shoot while they can see the player
-                if (shootTimer >= shootRate)
-                {
-                    shoot();
-                }
                 return true;
             }
             else

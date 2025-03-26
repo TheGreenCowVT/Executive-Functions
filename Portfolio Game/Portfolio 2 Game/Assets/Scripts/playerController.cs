@@ -59,9 +59,6 @@ public class playerController : MonoBehaviour, IDamage, IPickup
         expAmount = 0;
         expMax = 100;
 
-        expAmount = 0;
-        expMax = 100;
-
     }
 
     // Update is called once per frame

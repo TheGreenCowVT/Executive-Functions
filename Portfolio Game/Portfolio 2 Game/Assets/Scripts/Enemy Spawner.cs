@@ -33,23 +33,23 @@ public class EnemySpawner : MonoBehaviour
         StartNextWave();
     }
 
-    private void SpawnBoss()
-    {
-        if (bossPrefabs.Length > 0 && spawnPoints.Length > 0)
-        {
-            int randomIndex = Random.Range(0, spawnPoints.Length);
-            Transform spawnPoint = spawnPoints[randomIndex];
+    //private void SpawnBoss()
+    //{
+    //    if (bossPrefabs.Length > 0 && spawnPoints.Length > 0)
+    //    {
+    //        int randomIndex = Random.Range(0, spawnPoints.Length);
+    //        Transform spawnPoint = spawnPoints[randomIndex];
 
-            GameObject bossPrefab = bossPrefabs[Random.Range(0, bossPrefabs.Length)];
-            currentBoss = Instantiate(bossPrefab, spawnPoint.position, spawnPoint.rotation);
-            Debug.Log($"Spawned boss at {spawnPoint.name}");
-            StartCoroutine(EnableEnemyMovement(currentBoss));
-        }
-        else
-        {
-            Debug.LogWarning("No boss prefabs or spawn points assigned for boss spawn");
-        }
-    }
+    //        GameObject bossPrefab = bossPrefabs[Random.Range(0, bossPrefabs.Length)];
+    //        currentBoss = Instantiate(bossPrefab, spawnPoint.position, spawnPoint.rotation);
+    //        Debug.Log($"Spawned boss at {spawnPoint.name}");
+    //        StartCoroutine(EnableEnemyMovement(currentBoss));
+    //    }
+    //    else
+    //    {
+    //        Debug.LogWarning("No boss prefabs or spawn points assigned for boss spawn");
+    //    }
+    //}
 
     private void StartNextWave()
     {
@@ -126,20 +126,20 @@ public class EnemySpawner : MonoBehaviour
 
     }
 
-    private IEnumerator MakeBossVulnerable()
-    {
-        bossVulnerable = true;
-        Debug.Log("Boss is Vulnerable!");
+//    private IEnumerator MakeBossVulnerable()
+//    {
+//        bossVulnerable = true;
+//        Debug.Log("Boss is Vulnerable!");
 
-        yield return new WaitForSeconds(bossVulnerabilityTime);
-        bossVulnerable = false;
-        Debug.Log("Boss is no longer vulnerable");
+//        yield return new WaitForSeconds(bossVulnerabilityTime);
+//        bossVulnerable = false;
+//        Debug.Log("Boss is no longer vulnerable");
 
-        currentWaveIndex++;
-        Invoke(nameof(StartNextWave), timeBetweenWaves - bossVulnerabilityTime);
-    }
-    public bool IsBossVulnerable()
-    {
-        return bossVulnerable;
-    }
+//        currentWaveIndex++;
+//        Invoke(nameof(StartNextWave), timeBetweenWaves - bossVulnerabilityTime);
+//    }
+//    public bool IsBossVulnerable()
+//    {
+//        return bossVulnerable;
+//    }
 }
