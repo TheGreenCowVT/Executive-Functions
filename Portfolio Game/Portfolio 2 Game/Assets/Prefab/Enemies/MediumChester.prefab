@@ -813,7 +813,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2150778e29609b341b0776e19843e621, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  controller: {fileID: 0}
+  controller: {fileID: 475740237744980965, guid: c6ba5b856efc0674c840559a61ba580e, type: 3}
   enemyType: 0
   model: {fileID: 3824216941934674155}
   agent: {fileID: 2765725637429039914}

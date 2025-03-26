@@ -1842,7 +1842,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 348752c391a67484692c5c79b558ac43, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  controller: {fileID: 0}
+  controller: {fileID: 475740237744980965, guid: c6ba5b856efc0674c840559a61ba580e, type: 3}
   enemyType: 0
   model: {fileID: 2726805953900363311}
   agent: {fileID: 4167778477585725381}
@@ -1855,9 +1855,6 @@ MonoBehaviour:
   faceTargetSpeed: 600
   animTransSpeed: 30
   enemyHealthBar: {fileID: 0}
-  shootPos: {fileID: 0}
-  bullet: {fileID: 0}
-  shootRate: 0
   headPos: {fileID: 0}
 --- !u!1 &6007272079131462436
 GameObject:
