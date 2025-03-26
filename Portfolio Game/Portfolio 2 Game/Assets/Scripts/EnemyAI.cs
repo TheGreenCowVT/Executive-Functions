@@ -1,7 +1,7 @@
 using UnityEngine;
 using System.Collections;
 using UnityEngine.AI;
-using Unity.VisualScripting;
+
 
 public class EnemyAI : MonoBehaviour, IDamage
 {
@@ -50,22 +50,22 @@ public class EnemyAI : MonoBehaviour, IDamage
         HP = maxHP;
         stoppingDistance = agent.stoppingDistance;
         agent = GetComponent<NavMeshAgent>();
-        //enemyHealthBar = gamemanager.instance;
+        enemyHealthBar = gamemanager.instance;
 
 
-        //if (enemyHealthBar != null)
-        //{
-        //    enemyHealthBar.updateEnemyHPBar(maxHP, HP);
-        //}
-        //else
-        //{
-        //    Debug.LogError("Gamemanager not found");
-        //}
-        //if (enemyType == EnemyType.melee)
-        //{
-        //    bullet = null;
-        //    shootRate = 0f;
-        //}
+        if (enemyHealthBar != null)
+        {
+            enemyHealthBar.updateEnemyHPBar(maxHP, HP);
+        }
+        else
+        {
+            Debug.LogError("Gamemanager not found");
+        }
+        if (enemyType == EnemyType.melee)
+        {
+            bullet = null;
+            shootRate = 0f;
+        }
 
         gamemanager.instance.updateNumEnemies(1);
         gamemanager.instance.numEnemiesOrig++;
@@ -97,18 +97,18 @@ public class EnemyAI : MonoBehaviour, IDamage
             roamTimer += Time.deltaTime;
         }
 
-        if (playerInRange/* && !canSeePlayer()*/)
+        if (playerInRange && canSeePlayer())
         {
             agent.stoppingDistance = stoppingDistance;
 
             animator.SetBool("isChasing", true);
             agent.SetDestination(gamemanager.instance.player.transform.position);
 
-            if (shootTimer >= shootRate)
-            {
-                shoot();
-            }
-           
+
+                if (shootTimer >= shootRate)
+                {
+                    shoot();
+                }
 
         }
         else if (!playerInRange)
@@ -197,6 +197,12 @@ public class EnemyAI : MonoBehaviour, IDamage
     void shoot()
     {
         shootTimer = 0;
+        animator.SetTrigger("isAttacking");
+        
+    }
+
+    public void createBullet()
+    {
         Instantiate(bullet, shootPos.position, transform.rotation);
     }
 
@@ -239,7 +245,7 @@ public class EnemyAI : MonoBehaviour, IDamage
 
         }
 
-        // Falce because we did not find the player
+        // False because we did not find the player
         agent.stoppingDistance = 0;
         return false;
 
@@ -247,7 +253,7 @@ public class EnemyAI : MonoBehaviour, IDamage
 
     void checkRoam()
     {
-        if ((roamTimer > roamPauseTime && agent.remainingDistance < 0.01) || gamemanager.instance.playerScript.HP <= 0)
+        if ((roamTimer > roamPauseTime && agent.remainingDistance < 0.01)/* || gamemanager.instance.playerScript.HP <= 0*/)
         {
 
             roam();

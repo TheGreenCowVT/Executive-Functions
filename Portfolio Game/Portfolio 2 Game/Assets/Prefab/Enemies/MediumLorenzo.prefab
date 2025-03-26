@@ -330,7 +330,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 1b289ca454f3cdf4ca785ab70305a4ad, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 10b227ac98fd0ff42b167488929a2a24, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -532,7 +532,7 @@ Transform:
   m_GameObject: {fileID: 3800714334083428230}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0.9978572, z: 0, w: 0.06542942}
-  m_LocalPosition: {x: 2.149476, y: -2.6353238, z: 0.20243192}
+  m_LocalPosition: {x: -5.5130043, y: -0.006608963, z: 12.46497}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -561,7 +561,7 @@ MonoBehaviour:
   FOV: 90
   roamPauseTime: 3
   roamDistance: 20
-  maxHP: 20
+  maxHP: 15
   expValue: 1
   faceTargetSpeed: 600
   animTransSpeed: 30
@@ -580,7 +580,7 @@ Animator:
   m_GameObject: {fileID: 3800714334083428230}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: 3dc717adf98c7b043a3e77ed0130d470, type: 3}
-  m_Controller: {fileID: 9100000, guid: 1d4d5ce11bffc1a4fa297a4b3c263243, type: 2}
+  m_Controller: {fileID: 9100000, guid: 670fc3e0d0cdc2943acd3b99b647d9ef, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -880,14 +880,14 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 1b289ca454f3cdf4ca785ab70305a4ad, type: 3}
+  m_Sprite: {fileID: 21300000, guid: c155c0f2ad7775b42973b16cdca9ea4c, type: 3}
   m_Type: 3
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 0
   m_FillAmount: 0.5
   m_FillClockwise: 1
-  m_FillOrigin: 0
+  m_FillOrigin: 1
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
 --- !u!1 &5241941895411589024

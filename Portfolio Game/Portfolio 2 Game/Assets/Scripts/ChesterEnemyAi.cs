@@ -1,7 +1,6 @@
 using UnityEngine;
 using System.Collections;
 using UnityEngine.AI;
-using Unity.VisualScripting;
 
 public class ChesterEnemyAI : MonoBehaviour, IDamage
 {
@@ -16,7 +15,7 @@ public class ChesterEnemyAI : MonoBehaviour, IDamage
     [SerializeField] int roamDistance;
 
 
-
+    //[SerializeField] Collider weaponCol;
     [SerializeField] int maxHP;
     [Range(1,100),SerializeField] int expValue;
     [SerializeField] int faceTargetSpeed;
@@ -48,22 +47,18 @@ public class ChesterEnemyAI : MonoBehaviour, IDamage
         HP = maxHP;
         stoppingDistance = agent.stoppingDistance;
         agent = GetComponent<NavMeshAgent>();
-        //enemyHealthBar = gamemanager.instance;
+        enemyHealthBar = gamemanager.instance;
 
 
-        //if (enemyHealthBar != null)
-        //{
-        //    enemyHealthBar.updateEnemyHPBar(maxHP, HP);
-        //}
-        //else
-        //{
-        //    Debug.LogError("Gamemanager not found");
-        //}
-        //if (enemyType == EnemyType.melee)
-        //{
-        //    bullet = null;
-        //    shootRate = 0f;
-        //}
+        if (enemyHealthBar != null)
+        {
+            enemyHealthBar.updateEnemyHPBar(maxHP, HP);
+        }
+        else
+        {
+            Debug.LogError("Gamemanager not found");
+        }
+        
 
         gamemanager.instance.updateNumEnemies(1);
         gamemanager.instance.numEnemiesOrig++;
@@ -95,7 +90,7 @@ public class ChesterEnemyAI : MonoBehaviour, IDamage
             roamTimer += Time.deltaTime;
         }
 
-        if (playerInRange/* && !canSeePlayer()*/)
+        if (playerInRange && canSeePlayer())
         {
             agent.stoppingDistance = stoppingDistance;
 
@@ -154,6 +149,7 @@ public class ChesterEnemyAI : MonoBehaviour, IDamage
     public void TakeDamage(int amount)
     {
         HP -= amount;
+       //turnWeaponColOff();
         if (enemyHealthBar != null)
         {
             enemyHealthBar.updateEnemyHPBar(maxHP, HP);
@@ -223,7 +219,7 @@ public class ChesterEnemyAI : MonoBehaviour, IDamage
 
         }
 
-        // Falce because we did not find the player
+        // False because we did not find the player
         agent.stoppingDistance = 0;
         return false;
 
@@ -254,5 +250,12 @@ public class ChesterEnemyAI : MonoBehaviour, IDamage
 
         agent.SetDestination(hit.position);
     }
-
+    //public void turnWeaponColOn()
+    //{
+    //    weaponCol.enabled = true;
+    //}
+    //public void turnWeaponColOff()
+    //{
+    //    weaponCol.enabled = false;
+    //}
 }

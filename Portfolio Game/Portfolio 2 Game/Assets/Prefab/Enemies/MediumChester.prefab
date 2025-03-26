@@ -210,37 +210,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 5245972125970182213}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1635502934892832967
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 5540848624252435642}
-  m_Layer: 3
-  m_Name: shootPos
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &5540848624252435642
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1635502934892832967}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0.000000017427993, y: 0.000000029007815, z: 0.14005095, w: 0.9901444}
-  m_LocalPosition: {x: 0.77, y: -2.78, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 6999088174213985671}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 16.102}
 --- !u!1 &1709722794586359474
 GameObject:
   m_ObjectHideFlags: 0
@@ -725,7 +694,6 @@ Transform:
   - {fileID: 6669299185161293597}
   - {fileID: 1446509471025132661}
   - {fileID: 7670817583709316500}
-  - {fileID: 5540848624252435642}
   m_Father: {fileID: 6526988141646077109}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5001654430574259917
@@ -768,8 +736,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7170134691466647402}
-  - component: {fileID: 895445899858610074}
   - component: {fileID: 5778833530688565073}
+  - component: {fileID: 1556084988537331639}
   - component: {fileID: 7088564307881157544}
   - component: {fileID: 2765725637429039914}
   - component: {fileID: 5403062757625424807}
@@ -791,7 +759,7 @@ Transform:
   m_GameObject: {fileID: 5089300497578697585}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0.99957174, z: -0, w: -0.029264856}
-  m_LocalPosition: {x: 2.2361925, y: 0.018232346, z: 12.606573}
+  m_LocalPosition: {x: -1.42, y: 0.012983799, z: 11.58}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -801,35 +769,6 @@ Transform:
   - {fileID: 5501128294803051317}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 183.354, z: 0}
---- !u!114 &895445899858610074
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5089300497578697585}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2150778e29609b341b0776e19843e621, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  controller: {fileID: 475740237744980965, guid: c6ba5b856efc0674c840559a61ba580e, type: 3}
-  enemyType: 0
-  model: {fileID: 3824216941934674155}
-  agent: {fileID: 2765725637429039914}
-  animator: {fileID: 5778833530688565073}
-  FOV: 90
-  roamPauseTime: 3
-  roamDistance: 20
-  maxHP: 10
-  expValue: 1
-  faceTargetSpeed: 600
-  animTransSpeed: 50
-  enemyHealthBar: {fileID: 0}
-  shootPos: {fileID: 5540848624252435642}
-  bullet: {fileID: 3168093148846688338, guid: 37d207d53cb8f39499cf5b4841f9c901, type: 3}
-  shootRate: 30
-  headPos: {fileID: 7670817583709316500}
 --- !u!95 &5778833530688565073
 Animator:
   serializedVersion: 7
@@ -852,6 +791,32 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &1556084988537331639
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5089300497578697585}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 348752c391a67484692c5c79b558ac43, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  controller: {fileID: 0}
+  enemyType: 0
+  model: {fileID: 3824216941934674155}
+  agent: {fileID: 2765725637429039914}
+  animator: {fileID: 5778833530688565073}
+  FOV: 90
+  roamPauseTime: 3
+  roamDistance: 20
+  maxHP: 10
+  expValue: 1
+  faceTargetSpeed: 600
+  animTransSpeed: 60
+  enemyHealthBar: {fileID: 0}
+  headPos: {fileID: 7670817583709316500}
 --- !u!114 &7088564307881157544
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1069,14 +1034,14 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 1b289ca454f3cdf4ca785ab70305a4ad, type: 3}
+  m_Sprite: {fileID: 21300000, guid: c155c0f2ad7775b42973b16cdca9ea4c, type: 3}
   m_Type: 3
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 0
   m_FillAmount: 0.5
   m_FillClockwise: 1
-  m_FillOrigin: 0
+  m_FillOrigin: 1
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
 --- !u!1 &5706457540990702733
@@ -1403,7 +1368,7 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 126
   m_CollisionDetection: 0
 --- !u!114 &7175526695066101263
 MonoBehaviour:
@@ -1420,7 +1385,7 @@ MonoBehaviour:
   type: 2
   rb: {fileID: 1347208224599607398}
   damageAmount: 1
-  damageTime: 0.25
+  damageTime: 0.75
   speed: 10
   destroyTime: 1
 --- !u!1 &7591468235229687463
@@ -1552,7 +1517,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 1b289ca454f3cdf4ca785ab70305a4ad, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 10b227ac98fd0ff42b167488929a2a24, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
