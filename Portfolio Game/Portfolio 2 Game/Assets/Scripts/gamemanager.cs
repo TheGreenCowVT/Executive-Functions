@@ -74,24 +74,6 @@ public class gamemanager : MonoBehaviour
             waypoints = tempWaypoints;
         }
 
-        // Assign player target and waypoints to enemies
-        if (player != null && waypoints != null && enemies != null && enemies.Length > 0)
-        {
-            foreach (GameObject enemyObj in enemies)
-            {
-                EnemyPatrol enemyPatrol = enemyObj.GetComponent<EnemyPatrol>();
-                if (enemyPatrol != null)
-                {
-                    enemyPatrol.playerTarget = player.transform;
-                    enemyPatrol.waypoints = waypoints;
-                }
-            }
-        }
-        else
-        {
-            Debug.LogError("Player, waypoints, or enemies not found.");
-        }
-
         //Find Enemy HP bars
         enemyHP = GameObject.FindWithTag("EnemyHPBar");
         enemiesHP = GameObject.FindGameObjectsWithTag("EnemyHPBar");

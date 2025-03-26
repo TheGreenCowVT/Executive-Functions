@@ -1503,11 +1503,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2150778e29609b341b0776e19843e621, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  controller: {fileID: 0}
   enemyType: 0
   model: {fileID: 2726805953900363311}
   agent: {fileID: 4167778477585725381}
   animator: {fileID: 1574171721977101368}
   maxHP: 6
+  expValue: 1
   faceTargetSpeed: 600
   animTransSpeed: 30
   enemyHealthBar: {fileID: 0}

@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections;
 using UnityEngine.AI;
+using Unity.VisualScripting;
 
 public class enemyAI : MonoBehaviour, IDamage
 {
@@ -10,6 +11,11 @@ public class enemyAI : MonoBehaviour, IDamage
     [SerializeField] Renderer model;
     [SerializeField] NavMeshAgent agent;
     [SerializeField] Animator animator;
+    [SerializeField] int FOV;
+    [SerializeField] int roamPauseTime;
+    [SerializeField] int roamDistance;
+
+
 
     [SerializeField] int maxHP;
     [Range(1,100),SerializeField] int expValue;
@@ -19,13 +25,19 @@ public class enemyAI : MonoBehaviour, IDamage
     [SerializeField] Transform shootPos;
     [SerializeField] GameObject bullet;
     [SerializeField] float shootRate;
+    [SerializeField] Transform headPos;
 
-    
-    
+
+    float angleToPlayer;
+    Vector3 playerDir;
+    Vector3 startingPos;
+    float roamTimer;
+    float stoppingDistance;
+
     float shootTimer;
     private int HP;
-    Vector3 playerDir;
-    bool playerInRage;
+ 
+    bool playerInRange;
     bool wasDamagedRecently;
     private EnemyLoot loot;
 
@@ -61,26 +73,48 @@ public class enemyAI : MonoBehaviour, IDamage
     // Update is called once per frame
     void Update()
     {
-
-
         setAnimLocomotion();
 
         shootTimer += Time.deltaTime;
 
-        if (playerInRage || wasDamagedRecently)
+        if (agent.remainingDistance <= 0.01f)
         {
-            playerDir = gamemanager.instance.player.transform.position - transform.position;
-            agent.SetDestination(gamemanager.instance.player.transform.position);
+            roamTimer += Time.deltaTime;
+        }
 
-            if (enemyType == EnemyType.Ranged && shootTimer >= shootRate && bullet != null)
-            {
-                shoot();
-            }
+        if (playerInRange && !canSeePlayer())
+        {
+            agent.stoppingDistance = 0;
+            checkRoam();
 
-            if (agent.remainingDistance <= agent.stoppingDistance)
-            {
-                faceTarget();
-            }
+        }
+        else if (!playerInRange)
+        {
+            agent.stoppingDistance = 0;
+            checkRoam();
+        }
+        else if (angleToPlayer <= FOV)
+        {
+            agent.stoppingDistance = stoppingDistance;
+            faceTarget();
+        }
+
+
+    }
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            playerInRange = true;
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            playerInRange = false;
+            agent.stoppingDistance = 0;
         }
     }
 
@@ -89,22 +123,6 @@ public class enemyAI : MonoBehaviour, IDamage
         float agentSpeed = agent.velocity.normalized.magnitude;
         float animSpeedCur = animator.GetFloat("Speed");
         animator.SetFloat("Speed", Mathf.Lerp(animSpeedCur, agentSpeed, Time.deltaTime * animTransSpeed));
-    }
-
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.CompareTag("Player"))
-        {
-            playerInRage = true;
-        }
-    }
-
-    private void OnTriggerExit(Collider other)
-    {
-        if (other.CompareTag("Player"))
-        {
-            playerInRage = false;
-        }
     }
 
     void faceTarget()
@@ -162,4 +180,71 @@ public class enemyAI : MonoBehaviour, IDamage
         yield return new WaitForSeconds(2F);
         wasDamagedRecently = false;
     }
+
+
+    bool canSeePlayer()
+    {
+
+        playerDir = gamemanager.instance.player.transform.position - headPos.position;
+        angleToPlayer = Vector3.Angle(playerDir, transform.forward);
+
+        Debug.DrawRay(headPos.position, playerDir);
+
+        RaycastHit hit;
+
+        if (Physics.Raycast(headPos.position, playerDir, out hit))
+        {
+            if (hit.collider.CompareTag("Player") && angleToPlayer <= FOV)
+            {
+
+                agent.SetDestination(gamemanager.instance.player.transform.position);
+
+                // Moved to only let the enemy shoot while they can see the player
+                if (shootTimer >= shootRate)
+                {
+                    shoot();
+                }
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+
+            // True because we're shooting the player
+
+        }
+
+        // Falce because we did not find the player
+        agent.stoppingDistance = 0;
+        return false;
+
+    }
+
+    void checkRoam()
+    {
+        if ((roamTimer > roamPauseTime && agent.remainingDistance < 0.01) || gamemanager.instance.playerScript.HP <= 0)
+        {
+
+            roam();
+
+        }
+    }
+    void roam()
+    {
+        roamTimer = 0;
+
+        // Go exactly to the spot
+        //agent.stoppingDistance = 0;
+
+        Vector3 randomPos = Random.insideUnitSphere * roamDistance;
+        randomPos += startingPos;
+
+        NavMeshHit hit;
+
+        NavMesh.SamplePosition(randomPos, out hit, roamDistance, 1);
+
+        agent.SetDestination(hit.position);
+    }
+
 }
