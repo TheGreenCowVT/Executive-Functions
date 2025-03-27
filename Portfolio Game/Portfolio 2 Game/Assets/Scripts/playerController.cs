@@ -189,7 +189,7 @@ public class playerController : MonoBehaviour, IDamage, IPickup
         RaycastHit hit;
         if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, grappleDist))
         {
-            if (hit.collider.CompareTag("GrapplePoint"))
+            if (hit.collider.CompareTag("Grapple Point"))
             {
                 controller.Move((hit.point - transform.position).normalized * grappleSpeed * Time.deltaTime);
 
