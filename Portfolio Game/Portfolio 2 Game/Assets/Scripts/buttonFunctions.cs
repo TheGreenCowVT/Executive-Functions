@@ -11,7 +11,9 @@ public class buttonFunctions : MonoBehaviour
     public void Restart()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        gamemanager.instance.waveNum = 0;
         gamemanager.instance.StateUnpause();
+        Debug.Log("StateUnpause Called");
     }
 
     public void Quit()

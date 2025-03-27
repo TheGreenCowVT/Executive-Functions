@@ -34,7 +34,6 @@ public class damage : MonoBehaviour
     {
         if (other.isTrigger)
         {
-            Debug.Log("Returned!");
             return;
         }
 
@@ -42,7 +41,6 @@ public class damage : MonoBehaviour
 
         if (dmg != null && (type == damageType.stationary || type == damageType.moving))
         {
-            Debug.Log("Moving Type Damage Found in Damage.CS!");
             dmg.TakeDamage(damageAmount);
         }
 
