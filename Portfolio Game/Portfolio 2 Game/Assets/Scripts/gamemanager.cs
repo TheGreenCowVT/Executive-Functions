@@ -15,6 +15,7 @@ public class gamemanager : MonoBehaviour
     [SerializeField] public GameObject levelUp;
 
     [SerializeField] public Transform playerTargetPos;
+    public GameObject playerSpawnPos;
     public bool isPaused;
 
     [Header("----Player----")]

@@ -13,13 +13,13 @@ MonoBehaviour:
   m_Name: Bow
   m_EditorClassIdentifier: 
   model: {fileID: 3081383619466149923, guid: 0ffbd98feaea88b4d8eff16383bcefa3, type: 3}
-  shootDamage: 1
-  shootDist: 150
-  shootRate: 0.1
-  ammoCur: 12
-  ammoMax: 12
   projectilePrefab: {fileID: 1850961265077878968, guid: 0d79cf3292ca60e46a9a584374d11b4a, type: 3}
   projectileSpeed: 5
+  shootDamage: 3
+  shootDist: 150
+  shootRate: 0.1
+  ammoCur: 0
+  ammoMax: 12
   hitEffect: {fileID: 0}
   shootSound: []
   shootVol: 0.5

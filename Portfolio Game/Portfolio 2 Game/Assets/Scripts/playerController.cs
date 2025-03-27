@@ -31,12 +31,23 @@ public class playerController : MonoBehaviour, IDamage, IPickup
     [SerializeField] int grappleSpeed;
     [SerializeField] LineRenderer grappleLine;
 
+    [Header("----- Audio -----")]
+    [SerializeField] AudioSource aud;
+    [SerializeField] AudioClip[] audJump;
+    [Range(0, 1)][SerializeField] float audJumpVol;
+    [SerializeField] AudioClip[] audSteps;
+    [Range(0, 1)][SerializeField] float audStepsVol;
+    [SerializeField] AudioClip[] audHurt;
+    [Range(0, 1)][SerializeField] float audHurtVol;
+
     int HPOrig;
     int jumpCount;
     public int weaponListPos;
     public float shootTimer;
 
     public float rotationSpeed;
+    bool isplayingSteps;
+    bool isSprinting;
 
     Vector3 moveDir;
     Vector3 playerVelocity;
@@ -46,13 +57,19 @@ public class playerController : MonoBehaviour, IDamage, IPickup
     public Animator animator;
 
     public int expAmount;
-    public int expMax;        
+    public int expMax;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         HPOrig = HP;
         animator = GetComponent<Animator>();
+        if (weaponList.Count > 0)
+        {
+            weaponListPos = 0;
+            changeWeapon();
+        }
+        spawnPlayer();
         updatePlayerUI();
         gamemanager.instance.UpdateWeaponUI();
 
@@ -68,17 +85,12 @@ public class playerController : MonoBehaviour, IDamage, IPickup
         {
             levelUp();
         }
-        if (currentWeapon != null)
-        {
-            Debug.DrawRay(Camera.main.transform.position, Camera.main.transform.forward * currentWeapon.shootDist, Color.red);
 
+        if (!gamemanager.instance.isPaused)
             movement();
-            updatePlayerUI();
-            
 
-            animator.SetBool("isGrounded", controller.isGrounded);
-            animator.SetFloat("velocityY", playerVelocity.y + 0.001f);
-        }
+        
+        updatePlayerUI();
 
     }
     void movement()
@@ -88,41 +100,25 @@ public class playerController : MonoBehaviour, IDamage, IPickup
 
         if (controller.isGrounded)
         {
-            jumpCount = 0;
+            if (moveDir.magnitude > 0.3f /*&& !isplayingSteps*/)
+                //   StartCoroutine(playSteps());
+                jumpCount = 0;
             playerVelocity = Vector3.zero;
 
         }
 
         // Basic Movement & Camera Rotation
 
-        float horizontalInput = Input.GetAxis("Horizontal");
-        float verticalInput = Input.GetAxis("Vertical");
-
-        Vector3 cameraForward = Camera.main.transform.forward;
-        Vector3 cameraRight = Camera.main.transform.right;
-        cameraForward.y = 0;
-        cameraForward.Normalize();
-
-
-        Vector3 moveDir = (cameraForward * verticalInput) + (cameraRight * horizontalInput);
-        moveDir.Normalize();
+        moveDir = (Input.GetAxis("Horizontal") * transform.right) +
+                  (Input.GetAxis("Vertical") * transform.forward);
 
         controller.Move(moveDir * speed * Time.deltaTime);
-        if (moveDir != Vector3.zero)
-        {
-            Quaternion toRotation = Quaternion.LookRotation(moveDir, Vector3.up);
-
-            transform.rotation = Quaternion.RotateTowards(transform.rotation, toRotation, rotationSpeed * Time.deltaTime);
-        }
 
         jump();
         isGrappling();
 
-        controller.Move(playerVelocity * Time.deltaTime);
-        playerVelocity.y -= gravity * Time.deltaTime;
-
-        //if (Input.GetButtonDown("Fire1") && weaponList.Count > 0 && weaponList[weaponListPos].ammoCur > 0 && shootTimer >= shootRate)
-        //    shoot();
+        if (Input.GetButtonDown("Fire1") && weaponList.Count > 0 && weaponList[weaponListPos].ammoCur > 0 && shootTimer >= shootRate)
+            shoot();
 
 
         selectWeapon();
@@ -130,12 +126,20 @@ public class playerController : MonoBehaviour, IDamage, IPickup
 
 
         // Animation movement controls
-
-        animator.SetFloat("Horizontal", horizontalInput);
-        animator.SetFloat("Vertical", verticalInput);
-        animator.SetBool("IsSprinting", Input.GetButton("Sprint"));
         animator.SetFloat("Speed", Mathf.Round(moveDir.magnitude * 100f) / 100f);
 
+        //IEnumerator playSteps()
+        //{
+        //    isplayingSteps = true;
+        //    aud.PlayOneShot(audSteps[Random.Range(0, audSteps.Length)], audStepsVol);
+
+        //    if (!isSprinting)
+        //        yield return new WaitForSeconds(0.5f);
+        //    else
+        //        yield return new WaitForSeconds(0.5f);
+
+        //    isplayingSteps = false;
+        //}
 
     }
 
@@ -146,12 +150,7 @@ public class playerController : MonoBehaviour, IDamage, IPickup
         {
             jumpCount++;
             playerVelocity.y = jumpSpeed;
-            animator.SetBool("IsJumping", true);
-
-        }
-        if (controller.isGrounded && animator.GetBool("IsJumping") == true && playerVelocity.y + 0.001f <= 0.1f)
-        {
-            animator.SetBool("IsJumping", false);
+            //   aud.PlayOneShot(audJump[Random.Range(0, audJump.Length)], audJumpVol);
         }
     }
 
@@ -170,49 +169,51 @@ public class playerController : MonoBehaviour, IDamage, IPickup
 
     void isGrappling()
     {
-        if (Input.GetButton("Sprint") && Input.GetButton("Fire2"))
+        if (Input.GetButton("Fire2") && grapple())
         {
-            RaycastHit hit;
-            if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, grappleDist))
-            {
-                if (hit.collider.CompareTag("GrapplePoint"))
-                {
-                    grappleLine.enabled = true;
-                    grappleLine.SetPosition(0, transform.position);
-                    grappleLine.SetPosition(1, hit.point);
-
-                    if (Input.GetButtonDown("Fire1"))
-                    {
-                        controller.Move((hit.point - transform.position).normalized * grappleSpeed * Time.deltaTime);
-                    }
-                }
-                else
-                {
-                    grappleLine.enabled = false;
-                }
-            }
-            else
-            {
-                grappleLine.enabled = false;
-
-
-            }
+            grappleLine.enabled = true;
 
         }
         else
         {
             grappleLine.enabled = false;
+            controller.Move(playerVelocity * Time.deltaTime);
+            playerVelocity.y -= gravity * Time.deltaTime;
+
         }
 
-        
+    }
+
+    bool grapple()
+    {
+        RaycastHit hit;
+        if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, grappleDist))
+        {
+            if (hit.collider.CompareTag("GrapplePoint"))
+            {
+                controller.Move((hit.point - transform.position).normalized * grappleSpeed * Time.deltaTime);
+
+
+                grappleLine.SetPosition(0, transform.position);
+                grappleLine.SetPosition(1, hit.point);
+
+                return true;
+            }
+
+        }
+
+        return false;
     }
 
 
-        public void shoot()
+    void shoot()
     {
         shootTimer = 0;
 
+        animator.SetTrigger("Shoot");
+
         weaponList[weaponListPos].ammoCur--;
+        //        aud.PlayOneShot(weaponList[weaponListPos].shootSound[Random.Range(0, weaponList[weaponListPos].shootSound.Length)], weaponList[weaponListPos].shootVol);
         gamemanager.instance.UpdateWeaponUI();
         Weapon currentWeapon = weaponList[weaponListPos];
         Transform projectilePos = handTransform;
@@ -233,6 +234,7 @@ public class playerController : MonoBehaviour, IDamage, IPickup
                 rb.linearVelocity = projectilePos.forward * currentWeapon.projectileSpeed;
             }
         }
+        animator.ResetTrigger("Shoot");
     }
 
 
@@ -241,6 +243,7 @@ public class playerController : MonoBehaviour, IDamage, IPickup
         HP -= amount;
         updatePlayerUI();
         StartCoroutine(flashDamageScreen());
+        //  aud.PlayOneShot(audHurt[Random.Range(0, audHurt.Length)], audHurtVol);
 
         if (HP <= 0)
         {
@@ -315,8 +318,8 @@ public class playerController : MonoBehaviour, IDamage, IPickup
         speed += 0.5f;
         expAmount = 0;
         gamemanager.instance.updateLevelCount();
-       StartCoroutine(levelUpNotification());
-        
+        StartCoroutine(levelUpNotification());
+
     }
 
     IEnumerator levelUpNotification()
@@ -327,6 +330,14 @@ public class playerController : MonoBehaviour, IDamage, IPickup
 
         gamemanager.instance.levelUp.SetActive(false);
         updatePlayerUI();
+    }
+
+    public void spawnPlayer()
+    {
+        controller.transform.position = gamemanager.instance.playerSpawnPos.transform.position;
+        HP = HPOrig;
+        updatePlayerUI();
+
     }
 
 }
