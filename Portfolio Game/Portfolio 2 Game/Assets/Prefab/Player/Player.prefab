@@ -244,7 +244,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   controller: {fileID: 3325451821849007866}
-  HP: 10
+  HP: 10000
   speed: 3
   sprintMod: 3
   jumpSpeed: 8
@@ -256,8 +256,8 @@ MonoBehaviour:
   shootDamage: 0
   shootDist: 0
   shootRate: 0
-  grappleDist: 0
-  grappleSpeed: 0
+  grappleDist: 150
+  grappleSpeed: 8
   grappleLine: {fileID: -4545204341092875132}
   aud: {fileID: 0}
   audJump: []
@@ -1478,6 +1478,7 @@ Transform:
   - {fileID: 482420907535023185}
   - {fileID: 1923838671536532134}
   - {fileID: 8417288103841123156}
+  - {fileID: 9102660353063793717}
   m_Father: {fileID: 1654214537111940354}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &7267668463682297761
@@ -1511,6 +1512,37 @@ Transform:
   m_Children:
   - {fileID: 1888575785775034516}
   m_Father: {fileID: 9039704776107388107}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &7517813440862643755
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 9102660353063793717}
+  m_Layer: 6
+  m_Name: PlayerDamagePos
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &9102660353063793717
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7517813440862643755}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3527732658894179592}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &7680023579307581229
 GameObject:
