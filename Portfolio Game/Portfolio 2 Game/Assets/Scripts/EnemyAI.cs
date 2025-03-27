@@ -67,9 +67,6 @@ public class EnemyAI : MonoBehaviour, IDamage
         //    shootRate = 0f;
         //}
 
-        gamemanager.instance.updateNumEnemies(1);
-        gamemanager.instance.numEnemiesOrig++;
-
         spawner = FindObjectOfType<EnemySpawner>();
     }
     // Update is called once per frame
@@ -121,12 +118,6 @@ public class EnemyAI : MonoBehaviour, IDamage
 
     }
 
-    void distanceToPlayer()
-    {
-        RaycastHit hit;
-
-
-    }
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
@@ -162,10 +153,11 @@ public class EnemyAI : MonoBehaviour, IDamage
     public void TakeDamage(int amount)
     {
         HP -= amount;
-        if (enemyHealthBar != null)
-        {
-            enemyHealthBar.updateEnemyHPBar(maxHP, HP);
-        }
+        
+        //if (enemyHealthBar != null)
+        //{
+        //    enemyHealthBar.updateEnemyHPBar(maxHP, HP);
+        //}
 
         StartCoroutine(flashRed());
 
@@ -182,6 +174,8 @@ public class EnemyAI : MonoBehaviour, IDamage
                 spawner.OnEnemyDestroyed();
             }
 
+            gamemanager.instance.enemyKillCountInt++;
+            gamemanager.instance.enemyKillCount.text = gamemanager.instance.enemyKillCountInt.ToString("F0");
             Destroy(gameObject);
             controller.expAmount += expValue;
             controller.updatePlayerUI();

@@ -40,7 +40,10 @@ public class gamemanager : MonoBehaviour
     [SerializeField] public Image enemyHPBar;
 
     [Header("----Wave----")]
-    [SerializeField] TMP_Text waveNumberText;
+    public float waveTimerCountdownCurrent;
+    private float waveTimerCountdownMax;
+    [SerializeField] public TMP_Text enemyKillCount;
+    public int enemyKillCountInt;
     public int numEnemies;
     public int numEnemiesOrig;
     int levelCount;
@@ -86,21 +89,30 @@ public class gamemanager : MonoBehaviour
             Debug.Log("Enemy HP Bar not found");
         }
 
-
-        updateNumEnemies(0);
-
-        
-        StartNewWave();
-
+        waveTimerCountdownCurrent = 300;
+        waveTimerCountdownMax = 300;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (waveNum >= 3)
+        waveTimerCountdownCurrent -= Time.deltaTime;
+        UpdateWaveBar();
+
+        if (waveTimerCountdownCurrent <= 0.01f || waveNum >= 5)
         {
             youWin();
         }
+        if (waveTimerCountdownCurrent <= 0.01f && waveNum < 5)
+        {
+            youLose();
+        }
+
+        if (waveTimerCountdownCurrent % 100 == 0)
+        {
+            enemySpawner.StartNextWave();
+        }
+
 
         if (Input.GetButtonDown("Cancel"))
         {
@@ -140,35 +152,6 @@ public class gamemanager : MonoBehaviour
 
     }
 
-    public void updateNumEnemies(int amount)
-    {
-        numEnemies += amount;
-
-        UpdateWaveBar();
-
-        if (numEnemies <=0)
-        {
-            if (waveNum < 4)
-            {
-                StartNewWave();
-            }
-            else if(waveNum == 4)
-            {
-                youWin();
-            }
-        }
-
-       
-    }
-
-    public void advanceWave()
-    {
-        waveNum++;
-        waveNumberText.text = waveNum.ToString("F0");
-        
-        UpdateWaveBar();
-    }
-
     public void youLose()
     {
         statePause();
@@ -193,7 +176,7 @@ public class gamemanager : MonoBehaviour
 
     public void UpdateWaveBar()
     {
-        gamemanager.instance.waveTimer.fillAmount = (float)numEnemies / numEnemiesOrig;
+        waveTimer.fillAmount = waveTimerCountdownCurrent / waveTimerCountdownMax;
     }
 
     //public void UpdateWeaponUI()
@@ -222,11 +205,6 @@ public class gamemanager : MonoBehaviour
 
     }
 
-    public void StartNewWave()
-    {
-        UpdateWaveBar();
-        waveNum++;
-        waveNumberText.text = waveNum.ToString("F0");
-    }
+
 
 }

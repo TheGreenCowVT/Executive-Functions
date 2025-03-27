@@ -65,9 +65,6 @@ public class ChesterEnemyAI : MonoBehaviour, IDamage
         //    shootRate = 0f;
         //}
 
-        gamemanager.instance.updateNumEnemies(1);
-        gamemanager.instance.numEnemiesOrig++;
-
         spawner = FindObjectOfType<EnemySpawner>();
     }
     // Update is called once per frame
@@ -113,12 +110,6 @@ public class ChesterEnemyAI : MonoBehaviour, IDamage
 
     }
 
-    void distanceToPlayer()
-    {
-        RaycastHit hit;
-
-
-    }
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
@@ -154,13 +145,12 @@ public class ChesterEnemyAI : MonoBehaviour, IDamage
     public void TakeDamage(int amount)
     {
         HP -= amount;
+        StartCoroutine(flashRed());
+
         if (enemyHealthBar != null)
         {
             enemyHealthBar.updateEnemyHPBar(maxHP, HP);
         }
-
-        StartCoroutine(flashRed());
-
 
         agent.SetDestination(gamemanager.instance.player.transform.position);
         wasDamagedRecently = true;
@@ -174,9 +164,13 @@ public class ChesterEnemyAI : MonoBehaviour, IDamage
                 spawner.OnEnemyDestroyed();
             }
 
+            
             Destroy(gameObject);
             controller.expAmount += expValue;
             controller.updatePlayerUI();
+            //gamemanager.instance.enemyKillCountInt++;
+            //gamemanager.instance.enemyKillCount.text = gamemanager.instance.enemyKillCountInt.ToString("F0");
+
         }
     }
     IEnumerator flashRed()

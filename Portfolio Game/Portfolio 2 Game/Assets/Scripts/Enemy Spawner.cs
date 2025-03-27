@@ -51,13 +51,13 @@ public class EnemySpawner : MonoBehaviour
     //    }
     //}
 
-    private void StartNextWave()
+    public void StartNextWave()
     {
-        if (currentWaveIndex >= waves.Length)
-        {
-            Debug.Log("All waves completed!");
-            return;
-        }
+        //if (currentWaveIndex >= waves.Length)
+        //{
+        //    Debug.Log("All waves completed!");
+        //    return;
+        //}
 
         currentWave = waves[currentWaveIndex];
 
@@ -73,8 +73,7 @@ public class EnemySpawner : MonoBehaviour
 
     private void SpawnEnemiesForWave()
     {
-        if (enemiesRemainingInWave > 0)
-        {
+
             if (spawnPoints.Length > 0)
             {
                 int randomIndex = Random.Range(0, spawnPoints.Length);
@@ -89,13 +88,13 @@ public class EnemySpawner : MonoBehaviour
                 Debug.Log($"Spawned enemy at {spawnPoint.name}. Enemies remaining in wave: {enemiesRemainingInWave}");
 
                 StartCoroutine(EnableEnemyMovement(enemy));
-                Invoke(nameof(SpawnEnemiesForWave), 1f);
+                Invoke(nameof(SpawnEnemiesForWave), 10f);
             }
             else
             {
                 Debug.LogWarning("No spawn points assigned to the spawner!");
             }
-        }
+        
         
     }
 
@@ -114,15 +113,7 @@ public class EnemySpawner : MonoBehaviour
     public void OnEnemyDestroyed()
     {
         enemiesAlive--;
-        gamemanager.instance.updateNumEnemies(-1);
-
-        Debug.Log($"Enemy destroyed. Enemies alive: {enemiesAlive}");
-
-        if (enemiesAlive <= 0 && enemiesRemainingInWave <= 0)
-        {
-            currentWaveIndex++;
-            Invoke(nameof(StartNextWave), timeBetweenWaves);
-        }
+         
 
     }
 
