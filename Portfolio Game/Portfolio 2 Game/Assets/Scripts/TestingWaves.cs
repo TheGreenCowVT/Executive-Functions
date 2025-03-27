@@ -13,4 +13,9 @@ public class TestingWaves : MonoBehaviour
     {
         
     }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        gamemanager.instance.advanceWave();
+    }
 }

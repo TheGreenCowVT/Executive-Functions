@@ -1154,12 +1154,15 @@ MonoBehaviour:
   menuLose: {fileID: 1896782015746467308}
   menuHUD: {fileID: 7892855141624697196}
   levelUp: {fileID: 4314425988272993421}
+  playerTargetPos: {fileID: 0}
+  playerSpawnPos: {fileID: 0}
   isPaused: 0
   playerHeartBeat: {fileID: 3632481188211583163}
   playerHPBar: {fileID: 2700879282874714722}
   playerExpBar: {fileID: 8201653861995557190}
   playerDamageScreen: {fileID: 5949483658955886474}
   player: {fileID: 0}
+  playerDamageSpot: {fileID: 0}
   playerScript: {fileID: 0}
   weaponIcon: {fileID: 3630890209446869493}
   activeWeaponIcon: {fileID: 0}
@@ -1177,7 +1180,9 @@ MonoBehaviour:
   waveNumberText: {fileID: 1881603807206633049}
   numEnemies: 0
   numEnemiesOrig: 0
+  waveNum: 0
   waveTimer: {fileID: 8911044363723008796}
+  enemySpawner: {fileID: 0}
 --- !u!1 &1533028313802489778
 GameObject:
   m_ObjectHideFlags: 0
