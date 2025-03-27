@@ -59,7 +59,7 @@ public class playerController : MonoBehaviour, IDamage, IPickup
     public int expAmount;
     public int expMax;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    //Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         HPOrig = HP;
@@ -100,9 +100,9 @@ public class playerController : MonoBehaviour, IDamage, IPickup
 
         if (controller.isGrounded)
         {
-            if (moveDir.magnitude > 0.3f /*&& !isplayingSteps*/)
-                //   StartCoroutine(playSteps());
-                jumpCount = 0;
+            if (moveDir.magnitude > 0.3f && !isplayingSteps)
+                StartCoroutine(playSteps());
+            jumpCount = 0;
             playerVelocity = Vector3.zero;
 
         }
@@ -128,18 +128,18 @@ public class playerController : MonoBehaviour, IDamage, IPickup
         // Animation movement controls
         animator.SetFloat("Speed", Mathf.Round(moveDir.magnitude * 100f) / 100f);
 
-        //IEnumerator playSteps()
-        //{
-        //    isplayingSteps = true;
-        //    aud.PlayOneShot(audSteps[Random.Range(0, audSteps.Length)], audStepsVol);
+        IEnumerator playSteps()
+        {
+            isplayingSteps = true;
+            aud.PlayOneShot(audSteps[Random.Range(0, audSteps.Length)], audStepsVol);
 
-        //    if (!isSprinting)
-        //        yield return new WaitForSeconds(0.5f);
-        //    else
-        //        yield return new WaitForSeconds(0.5f);
+            if (!isSprinting)
+                yield return new WaitForSeconds(0.5f);
+            else
+                yield return new WaitForSeconds(0.5f);
 
-        //    isplayingSteps = false;
-        //}
+            isplayingSteps = false;
+        }
 
     }
 
@@ -150,7 +150,7 @@ public class playerController : MonoBehaviour, IDamage, IPickup
         {
             jumpCount++;
             playerVelocity.y = jumpSpeed;
-            //   aud.PlayOneShot(audJump[Random.Range(0, audJump.Length)], audJumpVol);
+            aud.PlayOneShot(audJump[Random.Range(0, audJump.Length)], audJumpVol);
         }
     }
 
@@ -213,7 +213,7 @@ public class playerController : MonoBehaviour, IDamage, IPickup
         animator.SetTrigger("Shoot");
 
         weaponList[weaponListPos].ammoCur--;
-        //        aud.PlayOneShot(weaponList[weaponListPos].shootSound[Random.Range(0, weaponList[weaponListPos].shootSound.Length)], weaponList[weaponListPos].shootVol);
+        aud.PlayOneShot(weaponList[weaponListPos].shootSound[Random.Range(0, weaponList[weaponListPos].shootSound.Length)], weaponList[weaponListPos].shootVol);
         //gamemanager.instance.UpdateWeaponUI();
         Weapon currentWeapon = weaponList[weaponListPos];
         Transform projectilePos = handTransform;
@@ -243,7 +243,7 @@ public class playerController : MonoBehaviour, IDamage, IPickup
         HP -= amount;
         updatePlayerUI();
         StartCoroutine(flashDamageScreen());
-        //  aud.PlayOneShot(audHurt[Random.Range(0, audHurt.Length)], audHurtVol);
+        aud.PlayOneShot(audHurt[Random.Range(0, audHurt.Length)], audHurtVol);
 
         if (HP <= 0)
         {
