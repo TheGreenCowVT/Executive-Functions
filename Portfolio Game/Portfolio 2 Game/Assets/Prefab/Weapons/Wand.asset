@@ -12,14 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 59f2d9a5e2d2b574c987361d5aa65a77, type: 3}
   m_Name: Wand
   m_EditorClassIdentifier: 
-  model: {fileID: 3674654589630629515, guid: 942fab13b1177a84284d6e8a64f75616, type: 3}
+  model: {fileID: 2136262371397426501, guid: 942fab13b1177a84284d6e8a64f75616, type: 3}
+  projectilePrefab: {fileID: 4393827673531844428, guid: 5b0a1acf43d95d844932ad49fa627625, type: 3}
+  projectileSpeed: 10
   shootDamage: 10
   shootDist: 500
   shootRate: 0.1
-  ammoCur: 2
+  ammoCur: 0
   ammoMax: 20
-  projectilePrefab: {fileID: 0}
-  projectileSpeed: 5
   hitEffect: {fileID: 0}
   shootSound: []
   shootVol: 0.5
