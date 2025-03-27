@@ -33,12 +33,16 @@ public class damage : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         if (other.isTrigger)
+        {
+            Debug.Log("Returned!");
             return;
+        }
 
         IDamage dmg = other.GetComponent<IDamage>();
 
         if (dmg != null && (type == damageType.stationary || type == damageType.moving))
         {
+            Debug.Log("Moving Type Damage Found in Damage.CS!");
             dmg.TakeDamage(damageAmount);
         }
 
