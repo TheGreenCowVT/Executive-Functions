@@ -97,18 +97,18 @@ public class EnemyAI : MonoBehaviour, IDamage
             roamTimer += Time.deltaTime;
         }
 
-        if (playerInRange && canSeePlayer())
+        if (playerInRange && !canSeePlayer())
         {
-            agent.stoppingDistance = stoppingDistance;
+            //agent.stoppingDistance = stoppingDistance;
+            checkRoam();
+            //animator.SetBool("isChasing", true);
+            //agent.SetDestination(gamemanager.instance.player.transform.position);
 
-            animator.SetBool("isChasing", true);
-            agent.SetDestination(gamemanager.instance.player.transform.position);
 
-
-                if (shootTimer >= shootRate)
-                {
-                    shoot();
-                }
+            //    if (shootTimer >= shootRate)
+            //    {
+            //        shoot();
+            //    }
 
         }
         else if (!playerInRange)
@@ -225,7 +225,7 @@ public class EnemyAI : MonoBehaviour, IDamage
 
         if (Physics.Raycast(headPos.position, playerDir, out hit))
         {
-            if (hit.collider.CompareTag("Player"))
+            if (hit.collider.CompareTag("Player") && angleToPlayer <=FOV)
             {
                 agent.SetDestination(gamemanager.instance.player.transform.position);
 
@@ -234,21 +234,16 @@ public class EnemyAI : MonoBehaviour, IDamage
                 {
                     shoot();
                 }
+                if(agent.stoppingDistance <= stoppingDistance)
+                {
+                    faceTarget();
+                }
+                agent.stoppingDistance = stoppingDistance;
                 return true;
             }
-            else
-            {
-                return false;
-            }
-
-            // True because we're shooting the player
-
         }
-
-        // False because we did not find the player
         agent.stoppingDistance = 0;
         return false;
-
     }
 
     void checkRoam()

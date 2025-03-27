@@ -90,12 +90,12 @@ public class ChesterEnemyAI : MonoBehaviour, IDamage
             roamTimer += Time.deltaTime;
         }
 
-        if (playerInRange && canSeePlayer())
+        if (playerInRange && !canSeePlayer())
         {
-            agent.stoppingDistance = stoppingDistance;
-
-            animator.SetBool("isChasing", true);
-            agent.SetDestination(gamemanager.instance.player.transform.position);
+            //agent.stoppingDistance = stoppingDistance;
+            checkRoam();
+            //animator.SetBool("isChasing", true);
+            //agent.SetDestination(gamemanager.instance.player.transform.position);
 
         }
         else if (!playerInRange)
@@ -110,7 +110,7 @@ public class ChesterEnemyAI : MonoBehaviour, IDamage
 
     void distanceToPlayer()
     {
-        RaycastHit hit;
+        //RaycastHit hit;
 
 
     }
@@ -203,31 +203,24 @@ public class ChesterEnemyAI : MonoBehaviour, IDamage
 
         if (Physics.Raycast(headPos.position, playerDir, out hit))
         {
-            if (hit.collider.CompareTag("Player"))
+            if (hit.collider.CompareTag("Player") && angleToPlayer <= FOV)
             {
                 agent.SetDestination(gamemanager.instance.player.transform.position);
-
-                // Moved to only let the enemy shoot while they can see the player
+                if (agent.stoppingDistance <= stoppingDistance)
+                {
+                    faceTarget();
+                }
+                agent.stoppingDistance = stoppingDistance;
                 return true;
             }
-            else
-            {
-                return false;
-            }
-
-            // True because we're shooting the player
-
         }
-
-        // False because we did not find the player
         agent.stoppingDistance = 0;
         return false;
-
     }
 
     void checkRoam()
     {
-        if ((roamTimer > roamPauseTime && agent.remainingDistance < 0.01) || gamemanager.instance.playerScript.HP <= 0)
+        if ((roamTimer > roamPauseTime && agent.remainingDistance < 0.01)/* || gamemanager.instance.playerScript.HP <= 0*/)
         {
 
             roam();
