@@ -42,7 +42,6 @@ public class playerController : MonoBehaviour, IDamage, IPickup
     Vector3 playerVelocity;
 
     public Transform handTransform;
-    public Weapon currentWeapon;
     public Animator animator;
 
     public int expAmount;
