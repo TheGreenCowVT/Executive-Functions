@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using Unity.VisualScripting;
 
 public class gamemanager : MonoBehaviour
 {
@@ -24,7 +25,7 @@ public class gamemanager : MonoBehaviour
     public Image playerExpBar;
     public GameObject playerDamageScreen;
     public GameObject player;
-    public GameObject playerDamageSpot;
+    public Transform playerDamageSpot;
     public playerController playerScript;
     [SerializeField] public Image weaponIcon;
     [SerializeField] public Image activeWeaponIcon;
@@ -55,7 +56,6 @@ public class gamemanager : MonoBehaviour
     {
         instance = this;
         player = GameObject.FindWithTag("Player");
-        playerDamageSpot = GameObject.FindWithTag("PlayerDamageSpot");
 
         //playerTargetPos = playerDamageSpot.transform;
 
@@ -94,6 +94,8 @@ public class gamemanager : MonoBehaviour
 
         enemyKillCountInt = 0;
         enemyKillCount.text = enemyKillCountInt.ToString("F0");
+
+        playerDamageSpot = player.transform.Find("PlayerDamagePos");
     }
 
     // Update is called once per frame

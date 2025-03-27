@@ -17,7 +17,8 @@ public class BulletHoming : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Vector3 Direction = gamemanager.instance.playerTargetPos.transform.position - rb.position;
+        Vector3 adjustedPos = new Vector3(gamemanager.instance.player.transform.position.x, gamemanager.instance.player.transform.position.y+1, gamemanager.instance.player.transform.position.z); 
+        Vector3 Direction = adjustedPos - rb.position;
         Direction.Normalize();
         Vector3 rotationAmount = Vector3.Cross(transform.forward, Direction);
         rb.angularVelocity = rotationAmount * rotationForce;

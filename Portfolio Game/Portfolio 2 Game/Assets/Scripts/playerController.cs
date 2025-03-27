@@ -323,7 +323,7 @@ public class playerController : MonoBehaviour, IDamage, IPickup
     void levelUp()
     {
 
-        if (playerLevel >= 100)
+        if (playerLevel >= 20)
         {
             return;
         }
