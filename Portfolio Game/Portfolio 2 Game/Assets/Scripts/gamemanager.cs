@@ -39,12 +39,17 @@ public class gamemanager : MonoBehaviour
     public GameObject[] enemiesHP;
     [SerializeField] public Image enemyHPBar;
 
+    [Header("----Waypoint----")]
+    public GameObject waypoint;
+    public Transform[] waypoints;
+    public GameObject[] enemywaypoints;
+
     [Header("----Wave----")]
     [SerializeField] TMP_Text waveNumberText;
     public int numEnemies;
     public int numEnemiesOrig;
     int levelCount;
-    public int waveNum = 0;
+    int waveNum = 0;
     public Image waveTimer;
     public EnemySpawner enemySpawner;
 
@@ -54,7 +59,7 @@ public class gamemanager : MonoBehaviour
         player = GameObject.FindWithTag("Player");
         playerDamageSpot = GameObject.FindWithTag("PlayerDamageSpot");
 
-        //playerTargetPos = playerDamageSpot.transform;
+        playerTargetPos = playerDamageSpot.transform;
 
         playerScript = player.GetComponent<playerController>();
 
@@ -97,11 +102,6 @@ public class gamemanager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (waveNum >= 3)
-        {
-            youWin();
-        }
-
         if (Input.GetButtonDown("Cancel"))
         {
             if (menuActive == null)
@@ -161,14 +161,6 @@ public class gamemanager : MonoBehaviour
        
     }
 
-    public void advanceWave()
-    {
-        waveNum++;
-        waveNumberText.text = waveNum.ToString("F0");
-        
-        UpdateWaveBar();
-    }
-
     public void youLose()
     {
         statePause();
@@ -226,7 +218,7 @@ public class gamemanager : MonoBehaviour
     {
         UpdateWaveBar();
         waveNum++;
-        waveNumberText.text = waveNum.ToString("F0");
+        waveNumberText.text = waveNum.ToString();
     }
 
 }
