@@ -77,6 +77,7 @@ public class ChesterEnemyAI : MonoBehaviour, IDamage
         }
         else if (agent.velocity.magnitude > 0 && animator.GetBool("isAttacking") == true)
         {
+            faceTarget();
             animator.SetBool("isMoving", true);
         }
         else
@@ -95,6 +96,7 @@ public class ChesterEnemyAI : MonoBehaviour, IDamage
             agent.stoppingDistance = stoppingDistance;
 
             animator.SetBool("isChasing", true);
+            faceTarget();
             agent.SetDestination(gamemanager.instance.player.transform.position);
 
         }
@@ -136,8 +138,11 @@ public class ChesterEnemyAI : MonoBehaviour, IDamage
 
     void faceTarget()
     {
-        Quaternion rot = Quaternion.LookRotation(new Vector3(playerDir.x, transform.position.y, playerDir.z));
-        transform.rotation = Quaternion.Lerp(transform.rotation, rot, Time.deltaTime * faceTargetSpeed);
+        Vector3 directionToPlayer = gamemanager.instance.player.transform.position - transform.position;
+
+        Quaternion targetRotation = Quaternion.LookRotation(directionToPlayer, Vector3.up);
+
+        transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * 5f);
     }
 
     public void TakeDamage(int amount)
