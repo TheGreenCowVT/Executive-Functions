@@ -12,18 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 59f2d9a5e2d2b574c987361d5aa65a77, type: 3}
   m_Name: Bow
   m_EditorClassIdentifier: 
-
   model: {fileID: 719841797331926988, guid: 6566859457f145c4da7bb343cf9f9e23, type: 3}
   projectilePrefab: {fileID: 1850961265077878968, guid: 0d79cf3292ca60e46a9a584374d11b4a, type: 3}
   projectileSpeed: 5
   shootDamage: 3
-
   shootDist: 150
   shootRate: 0.1
-  ammoCur: 12
+  ammoCur: 0
   ammoMax: 12
-  projectilePrefab: {fileID: 1850961265077878968, guid: 0d79cf3292ca60e46a9a584374d11b4a, type: 3}
-  projectileSpeed: 5
   hitEffect: {fileID: 0}
   shootSound: []
   shootVol: 0.5

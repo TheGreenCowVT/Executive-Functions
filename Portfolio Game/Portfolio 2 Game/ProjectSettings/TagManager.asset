@@ -13,6 +13,7 @@ TagManager:
   - Torch
   - FlameTrap
   - PlayerDamageSpot
+  - Grapple Point
   layers:
   - Default
   - TransparentFX
@@ -23,7 +24,7 @@ TagManager:
   - Player
   - Environment
   - Traps
-  - 
+  - enemyBullet
   - 
   - 
   - 
