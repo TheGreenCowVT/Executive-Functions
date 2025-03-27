@@ -24500,6 +24500,7 @@ GameObject:
   - component: {fileID: 2847349223130694784}
   - component: {fileID: 1490586538140262385}
   - component: {fileID: 2442858044869202506}
+  - component: {fileID: 4167902678224696052}
   m_Layer: 9
   m_Name: Belzeyebulb shot
   m_TagString: Untagged
@@ -24553,7 +24554,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 852a3d1b872b3dd4291925d2f2a3ccf0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bullet: {fileID: 0}
+  bullet: {fileID: 7270373641778003685}
   force: 5
   rotationForce: 6
 --- !u!33 &2847349223130694784
@@ -24636,3 +24637,24 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!135 &4167902678224696052
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7270373641778003685}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 0.5000001
+  m_Center: {x: 0, y: 0, z: 0}
