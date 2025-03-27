@@ -36,8 +36,6 @@ public class ChesterEnemyAI : MonoBehaviour, IDamage
     private int HP;
  
     bool playerInRange;
-    bool wasDamagedRecently;
-    float debugRemainDist;
 
     private EnemySpawner spawner; // Reference to the wave-based spawner
 
@@ -66,11 +64,11 @@ public class ChesterEnemyAI : MonoBehaviour, IDamage
         //}
 
         spawner = FindObjectOfType<EnemySpawner>();
+        controller = GameObject.FindGameObjectWithTag("Player").GetComponent<playerController>();
     }
     // Update is called once per frame
     void Update()
     {
-        debugRemainDist = agent.remainingDistance;
         setAnimLocomotion();
 
         if(agent.velocity.magnitude > 0 && animator.GetBool("isAttacking") == false)
@@ -147,13 +145,12 @@ public class ChesterEnemyAI : MonoBehaviour, IDamage
         HP -= amount;
         StartCoroutine(flashRed());
 
-        if (enemyHealthBar != null)
-        {
-            enemyHealthBar.updateEnemyHPBar(maxHP, HP);
-        }
+        //if (enemyHealthBar != null)
+        //{
+        //    enemyHealthBar.updateEnemyHPBar(maxHP, HP);
+        //}
 
         agent.SetDestination(gamemanager.instance.player.transform.position);
-        wasDamagedRecently = true;
         StartCoroutine(ResetDamageFlag());
 
         if (HP <= 0)
@@ -164,13 +161,12 @@ public class ChesterEnemyAI : MonoBehaviour, IDamage
                 spawner.OnEnemyDestroyed();
             }
 
-            
-            Destroy(gameObject);
-            controller.expAmount += expValue;
-            controller.updatePlayerUI();
-            //gamemanager.instance.enemyKillCountInt++;
-            //gamemanager.instance.enemyKillCount.text = gamemanager.instance.enemyKillCountInt.ToString("F0");
 
+            gamemanager.instance.enemyKillCountInt++;
+            gamemanager.instance.enemyKillCount.text = gamemanager.instance.enemyKillCountInt.ToString("F0");
+            Destroy(gameObject);
+            controller.expUP();
+            controller.updatePlayerUI();
         }
     }
     IEnumerator flashRed()
@@ -185,7 +181,6 @@ public class ChesterEnemyAI : MonoBehaviour, IDamage
     IEnumerator ResetDamageFlag()
     {
         yield return new WaitForSeconds(2F);
-        wasDamagedRecently = false;
     }
 
 

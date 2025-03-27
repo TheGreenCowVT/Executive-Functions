@@ -58,6 +58,7 @@ public class playerController : MonoBehaviour, IDamage, IPickup
 
     public int expAmount;
     public int expMax;
+    public int playerLevel;
 
     //Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -73,6 +74,7 @@ public class playerController : MonoBehaviour, IDamage, IPickup
         updatePlayerUI();
         //gamemanager.instance.UpdateWeaponUI();
 
+        playerLevel = 1;
         expAmount = 0;
         expMax = 100;
 
@@ -81,10 +83,10 @@ public class playerController : MonoBehaviour, IDamage, IPickup
     // Update is called once per frame
     void Update()
     {
-        //if (expAmount >= expMax)
-        //{
-        //    levelUp();
-        //}
+        if (expAmount >= expMax)
+        {
+            levelUp();
+        }
 
         if (!gamemanager.instance.isPaused)
             movement();
@@ -213,7 +215,7 @@ public class playerController : MonoBehaviour, IDamage, IPickup
         animator.SetTrigger("Shoot");
 
         weaponList[weaponListPos].ammoCur--;
-        aud.PlayOneShot(weaponList[weaponListPos].shootSound[Random.Range(0, weaponList[weaponListPos].shootSound.Length)], weaponList[weaponListPos].shootVol);
+        //aud.PlayOneShot(weaponList[weaponListPos].shootSound[Random.Range(0, weaponList[weaponListPos].shootSound.Length)], weaponList[weaponListPos].shootVol);
         //gamemanager.instance.UpdateWeaponUI();
         Weapon currentWeapon = weaponList[weaponListPos];
         Transform projectilePos = handTransform;
@@ -312,9 +314,22 @@ public class playerController : MonoBehaviour, IDamage, IPickup
         }
     }
 
+    public void expUP()
+    {
+        expAmount += 10;
+        updatePlayerUI();
+    }
+
     void levelUp()
     {
-        HP += 3;
+
+        if (playerLevel >= 100)
+        {
+            return;
+        }
+
+        playerLevel++;
+        HP = HPOrig;
         speed += 0.5f;
         expAmount = 0;
         gamemanager.instance.updateLevelCount();

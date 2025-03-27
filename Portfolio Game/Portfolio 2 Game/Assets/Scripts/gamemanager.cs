@@ -37,7 +37,7 @@ public class gamemanager : MonoBehaviour
     public GameObject enemyHP;
     public GameObject[] enemies;
     public GameObject[] enemiesHP;
-    [SerializeField] public Image enemyHPBar;
+    public Image enemyHPBar;
 
     [Header("----Wave----")]
     public float waveTimerCountdownCurrent;
@@ -79,7 +79,7 @@ public class gamemanager : MonoBehaviour
                 Image enemyHPBarImage = enemyHPBar.GetComponent<Image>();
                 if (enemyHPBarImage != null)
                 {
-                    enemyHPBarImage.fillAmount = 1;
+                    enemyHPBarImage.fillAmount = 0.5f;
                 }
             }
             enemyHPBar = enemyHP.GetComponent<Image>();
@@ -91,6 +91,9 @@ public class gamemanager : MonoBehaviour
 
         waveTimerCountdownCurrent = 300;
         waveTimerCountdownMax = 300;
+
+        enemyKillCountInt = 0;
+        enemyKillCount.text = enemyKillCountInt.ToString("F0");
     }
 
     // Update is called once per frame

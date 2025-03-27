@@ -2,6 +2,9 @@ using UnityEngine;
 using System.Collections;
 using UnityEngine.AI;
 using Unity.VisualScripting;
+//using UnityEngine.UIElements;
+using TMPro;
+using UnityEngine.UI;
 
 public class EnemyAI : MonoBehaviour, IDamage
 {
@@ -17,11 +20,11 @@ public class EnemyAI : MonoBehaviour, IDamage
 
 
 
-    [SerializeField] int maxHP;
+    [SerializeField] float maxHP;
     [Range(1,100),SerializeField] int expValue;
     [SerializeField] int faceTargetSpeed;
     [SerializeField] int animTransSpeed;
-    [SerializeField] gamemanager enemyHealthBar;
+    [SerializeField] public Image enemyHealthBar;
     [SerializeField] Transform shootPos;
     [SerializeField] GameObject bullet;
     [SerializeField] float shootRate;
@@ -35,7 +38,9 @@ public class EnemyAI : MonoBehaviour, IDamage
     float stoppingDistance;
     bool isChasing;
     float shootTimer;
-    private int HP;
+    private float HP;
+
+
  
     bool playerInRange;
     bool wasDamagedRecently;
@@ -68,6 +73,9 @@ public class EnemyAI : MonoBehaviour, IDamage
         //}
 
         spawner = FindObjectOfType<EnemySpawner>();
+        controller = GameObject.FindGameObjectWithTag("Player").GetComponent<playerController>();
+    
+    
     }
     // Update is called once per frame
     void Update()
@@ -118,6 +126,11 @@ public class EnemyAI : MonoBehaviour, IDamage
 
     }
 
+
+    public void updateEnemyUIBar()
+    {
+        //enemyHealthBar.fillAmount = HP / maxHP;
+    }
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
@@ -160,6 +173,7 @@ public class EnemyAI : MonoBehaviour, IDamage
         //}
 
         StartCoroutine(flashRed());
+        updateEnemyUIBar();
 
 
         agent.SetDestination(gamemanager.instance.player.transform.position);
@@ -177,8 +191,10 @@ public class EnemyAI : MonoBehaviour, IDamage
             gamemanager.instance.enemyKillCountInt++;
             gamemanager.instance.enemyKillCount.text = gamemanager.instance.enemyKillCountInt.ToString("F0");
             Destroy(gameObject);
-            controller.expAmount += expValue;
+            controller.expAmount += 10;
             controller.updatePlayerUI();
+
+           
         }
     }
     IEnumerator flashRed()
