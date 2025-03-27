@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3952033837372585507}
   - component: {fileID: 3009774023712930447}
+  - component: {fileID: 8623736083331417917}
   - component: {fileID: 4915938115248326305}
   - component: {fileID: 471148321376606138}
   - component: {fileID: 4429022464304747668}
@@ -48,6 +49,25 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weapon: {fileID: 11400000, guid: db32fc2130dd5bb4583d4d646cca0743, type: 2}
+--- !u!114 &8623736083331417917
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2136262371397426501}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a824702b2a92f6a48a35205acdd8bec4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rotationAxis: {x: 0, y: 1, z: 0}
+  rotationSpeed: 100
+  xAxisSlider: 0
+  yAxisSlider: 15
+  zAxisSlider: 0
+  speedSlider: 100
+  isRotating: 1
 --- !u!33 &4915938115248326305
 MeshFilter:
   m_ObjectHideFlags: 0

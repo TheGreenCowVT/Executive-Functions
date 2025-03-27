@@ -12,10 +12,37 @@ public class RotateObject : MonoBehaviour
     [Range(0, 360)][SerializeField] private float zAxisSlider = 0f;
     [Range(0, 360)][SerializeField] private float speedSlider = 100f;
 
+    [Header("Trigger")]
+    [SerializeField] private bool isRotating = false;
+
     private void Update()
     {
-        rotationAxis = new Vector3(xAxisSlider, yAxisSlider, zAxisSlider).normalized;
-        rotationSpeed = speedSlider;
-        transform.Rotate(rotationAxis, rotationSpeed *  Time.deltaTime);
+        if (isRotating)
+        {
+            rotationAxis = new Vector3(xAxisSlider, yAxisSlider, zAxisSlider).normalized;
+            rotationSpeed = speedSlider;
+            transform.Rotate(rotationAxis, rotationSpeed * Time.deltaTime);
+        }
+
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+
+        if (other.CompareTag("Player") || other.CompareTag("Enemy"))
+        {
+            isRotating = true;
+
+
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("Player") || other.CompareTag("Enemy"))
+        {
+
+            isRotating = false;
+        }
     }
 }
