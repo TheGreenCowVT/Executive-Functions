@@ -96,6 +96,8 @@ public class gamemanager : MonoBehaviour
         enemyKillCount.text = enemyKillCountInt.ToString("F0");
 
         playerDamageSpot = player.transform.Find("PlayerDamagePos");
+
+        playerScript.weaponList[playerScript.weaponListPos].ammoCur = playerScript.weaponList[playerScript.weaponListPos].ammoMax;
     }
 
     // Update is called once per frame
