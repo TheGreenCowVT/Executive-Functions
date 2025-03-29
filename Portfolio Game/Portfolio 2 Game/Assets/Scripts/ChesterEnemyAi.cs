@@ -188,6 +188,24 @@ public class ChesterEnemyAI : MonoBehaviour, IDamage
         yield return new WaitForSeconds(2F);
     }
 
+    public void meleeAttack()
+    {
+        Debug.Log("Animation Attack Called");
+        Transform attackSphereTransform = transform.Find("Damage Sphere");
+
+        if (attackSphereTransform != null)
+        {
+            SphereCollider attackSphere = attackSphereTransform.GetComponent<SphereCollider>();
+
+            StartCoroutine(DisableAttackSphereAfterDelay(attackSphere));
+        }
+    }
+
+    IEnumerator DisableAttackSphereAfterDelay(SphereCollider attackSphere)
+    {
+        yield return new WaitForSeconds(0.2f);
+        attackSphere.enabled = false;
+    }
 
     bool canSeePlayer()
     {

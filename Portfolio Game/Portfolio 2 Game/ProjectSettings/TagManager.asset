@@ -16,6 +16,7 @@ TagManager:
   - Grapple Point
   - Undefined
   - Player Damage
+  - ChesterDamageSphere
   layers:
   - Default
   - TransparentFX
