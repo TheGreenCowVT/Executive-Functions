@@ -103,6 +103,7 @@ public class gamemanager : MonoBehaviour
     {
         waveTimerCountdownCurrent -= Time.deltaTime;
         UpdateWaveBar();
+        UpdateWeaponUI();
 
         if (waveTimerCountdownCurrent <= 0.01f || waveNum >= 5)
         {
@@ -184,23 +185,23 @@ public class gamemanager : MonoBehaviour
         waveTimer.fillAmount = waveTimerCountdownCurrent / waveTimerCountdownMax;
     }
 
-    //public void UpdateWeaponUI()
-    //{
-    //    activeWeaponIcon = playerScript.weaponList[playerScript.weaponListPos].UIImage;
-    //    weaponIcon.sprite = activeWeaponIcon.sprite;
+    public void UpdateWeaponUI()
+    {
+        activeWeaponIcon = playerScript.weaponList[playerScript.weaponListPos].UIImage;
+        //weaponIcon.sprite = activeWeaponIcon.sprite;
 
-    //    if (playerScript.weaponList[playerScript.weaponListPos].ammoMax > 0)
-    //    {
-    //        ammoText.enabled = true;
-    //        ammoCount.enabled = true;
-    //        ammoCount.text = playerScript.weaponList[playerScript.weaponListPos].ammoCur.ToString() + " / " + playerScript.weaponList[playerScript.weaponListPos].ammoMax.ToString();
-    //    }
-    //    else if (playerScript.weaponList[playerScript.weaponListPos].ammoMax == 0 || playerScript.weaponList.Count <= 0)
-    //    {
-    //        ammoText.enabled = false;
-    //        ammoCount.enabled = false;
-    //    }
-    //}
+        if (playerScript.weaponList[playerScript.weaponListPos].ammoMax >= 0)
+        {
+            ammoText.enabled = true;
+            ammoCount.enabled = true;
+            ammoCount.text = playerScript.weaponList[playerScript.weaponListPos].ammoCur.ToString() + " / " + playerScript.weaponList[playerScript.weaponListPos].ammoMax.ToString();
+        }
+        else if (playerScript.weaponList[playerScript.weaponListPos].ammoMax == 0 || playerScript.weaponList.Count <= 0)
+        {
+            ammoText.enabled = false;
+            ammoCount.enabled = false;
+        }
+    }
 
     public void updateLevelCount()
     {
